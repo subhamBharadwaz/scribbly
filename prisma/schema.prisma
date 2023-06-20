@@ -10,3 +10,55 @@ datasource db {
   url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  clerkId   String   @unique
+  image     String?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  entries  JournalEntry[]
+  reminder Reminder?
+
+  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?   @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
+
+  @@map(name: "users")
+}
+
+model JournalEntry {
+  id        String   @id @default(cuid())
+  title     String
+  content   Json?
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId, id])
+  @@map(name: "journal_entries")
+}
+
+model Reminder {
+  id        String       @id @default(cuid())
+  frequency ReminderType @default(DAILY)
+  time      DateTime
+  active    Boolean      @default(false)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@unique([userId])
+  @@map("reminders")
+}
+
+enum ReminderType {
+  DAILY
+  WEEKLY
+}
