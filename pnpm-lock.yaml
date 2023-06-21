@@ -37,6 +37,9 @@ dependencies:
   "@editorjs/table":
     specifier: ^2.2.1
     version: 2.2.1
+  "@hookform/resolvers":
+    specifier: ^3.1.1
+    version: 3.1.1(react-hook-form@7.45.0)
   "@prisma/client":
     specifier: ^4.15.0
     version: 4.15.0(prisma@4.15.0)
@@ -109,6 +112,9 @@ dependencies:
   "@typescript-eslint/parser":
     specifier: ^5.60.0
     version: 5.60.0(eslint@8.43.0)(typescript@5.1.3)
+  "@uploadthing/react":
+    specifier: ^5.0.0
+    version: 5.0.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.0.0)(zod@3.21.4)
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.24)
@@ -130,6 +136,9 @@ dependencies:
   date-fns:
     specifier: ^2.30.0
     version: 2.30.0
+  editorjs-text-color-plugin:
+    specifier: ^2.0.4
+    version: 2.0.4
   eslint:
     specifier: 8.43.0
     version: 8.43.0
@@ -163,6 +172,12 @@ dependencies:
   react-editor-js:
     specifier: ^2.1.0
     version: 2.1.0(@editorjs/editorjs@2.27.0)(@editorjs/paragraph@2.9.0)(react@18.2.0)
+  react-hook-form:
+    specifier: ^7.45.0
+    version: 7.45.0(react@18.2.0)
+  react-textarea-autosize:
+    specifier: ^8.4.1
+    version: 8.4.1(@types/react@18.2.13)(react@18.2.0)
   sharp:
     specifier: ^0.32.1
     version: 0.32.1
@@ -184,6 +199,9 @@ dependencies:
   typescript:
     specifier: 5.1.3
     version: 5.1.3
+  uploadthing:
+    specifier: ^5.0.0
+    version: 5.0.0(zod@3.21.4)
   zod:
     specifier: ^3.21.4
     version: 3.21.4
@@ -1541,6 +1559,17 @@ packages:
       long: 4.0.0
       protobufjs: 7.2.3
       yargs: 17.7.2
+    dev: false
+
+  /@hookform/resolvers@3.1.1(react-hook-form@7.45.0):
+    resolution:
+      {
+        integrity: sha512-tS16bAUkqjITNSvbJuO1x7MXbn7Oe8ZziDTJdA9mMvsoYthnOOiznOTGBYwbdlYBgU+tgpI/BtTU3paRbCuSlg==,
+      }
+    peerDependencies:
+      react-hook-form: ^7.0.0
+    dependencies:
+      react-hook-form: 7.45.0(react@18.2.0)
     dev: false
 
   /@humanwhocodes/config-array@0.11.10:
@@ -4084,6 +4113,48 @@ packages:
       eslint-visitor-keys: 3.4.1
     dev: false
 
+  /@uploadthing/mime-types@0.2.0:
+    resolution:
+      {
+        integrity: sha512-nRcdyM622+GYT9SdaJIVLknqoc8i7krItinfuBPtvmPc+UNGDJ+pMkr4AatYp88cEc4iYtPlN8flJvZ3dNtgrg==,
+      }
+    dev: false
+
+  /@uploadthing/react@5.0.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.0.0)(zod@3.21.4):
+    resolution:
+      {
+        integrity: sha512-rWqL9V/gyCa+rWB0XNPSUEdy0w9Mlx/I/LxQkmzC2NCAwIUeub11pecdMwlKdVsogg45oMhzEI3odA2g9a5Scw==,
+      }
+    peerDependencies:
+      react: ^17.0.2 || ^18.0.0
+      react-dropzone: ^14.2.3
+      uploadthing: ^5.0.0
+    dependencies:
+      "@uploadthing/shared": 5.0.0(@uploadthing/mime-types@0.2.0)(zod@3.21.4)
+      react: 18.2.0
+      react-dropzone: 14.2.3(react@18.2.0)
+      uploadthing: 5.0.0(zod@3.21.4)
+    transitivePeerDependencies:
+      - "@uploadthing/mime-types"
+      - zod
+    dev: false
+
+  /@uploadthing/shared@5.0.0(@uploadthing/mime-types@0.2.0)(zod@3.21.4):
+    resolution:
+      {
+        integrity: sha512-Owr/RbSZgThcjZWWy6xTcmRH6jNcCfTGtrH3jAftA1nlGW1g4FzrdTZIHB2fdjZ5qJJ2KoyY3cPY1wEdE4FjaQ==,
+      }
+    peerDependencies:
+      "@uploadthing/mime-types": ^0.2.0
+      zod: ^3.21.4
+    peerDependenciesMeta:
+      "@uploadthing/mime-types":
+        optional: true
+    dependencies:
+      "@uploadthing/mime-types": 0.2.0
+      zod: 3.21.4
+    dev: false
+
   /JSONStream@1.3.5:
     resolution:
       {
@@ -4366,6 +4437,14 @@ packages:
       {
         integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==,
       }
+    dev: false
+
+  /attr-accept@2.2.2:
+    resolution:
+      {
+        integrity: sha512-7prDjvt9HmqiZ0cl5CRjtS84sEyhsHP2coDkaZKRKVfCDo9s7iw7ChVmar78Gu9pC4SoR/28wFu/G5JJhTnqEg==,
+      }
+    engines: { node: ">=4" }
     dev: false
 
   /autoprefixer@10.4.14(postcss@8.4.24):
@@ -5303,6 +5382,13 @@ packages:
       is-obj: 2.0.0
     dev: true
 
+  /editorjs-text-color-plugin@2.0.4:
+    resolution:
+      {
+        integrity: sha512-QpibTkOxs3ndlKNOLT8ZlC4ktc3/eKIajiLO0Jm/hh9AJug/CrM1/rAvHy+ldfUKavbWeI+YZvgjad0YTyoyGw==,
+      }
+    dev: false
+
   /electron-to-chromium@1.4.434:
     resolution:
       {
@@ -6057,6 +6143,16 @@ packages:
     engines: { node: ^10.12.0 || >=12.0.0 }
     dependencies:
       flat-cache: 3.0.4
+
+  /file-selector@0.6.0:
+    resolution:
+      {
+        integrity: sha512-QlZ5yJC0VxHxQQsQhXvBaC7VRJ2uaxTf+Tfpu4Z/OcVQJVpZO+DGU0rkoVW5ce2SccxugvpBJoMvUs59iILYdw==,
+      }
+    engines: { node: ">= 12" }
+    dependencies:
+      tslib: 2.5.3
+    dev: false
 
   /fill-range@7.0.1:
     resolution:
@@ -9229,6 +9325,21 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-dropzone@14.2.3(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-O3om8I+PkFKbxCukfIR3QAGftYXDZfOE2N1mr/7qebQJHs7U+/RSL/9xomJNpRg9kM5h9soQSdf0Gc7OHF5Fug==,
+      }
+    engines: { node: ">= 10.13" }
+    peerDependencies:
+      react: ">= 16.8 || 18.0.0"
+    dependencies:
+      attr-accept: 2.2.2
+      file-selector: 0.6.0
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
   /react-editor-js@2.1.0(@editorjs/editorjs@2.27.0)(@editorjs/paragraph@2.9.0)(react@18.2.0):
     resolution:
       {
@@ -9242,6 +9353,18 @@ packages:
       - "@editorjs/editorjs"
       - "@editorjs/paragraph"
       - react
+    dev: false
+
+  /react-hook-form@7.45.0(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-AbHeZ4ad+0dEIknSW9dBgIwcvRDfZ1O97sgj75WaMdOX0eg8TBiUf9wxzVkIjZbk76BBIE9lmFOzyD4PN80ZQg==,
+      }
+    engines: { node: ">=12.22.0" }
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-is@16.13.1:
@@ -9331,6 +9454,23 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.5.3
+    dev: false
+
+  /react-textarea-autosize@8.4.1(@types/react@18.2.13)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-aD2C+qK6QypknC+lCMzteOdIjoMbNlgSFmJjCV+DrfTPwp59i/it9mMNf2HDzvRjQgKAyBDPyLJhcrzElf2U4Q==,
+      }
+    engines: { node: ">=10" }
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      "@babel/runtime": 7.22.5
+      react: 18.2.0
+      use-composed-ref: 1.3.0(react@18.2.0)
+      use-latest: 1.2.1(@types/react@18.2.13)(react@18.2.0)
+    transitivePeerDependencies:
+      - "@types/react"
     dev: false
 
   /react@18.2.0:
@@ -10763,6 +10903,18 @@ packages:
       escalade: 3.1.1
       picocolors: 1.0.0
 
+  /uploadthing@5.0.0(zod@3.21.4):
+    resolution:
+      {
+        integrity: sha512-ahWcBKkcOrEF3NpTH9bpZWS4ZDim92lezd3+uSLkvhUg5kKoGT1+lyOWUUWgiIq9HlYwN8oXIb8LFvg6jLv05Q==,
+      }
+    dependencies:
+      "@uploadthing/mime-types": 0.2.0
+      "@uploadthing/shared": 5.0.0(@uploadthing/mime-types@0.2.0)(zod@3.21.4)
+    transitivePeerDependencies:
+      - zod
+    dev: false
+
   /uri-js@4.4.1:
     resolution:
       {
@@ -10797,6 +10949,50 @@ packages:
       "@types/react": 18.2.13
       react: 18.2.0
       tslib: 2.5.3
+    dev: false
+
+  /use-composed-ref@1.3.0(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-GLMG0Jc/jiKov/3Ulid1wbv3r54K9HlMW29IWcDFPEqFkSO2nS0MuefWgMJpeHQ9YJeXDL3ZUF+P3jdXlZX/cQ==,
+      }
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+    dev: false
+
+  /use-isomorphic-layout-effect@1.1.2(@types/react@18.2.13)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==,
+      }
+    peerDependencies:
+      "@types/react": "*"
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true
+    dependencies:
+      "@types/react": 18.2.13
+      react: 18.2.0
+    dev: false
+
+  /use-latest@1.2.1(@types/react@18.2.13)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-xA+AVm/Wlg3e2P/JiItTziwS7FK92LWrDB0p+hgXloIMuVCeJJ8v6f0eeHyPZaJrM+usM1FkFfbNCrJGs8A/zw==,
+      }
+    peerDependencies:
+      "@types/react": "*"
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      "@types/react":
+        optional: true
+    dependencies:
+      "@types/react": 18.2.13
+      react: 18.2.0
+      use-isomorphic-layout-effect: 1.1.2(@types/react@18.2.13)(react@18.2.0)
     dev: false
 
   /use-sidecar@1.1.2(@types/react@18.2.13)(react@18.2.0):

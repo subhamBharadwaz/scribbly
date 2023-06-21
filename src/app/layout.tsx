@@ -1,13 +1,14 @@
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs"
 
-import "@/styles/globals.css";
+import "@/styles/globals.css"
 
-import { Inter } from "next/font/google";
+import { Inter } from "next/font/google"
 
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
+import { siteConfig } from "@/config/site"
+import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/toaster"
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
   title: {
@@ -55,20 +56,21 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={cn(inter.className, "min-h-screen antialiased")}>
+        <body className={cn(inter.className, "min-h-screen bg-background")}>
           {children}
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>
-  );
+  )
 }
