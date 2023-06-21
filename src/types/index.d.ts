@@ -1,59 +1,59 @@
-import type { Icon } from "lucide-react";
+import type { Icon } from "lucide-react"
 
-import { Icons } from "@/components/icons";
+import { Icons } from "@/components/icons"
 
 export type NavItem = {
-  title: string;
-  href: string;
-  disabled?: boolean;
-};
+  title: string
+  href: string
+  disabled?: boolean
+}
 
-export type MainNavItem = NavItem;
+export type MainNavItem = NavItem
 
 export type SidebarNavItem = {
-  title: string;
-  disabled?: boolean;
-  external?: boolean;
-  icon?: keyof typeof Icons;
+  title: string
+  disabled?: boolean
+  external?: boolean
+  icon?: keyof typeof Icons
 } & (
   | {
-      href: string;
-      items?: never;
+      href: string
+      items?: never
     }
   | {
-      href?: string;
-      items: NavLink[];
+      href?: string
+      items: NavLink[]
     }
-);
+)
 
 export type SiteConfig = {
-  name: string;
-  description: string;
-  url: string;
-  ogImage: string;
+  name: string
+  description: string
+  url: string
+  ogImage: string
   links: {
-    twitter: string;
-    github: string;
-  };
-};
+    twitter: string
+    github: string
+  }
+}
 
 export type MarketingConfig = {
-  mainNav: MainNavItem[];
-};
+  mainNav: MainNavItem[]
+}
 
 export type SubscriptionPlan = {
-  name: string;
-  description: string;
-  stripePriceId: string;
-};
+  name: string
+  description: string
+  stripePriceId: string
+}
 
-export type DashboardConfig = {
-  mainNav: MainNavItem[];
-  sidebarNav: SidebarNavItem[];
-};
+export type JournalConfig = {
+  mainNav: MainNavItem[]
+  sidebarNav: SidebarNavItem[]
+}
 
 export type UserSubscriptionPlan = SubscriptionPlan &
   Pick<User, "stripeCustomerId" | "stripeSubscriptionId"> & {
-    stripeCurrentPeriodEnd: number;
-    isPro: boolean;
-  };
+    stripeCurrentPeriodEnd: number
+    isPro: boolean
+  }
