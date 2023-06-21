@@ -1,14 +1,23 @@
+import localFont from "next/font/local"
 import { ClerkProvider } from "@clerk/nextjs"
 
 import "@/styles/globals.css"
 
-import { Inter } from "next/font/google"
+import { Inter as FontSans } from "next/font/google"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 
-const inter = Inter({ subsets: ["latin"] })
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
+
+const fontHeading = localFont({
+  src: "../../assets/fonts/CalSans-SemiBold.woff2",
+  variable: "--font-heading",
+})
 
 export const metadata = {
   title: {
@@ -66,7 +75,13 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={cn(inter.className, "min-h-screen bg-background")}>
+        <body
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased",
+            fontSans.variable,
+            fontHeading.variable
+          )}
+        >
           {children}
           <Toaster />
         </body>
