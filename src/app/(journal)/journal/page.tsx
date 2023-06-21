@@ -7,7 +7,7 @@ import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { JournalHeader } from "@/components/header"
 import { JournalEntryItem } from "@/components/journal/journal-entry"
 import JournalEntryCreateButton from "@/components/journal/journal-entry-create-button"
-import { DashboardShell } from "@/components/shell"
+import { JournalShell } from "@/components/shell"
 
 export const metadata = {
   title: "Journal",
@@ -35,7 +35,7 @@ export default async function JournalPage() {
   })
 
   return (
-    <DashboardShell>
+    <JournalShell>
       <JournalHeader
         heading="Entries"
         text="Create and manage journal entries."
@@ -60,6 +60,6 @@ export default async function JournalPage() {
           </EmptyPlaceholder>
         )}
       </div>
-    </DashboardShell>
+    </JournalShell>
   )
 }

@@ -1,11 +1,11 @@
 import { JournalHeader } from "@/components/header"
 import { JournalEntryItem } from "@/components/journal/journal-entry"
 import JournalEntryCreateButton from "@/components/journal/journal-entry-create-button"
-import { DashboardShell } from "@/components/shell"
+import { JournalShell } from "@/components/shell"
 
-export default function DashboardLoading() {
+export default function JournalLoading() {
   return (
-    <DashboardShell>
+    <JournalShell>
       <JournalHeader
         heading="Entries"
         text="Create and manage journal entries."
@@ -19,6 +19,6 @@ export default function DashboardLoading() {
         <JournalEntryItem.Skeleton />
         <JournalEntryItem.Skeleton />
       </div>
-    </DashboardShell>
+    </JournalShell>
   )
 }

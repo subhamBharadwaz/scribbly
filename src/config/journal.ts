@@ -1,6 +1,6 @@
 import { JournalConfig } from "@/types"
 
-export const dashboardConfig: JournalConfig = {
+export const journalConfig: JournalConfig = {
   mainNav: [
     {
       title: "Documentation",
@@ -14,18 +14,18 @@ export const dashboardConfig: JournalConfig = {
   ],
   sidebarNav: [
     {
-      title: "Posts",
-      href: "/dashboard",
+      title: "Entries",
+      href: "/journal",
       icon: "post",
     },
     {
       title: "Billing",
-      href: "/dashboard/billing",
+      href: "/journal/billing",
       icon: "billing",
     },
     {
       title: "Settings",
-      href: "/dashboard/settings",
+      href: "/journal/settings",
       icon: "settings",
     },
   ],
