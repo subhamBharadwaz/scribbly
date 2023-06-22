@@ -199,7 +199,7 @@ const Editor: FC<EditorProps> = ({ entry }) => {
             <span>Save</span>
           </button>
         </div>
-        <div className="prose prose-stone mx-auto w-[800px]">
+        <div className="prose prose-stone mx-auto w-[800px] dark:prose-invert">
           <TextareaAutosize
             autoFocus
             id="title"
