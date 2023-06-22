@@ -36,7 +36,7 @@ export default async function JournalLayout({ children }: JournalLayoutProps) {
         <aside className="hidden w-[200px] flex-col md:flex">
           <JournalNav items={journalConfig.sidebarNav} />
         </aside>
-        <main className="flex w-full flex-1 flex-col overflow-hidden">
+        <main className="mb-10 flex w-full flex-1 flex-col overflow-hidden">
           {children}
         </main>
       </div>

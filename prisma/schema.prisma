@@ -46,10 +46,10 @@ model JournalEntry {
 }
 
 model Reminder {
-  id        String       @id @default(cuid())
-  frequency ReminderType @default(DAILY)
-  time      DateTime
-  active    Boolean      @default(false)
+  id        String        @id @default(cuid())
+  frequency ReminderType? @default(DAILY)
+  time      DateTime?     @default(dbgenerated("'09:00:00'")) @db.Time(0)
+  active    Boolean?      @default(false)
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
