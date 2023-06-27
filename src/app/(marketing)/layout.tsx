@@ -1,14 +1,14 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { marketingConfig } from "@/config/marketing";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
-import { MainNav } from "@/components/main-nav";
+import { marketingConfig } from "@/config/marketing"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { MainNav } from "@/components/main-nav"
 
 // import { SiteFooter } from "@/components/site-footer"
 
 interface MarketingLayoutProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export default async function MarketingLayout({
@@ -21,7 +21,7 @@ export default async function MarketingLayout({
           <MainNav items={marketingConfig.mainNav} />
           <nav>
             <Link
-              href="/login"
+              href="/sign-in"
               className={cn(
                 buttonVariants({ variant: "secondary", size: "sm" }),
                 "px-4"
@@ -35,5 +35,5 @@ export default async function MarketingLayout({
       <main className="flex-1">{children}</main>
       {/* <SiteFooter /> */}
     </div>
-  );
+  )
 }
