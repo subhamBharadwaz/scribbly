@@ -79,7 +79,7 @@ export async function POST(req: Request) {
     if (error instanceof RequiresProPlanError) {
       return new Response("Requires Pro Plan", { status: 402 })
     }
-    console.log({ error })
+
     return new Response(null, { status: 500 })
   }
 }

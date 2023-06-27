@@ -8,7 +8,7 @@ import { Inter as FontSans } from "next/font/google"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Providers } from "@/components/providers"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -83,10 +83,10 @@ export default function RootLayout({
             fontHeading.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Providers>
             {children}
             <Toaster />
-          </ThemeProvider>
+          </Providers>
         </body>
       </html>
     </ClerkProvider>

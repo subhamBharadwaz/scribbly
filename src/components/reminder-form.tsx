@@ -4,6 +4,9 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 import { UserSubscriptionPlan } from "@/types"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Reminder } from "@prisma/client"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import axios from "axios"
 import { useForm } from "react-hook-form"
 
 import { cn } from "@/lib/utils"
@@ -34,12 +37,6 @@ import {
 } from "./ui/select"
 import { Switch } from "./ui/switch"
 
-// This can come from your database or API.
-const defaultValues: Partial<ReminderFormValues> = {
-  frequency: "DAILY",
-  active: false,
-}
-
 interface ReminderFormProps extends React.HTMLAttributes<HTMLFormElement> {
   subscriptionPlan: UserSubscriptionPlan
 }
@@ -50,41 +47,66 @@ export function ReminderForm({
   ...props
 }: ReminderFormProps) {
   const router = useRouter()
-  const form = useForm<ReminderFormValues>({
-    resolver: zodResolver(reminderFormSchema),
-    defaultValues,
-  })
+  const queryClient = useQueryClient()
 
   const [isSaving, setIsSaving] = React.useState<boolean>(false)
 
-  async function onSubmit(data: ReminderFormValues) {
-    setIsSaving(true)
+  const { data: reminder, isLoading } = useQuery<Reminder>({
+    queryKey: ["reminder"],
+    queryFn: async () => {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/reminder`
+      )
+      return await res.data
+    },
+  })
 
-    const response = await fetch(`/api/reminder`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        frequency: data.frequency,
-        active: data.active,
-      }),
-    })
+  const form = useForm<ReminderFormValues>({
+    resolver: zodResolver(reminderFormSchema),
+    defaultValues: async () => {
+      const res = await axios.get(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/reminder`
+      )
+      const data = await res.data
+      return {
+        active: data?.active,
+        frequency: data?.frequency,
+      }
+    },
+  })
 
-    setIsSaving(false)
+  const updateReminderHandler = async (data: ReminderFormValues) => {
+    const res = await axios.patch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/reminder`,
+      data
+    )
+    return await res.data
+  }
 
-    if (!response?.ok) {
-      return toast({
+  const updateReminderMutation = useMutation({
+    mutationFn: updateReminderHandler,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["reminder"]),
+        toast({
+          description: "Reminder settings updated successfully.",
+        }),
+        setIsSaving(false)
+    },
+    onError: () => {
+      toast({
         title: "Something went wrong.",
-        description: "Your name was not updated. Please try again.",
+        description:
+          "Your reminder settings were not updated. Please try again.",
         variant: "destructive",
       })
+    },
+  })
+
+  async function onSubmit(data: ReminderFormValues) {
+    if (subscriptionPlan?.isPro) {
+      setIsSaving(true)
+      updateReminderMutation.mutate(data)
     }
-
-    toast({
-      description: "Your name has been updated.",
-    })
-
     router.refresh()
   }
 
@@ -110,7 +132,7 @@ export function ReminderForm({
                 <Switch
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  disabled={!subscriptionPlan?.isPro}
+                  disabled={!subscriptionPlan?.isPro || isLoading}
                 />
               </FormControl>
             </FormItem>
@@ -126,7 +148,6 @@ export function ReminderForm({
 
               <Select
                 onValueChange={field.onChange}
-                defaultValue={field.value}
                 disabled={!subscriptionPlan?.isPro}
               >
                 <FormControl>
