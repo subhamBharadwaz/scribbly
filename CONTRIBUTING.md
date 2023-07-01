@@ -3,12 +3,12 @@ Thank you for considering contributing to this repository! We appreciate your in
 
 ### Table of Contents
 
--   [Getting Started]([https://github.com/subhamBharadwaz/scribbly](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md)/#getting-started)
--   [How to Contribute]([https://github.com/subhamBharadwaz/scribbly](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md)/#how-to-contribute)
--   [Code Style]([https://github.com/subhamBharadwaz/scribbly](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md)/#code-style)
--   [Reporting Issues]([https://github.com/subhamBharadwaz/scribbly](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md)/#reporting-issues)
--   [Submitting Pull Requests]([https://github.com/subhamBharadwaz/scribbly](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md)/#submitting-pull-requests)
--   [License]([https://github.com/subhamBharadwaz/scribbly](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md)/#license)
+-   [Getting Started](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md#getting-started)
+-   [How to Contribute](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md/#how-to-contribute)
+-   [Code Style](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md#code-style)
+-   [Reporting Issues](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md#reporting-issues)
+-   [Submitting Pull Requests](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md#submitting-pull-requests)
+-   [License](https://github.com/subhamBharadwaz/scribbly/blob/main/CONTRIBUTING.md#license)
 
 ### Getting Started
 
