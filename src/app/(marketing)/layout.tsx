@@ -4,6 +4,7 @@ import { marketingConfig } from "@/config/marketing"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { MainNav } from "@/components/main-nav"
+import SiteFooter from "@/components/site-footer"
 
 // import { SiteFooter } from "@/components/site-footer"
 
@@ -22,18 +23,15 @@ export default async function MarketingLayout({
           <nav>
             <Link
               href="/sign-in"
-              className={cn(
-                buttonVariants({ variant: "secondary", size: "sm" }),
-                "px-4"
-              )}
+              className={cn(buttonVariants({ size: "lg" }), "px-4")}
             >
-              Login
+              Sign-up
             </Link>
           </nav>
         </div>
       </header>
-      <main className="flex-1">{children}</main>
-      {/* <SiteFooter /> */}
+      <main className="container flex-1">{children}</main>
+      <SiteFooter className="mt-[20vh]" />
     </div>
   )
 }
