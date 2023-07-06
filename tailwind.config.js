@@ -62,6 +62,11 @@ module.exports = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         heading: ["var(--font-heading)", ...fontFamily.sans],
       },
+      backgroundImage: {
+        "underline-gradient":
+          "linear-gradient(181deg, #facc15 0%, #eab308 50%, transparent 54%, transparent 100%)",
+      },
+
       keyframes: {
         "accordion-down": {
           from: { height: 0 },
