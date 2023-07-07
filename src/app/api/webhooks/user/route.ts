@@ -25,14 +25,12 @@ async function handler(request: Request) {
       heads as IncomingHttpHeaders & WebhookRequiredHeaders
     ) as Event
   } catch (err) {
-    console.error((err as Error).message)
-    return NextResponse.json({}, { status: 400 })
+    return NextResponse.json({ errors: `${err}` }, { status: 400 })
   }
 
   const eventType: EventType = evt.type
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, first_name, last_name, email_addresses, image_url } = evt.data
-    console.log({ id })
 
     await db.user.upsert({
       where: { clerkId: id as string },
