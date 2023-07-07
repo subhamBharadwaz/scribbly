@@ -8,7 +8,7 @@ import { db } from "@/lib/db"
 
 const webhookSecret = env.CLERK_WEBHOOK_SECRET
 
-async function handler(request: Request) {
+export async function POST(request: Request) {
   const payload = await request.json()
   const headersList = headers()
   const heads = {
@@ -25,27 +25,34 @@ async function handler(request: Request) {
       heads as IncomingHttpHeaders & WebhookRequiredHeaders
     ) as Event
   } catch (err) {
-    return NextResponse.json({ errors: `${err}` }, { status: 400 })
+    console.error((err as Error).message)
+    return NextResponse.json({}, { status: 400 })
   }
 
   const eventType: EventType = evt.type
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, first_name, last_name, email_addresses, image_url } = evt.data
-
-    await db.user.upsert({
-      where: { clerkId: id as string },
-      create: {
-        clerkId: id as string,
-        name: `${first_name} ${last_name}`,
-        // @ts-ignore
-        email: email_addresses[0].email_address,
-        image: image_url as string,
-      },
-      update: {
-        name: `${first_name} ${last_name}`,
-        image: image_url as string,
-      },
-    })
+    console.log({ id })
+    try {
+      await db.user.upsert({
+        where: { clerkId: id as string },
+        create: {
+          clerkId: id as string,
+          name: `${first_name} ${last_name}`,
+          // @ts-ignore
+          email: email_addresses[0].email_address,
+          image: image_url as string,
+        },
+        update: {
+          name: `${first_name} ${last_name}`,
+          image: image_url as string,
+        },
+      })
+      return NextResponse.json({ success: true }, { status: 201 })
+    } catch (error) {
+      console.error(error)
+      return NextResponse.json({ err: `${error}` }, { status: 400 })
+    }
   }
 }
 
@@ -56,7 +63,3 @@ type Event = {
   object: "event"
   type: EventType
 }
-
-export const GET = handler
-export const POST = handler
-export const PUT = handler

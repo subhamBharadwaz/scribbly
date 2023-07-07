@@ -15,6 +15,7 @@ export const metadata = {
 
 export default async function JournalPage() {
   const user = await getUserByClerkId()
+  console.log({ user })
 
   if (!user) {
     redirect("/login")
