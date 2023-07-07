@@ -14,20 +14,20 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
   return (
     <footer
       className={cn(
-        "min-h-[30vh] w-full space-y-20 bg-slate-100 p-10 text-slate-800",
+        "min-h-[30vh] w-full  space-y-20 border-t bg-background p-10 text-foreground",
         className
       )}
     >
       <div className="space-y-10">
         <h3 className="text-center text-2xl font-bold">Scribbly</h3>
         <div className="flex flex-col gap-x-5 sm:flex-row sm:items-center sm:justify-center">
-          <Link href="/#overview" className="inline-block font-semibold">
+          <Link href="#features" className="inline-block font-semibold">
             Features
           </Link>
           <Link href="/journal" className="inline-block font-semibold">
             Journal
           </Link>
-          <Link href="/#pricing" className="inline-block font-semibold">
+          <Link href="#pricing" className="inline-block font-semibold">
             Pricing
           </Link>
           <Link href="/" className="inline-block font-semibold">

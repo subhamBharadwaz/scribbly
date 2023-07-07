@@ -72,7 +72,7 @@ const Testimonials: FC<TestimonialsProps> = ({ className }) => {
       {testimonialData.map((testimonial) => (
         <Card>
           <CardContent className="py-6">
-            <p className="leading-relaxed text-slate-600">
+            <p className="leading-relaxed text-muted-foreground">
               {testimonial.testimonial}
             </p>
           </CardContent>

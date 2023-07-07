@@ -48,7 +48,7 @@ export type SubscriptionPlan = {
 }
 
 export type JournalConfig = {
-  mainNav: MainNavItem[]
+  mainNav?: MainNavItem[]
   sidebarNav: SidebarNavItem[]
 }
 
