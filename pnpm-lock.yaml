@@ -152,7 +152,7 @@ dependencies:
     specifier: ^8.2.0
     version: 8.2.0
   contentlayer:
-    specifier: ^0.3.4
+    specifier: ^0.3.1
     version: 0.3.4(esbuild@0.18.11)
   date-fns:
     specifier: ^2.30.0
