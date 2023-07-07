@@ -16,15 +16,15 @@ import TestimonialSwiper from "@/components/testimonials"
 export default function Home() {
   return (
     <>
-      <section className="h-[90vh]">
+      <section className="h-[90vh] py-16">
         <div className="relative flex flex-col items-center justify-between md:flex-row">
           <div className="space-y-5 lg:space-y-10">
-            <h1 className="font-heading text-4xl  tracking-wide text-slate-950 md:text-6xl lg:leading-normal xl:text-8xl">
+            <h1 className="font-heading text-4xl  tracking-wide text-foreground md:text-6xl lg:leading-normal xl:text-8xl">
               The <span className="relative inline-block">Ultimate</span>{" "}
               <br className="hidden md:block" />
               Digital <span className="text-indigo-600">Journal</span>
             </h1>
-            <p className="max-w-md  text-slate-500 lg:max-w-xl lg:text-lg 2xl:text-xl">
+            <p className="max-w-md  text-muted-foreground lg:max-w-xl lg:text-lg 2xl:text-xl">
               Unleash the Power of Journaling: Seamlessly Document and Preserve
               the Vibrant Moments of Your Life with Our Feature-Rich Digital
               Journal.
@@ -39,19 +39,19 @@ export default function Home() {
           <LottieAnim />
         </div>
       </section>
-      <section id="overview" className="mt-[10vh] min-h-[90vh]">
-        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-slate-950 md:text-4xl xl:text-6xl">
+      <section id="features" className="mt-[10vh] min-h-[90vh]">
+        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-foreground md:text-4xl xl:text-6xl">
           An app where you&apos; find <br />a peace of mind
         </h2>
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
           <Card className="overflow-hidden">
             <CardContent className="space-y-10 p-0">
               <div className="space-y-5 px-6 py-8">
-                <h3 className="text-center font-heading text-2xl  leading-normal tracking-wide text-slate-950 lg:text-3xl">
+                <h3 className="text-center font-heading text-2xl  leading-normal tracking-wide text-foreground lg:text-3xl">
                   Intuitive and Modern
                   <br /> Journal Editor
                 </h3>
-                <p className="text-center text-slate-500 lg:text-lg">
+                <p className="text-center text-muted-foreground lg:text-lg">
                   Create journal entries with our sleek and intuitive editor,
                   offering rich formatting options and a visually captivating
                   experience.
@@ -77,11 +77,11 @@ export default function Home() {
           <Card className="overflow-hidden">
             <CardContent className="space-y-10 p-0">
               <div className="space-y-5 px-6 py-8">
-                <h3 className="text-center font-heading text-2xl  leading-normal tracking-wide text-slate-950 lg:text-3xl">
+                <h3 className="text-center font-heading text-2xl  leading-normal tracking-wide text-foreground lg:text-3xl">
                   Personalized Entry
                   <br /> Reminders
                 </h3>
-                <p className="text-center text-slate-500 lg:text-lg">
+                <p className="text-center text-muted-foreground lg:text-lg">
                   Set personalized reminders to ensure consistent journaling and
                   never miss an opportunity to reflect and record your thoughts.
                 </p>
@@ -107,7 +107,7 @@ export default function Home() {
       </section>
 
       <section className="mt-[10vh] min-h-[90vh]">
-        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-slate-950 md:text-4xl xl:text-6xl">
+        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-foreground md:text-4xl xl:text-6xl">
           Captivating Experiences and <br />
           Rave Reviews
         </h2>
@@ -115,24 +115,26 @@ export default function Home() {
       </section>
 
       <section id="pricing" className="mt-[10vh] min-h-[90vh]">
-        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-slate-950 md:text-4xl xl:text-6xl">
+        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-foreground md:text-4xl xl:text-6xl">
           Ready to get started?
         </h2>
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
           <Card>
             <CardHeader>
-              <CardTitle className="text-4xl">Starter</CardTitle>
+              <CardTitle className="text-2xl font-bold md:text-3xl lg:text-4xl">
+                Starter
+              </CardTitle>
               <CardDescription>
                 Experience the joy of journaling for free with Scribbly&apos;s
                 essential features and intuitive interface
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-8">
-              <h3 className="text-5xl font-bold">
+              <h3 className="lg:text-5x text-2xl font-bold md:text-3xl">
                 0₹{" "}
-                <span className="inline-block align-baseline text-base font-normal text-slate-500">
+                <span className="inline-block align-baseline text-base font-normal text-muted-foreground">
                   per month{" "}
-                  <span className="ml-2 inline-block rounded-lg border border-slate-400 p-1 text-base">
+                  <span className="ml-2 inline-block rounded-lg border p-1 text-base">
                     Free
                   </span>
                 </span>
@@ -147,29 +149,31 @@ export default function Home() {
                 <p className="text-lg">Includes</p>
                 <div className="flex items-center gap-x-5">
                   <Icons.check className="text-blue-400" />
-                  <p className="text-slate-500">3 Entries</p>
+                  <p className="text-muted-foreground">3 Entries</p>
                 </div>
                 <div className="flex items-center gap-x-5">
                   <Icons.check className="text-blue-400" />
-                  <p className="text-slate-500">24*7 Support</p>
+                  <p className="text-muted-foreground">24*7 Support</p>
                 </div>
               </div>
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="text-4xl">Pro</CardTitle>
+              <CardTitle className="text-2xl font-bold md:text-3xl lg:text-4xl">
+                Pro
+              </CardTitle>
               <CardDescription>
                 Upgrade to Scribbly Pro for an enhanced journaling experience
                 with advanced features and exclusive benefits.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-8">
-              <h3 className="text-5xl font-bold">
-                450₹{" "}
-                <span className="inline-block align-baseline text-base font-normal text-slate-500">
+              <h3 className="text-2xl font-bold md:text-3xl lg:text-5xl">
+                400₹{" "}
+                <span className="inline-block align-baseline text-base font-normal text-muted-foreground">
                   per month{" "}
-                  <span className="ml-2 inline-block rounded-lg border border-slate-400 p-1 text-base">
+                  <span className="ml-2 inline-block rounded-lg border  p-1 text-base">
                     Pro
                   </span>
                 </span>
@@ -185,19 +189,19 @@ export default function Home() {
                 <p className="text-lg">Includes</p>
                 <div className="flex items-center gap-x-5">
                   <Icons.check className="text-blue-400" />
-                  <p className="text-slate-500">Unlimited Entries</p>
+                  <p className="text-muted-foreground">Unlimited Entries</p>
                 </div>
                 <div className="flex items-center gap-x-5">
                   <Icons.check className="text-blue-400" />
-                  <p className="text-slate-500">Set Reminders</p>
+                  <p className="text-muted-foreground">Set Reminders</p>
                 </div>
                 <div className="flex items-center gap-x-5">
                   <Icons.check className="text-blue-400" />
-                  <p className="text-slate-500">24*7 Support</p>
+                  <p className="text-muted-foreground">24*7 Support</p>
                 </div>
                 <div className="flex items-center gap-x-5">
                   <Icons.check className="text-blue-400" />
-                  <p className="text-slate-500">Discord Channel</p>
+                  <p className="text-muted-foreground">Discord Channel</p>
                 </div>
               </div>
             </CardContent>
@@ -206,10 +210,10 @@ export default function Home() {
       </section>
       <section className="mt-[10vh] min-h-[30vh]">
         <div className="flex flex-col items-center justify-center space-y-8 py-10">
-          <h2 className="font-heading text-3xl  leading-normal tracking-wide text-slate-950 md:text-4xl xl:text-6xl">
+          <h2 className="font-heading text-3xl  leading-normal tracking-wide text-foreground md:text-4xl xl:text-6xl">
             Proudly open source
           </h2>
-          <p className="max-w-xl text-center text-lg leading-relaxed text-slate-600">
+          <p className="max-w-xl text-center text-lg leading-relaxed text-muted-foreground">
             Our source code is available on GitHub - feel free to read, review,
             or contribute to it however you want!
           </p>
@@ -222,7 +226,7 @@ export default function Home() {
             target="_blank"
             rel="noreferrer"
           >
-            <Icons.gitHub className="h-5 w-5 text-slate-100" /> Github
+            <Icons.gitHub className="h-5 w-5 text-background" /> Github
           </a>
         </div>
       </section>

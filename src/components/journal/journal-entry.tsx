@@ -12,7 +12,7 @@ interface JournalEntryProps {
 
 export function JournalEntryItem({ entry }: JournalEntryProps) {
   return (
-    <div className="flex items-center justify-between p-4">
+    <div className="flex items-center justify-between p-5">
       <div className="grid gap-1">
         <Link
           href={`/editor/${entry.id}`}

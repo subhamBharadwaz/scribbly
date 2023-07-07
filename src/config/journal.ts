@@ -1,17 +1,6 @@
 import { JournalConfig } from "@/types"
 
 export const journalConfig: JournalConfig = {
-  mainNav: [
-    {
-      title: "Documentation",
-      href: "/docs",
-    },
-    {
-      title: "Support",
-      href: "/support",
-      disabled: true,
-    },
-  ],
   sidebarNav: [
     {
       title: "Entries",
