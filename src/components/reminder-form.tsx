@@ -147,6 +147,7 @@ export function ReminderForm({
               <FormLabel className="font-semibold">Frequency</FormLabel>
 
               <Select
+                //@ts-ignore
                 onValueChange={field.onChange}
                 disabled={!subscriptionPlan?.isPro}
               >

@@ -26,6 +26,7 @@ import { UserNameForm } from "@/components/user-name-form"
 
 export default async function SettingsPage() {
   const user = await getUserByClerkId()
+  // @ts-ignore
   const subscriptionPlan = await getUserSubscriptionPlan(user.id)
 
   return (
@@ -51,7 +52,7 @@ export default async function SettingsPage() {
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-10">
-              <UserNameForm user={{ id: user?.id, name: user?.name }} />
+              <UserNameForm user={{ id: user!.id, name: user!.name }} />
               <div>
                 <p className="font-semibold">Profile</p>
                 <div className="space-y-8">

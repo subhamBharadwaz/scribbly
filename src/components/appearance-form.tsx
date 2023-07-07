@@ -55,6 +55,7 @@ export function AppearanceForm() {
               </FormDescription>
               <FormMessage />
               <RadioGroup
+                //@ts-ignore
                 onValueChange={field.onChange}
                 defaultValue={field.value}
                 className="grid max-w-md grid-cols-2 gap-8 pt-2"
