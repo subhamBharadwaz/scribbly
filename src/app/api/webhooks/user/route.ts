@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     ) as Event
   } catch (err) {
     console.error((err as Error).message)
-    return NextResponse.json({}, { status: 400 })
+    return NextResponse.json({ err: `${err}` }, { status: 400 })
   }
 
   const eventType: EventType = evt.type
