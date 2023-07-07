@@ -1,44 +1,44 @@
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { allPages } from "contentlayer/generated";
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+import { allPages } from "contentlayer/generated"
 
-import { env } from "@/env.mjs";
-import { siteConfig } from "@/config/site";
-import { absoluteUrl } from "@/lib/utils";
-import { Mdx } from "@/components/mdx-components";
+import { env } from "@/env.mjs"
+import { siteConfig } from "@/config/site"
+import { absoluteUrl } from "@/lib/utils"
+import { Mdx } from "@/components/mdx-components"
 
 interface PageProps {
   params: {
-    slug: string[];
-  };
+    slug: string[]
+  }
 }
 
 async function getPageFromParams(params: any) {
-  const slug = params?.slug?.join("/");
-  const page = allPages.find((page) => page.slugAsParams === slug);
+  const slug = params?.slug?.join("/")
+  const page = allPages.find((page) => page.slugAsParams === slug)
 
   if (!page) {
-    null;
+    null
   }
 
-  return page;
+  return page
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const page = await getPageFromParams(params);
+  const page = await getPageFromParams(params)
 
   if (!page) {
-    return {};
+    return {}
   }
 
-  const url = env.NEXT_PUBLIC_APP_URL;
+  const url = env.NEXT_PUBLIC_APP_URL
 
-  const ogUrl = new URL(`${url}/api/og`);
-  ogUrl.searchParams.set("heading", page.title);
-  ogUrl.searchParams.set("type", siteConfig.name);
-  ogUrl.searchParams.set("mode", "light");
+  const ogUrl = new URL(`${url}/api/og`)
+  ogUrl.searchParams.set("heading", page.title)
+  ogUrl.searchParams.set("type", siteConfig.name)
+  ogUrl.searchParams.set("mode", "light")
 
   return {
     title: page.title,
@@ -63,7 +63,7 @@ export async function generateMetadata({
       description: page.description,
       images: [ogUrl.toString()],
     },
-  };
+  }
 }
 
 // export async function generateStaticParams(): Promise<PageProps["params"][]> {
@@ -73,24 +73,24 @@ export async function generateMetadata({
 // }
 
 export default async function PagePage({ params }: PageProps) {
-  const page = await getPageFromParams(params);
+  const page = await getPageFromParams(params)
 
   if (!page) {
-    notFound();
+    notFound()
   }
 
   return (
     <article className="container max-w-3xl py-6 lg:py-12">
       <div className="space-y-4">
-        <h1 className="font-heading inline-block text-4xl lg:text-5xl">
+        <h1 className="inline-block font-heading text-4xl lg:text-5xl">
           {page.title}
         </h1>
         {page.description && (
-          <p className="text-muted-foreground text-xl">{page.description}</p>
+          <p className="text-xl text-muted-foreground">{page.description}</p>
         )}
       </div>
       <hr className="my-4" />
       <Mdx code={page.body.code} />
     </article>
-  );
+  )
 }

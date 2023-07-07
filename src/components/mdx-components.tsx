@@ -1,10 +1,10 @@
-import * as React from "react";
-import Image from "next/image";
-import { useMDXComponent } from "next-contentlayer/hooks";
+import * as React from "react"
+import Image from "next/image"
+import { useMDXComponent } from "next-contentlayer/hooks"
 
-import { cn } from "@/lib/utils";
-import { Callout } from "@/components/callout";
-import { MdxCard } from "@/components/mdx-card";
+import { cn } from "@/lib/utils"
+import { Callout } from "@/components/callout"
+import { MdxCard } from "@/components/mdx-card"
 
 const components = {
   h1: ({ className, ...props }) => (
@@ -85,7 +85,7 @@ const components = {
   blockquote: ({ className, ...props }) => (
     <blockquote
       className={cn(
-        "[&>*]:text-muted-foreground mt-6 border-l-2 pl-6 italic",
+        "mt-6 border-l-2 pl-6 italic [&>*]:text-muted-foreground",
         className
       )}
       {...props}
@@ -107,7 +107,7 @@ const components = {
   ),
   tr: ({ className, ...props }: React.HTMLAttributes<HTMLTableRowElement>) => (
     <tr
-      className={cn("even:bg-muted m-0 border-t p-0", className)}
+      className={cn("m-0 border-t p-0 even:bg-muted", className)}
       {...props}
     />
   ),
@@ -150,18 +150,18 @@ const components = {
   Image,
   Callout,
   Card: MdxCard,
-};
+}
 
 interface MdxProps {
-  code: string;
+  code: string
 }
 
 export function Mdx({ code }: MdxProps) {
-  const Component = useMDXComponent(code);
+  const Component = useMDXComponent(code)
 
   return (
     <div className="mdx">
       <Component components={components} />
     </div>
-  );
+  )
 }
