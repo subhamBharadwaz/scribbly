@@ -8,7 +8,7 @@ import { db } from "@/lib/db"
 
 const webhookSecret = env.CLERK_WEBHOOK_SECRET
 
-export async function POST(request: Request) {
+async function handler(request: Request) {
   const payload = await request.json()
   const headersList = headers()
   const heads = {
@@ -26,33 +26,29 @@ export async function POST(request: Request) {
     ) as Event
   } catch (err) {
     console.error((err as Error).message)
-    return NextResponse.json({ err: `${err}` }, { status: 400 })
+    return NextResponse.json({}, { status: 400 })
   }
 
   const eventType: EventType = evt.type
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, first_name, last_name, email_addresses, image_url } = evt.data
-    console.log({ id })
-    try {
-      await db.user.upsert({
-        where: { clerkId: id as string },
-        create: {
-          clerkId: id as string,
-          name: `${first_name} ${last_name}`,
-          // @ts-ignore
-          email: email_addresses[0].email_address,
-          image: image_url as string,
-        },
-        update: {
-          name: `${first_name} ${last_name}`,
-          image: image_url as string,
-        },
-      })
-      return NextResponse.json({ success: true }, { status: 201 })
-    } catch (error) {
-      console.error(error)
-      return NextResponse.json({ err: `${error}` }, { status: 400 })
-    }
+
+    await db.user.upsert({
+      where: { clerkId: id as string },
+      create: {
+        clerkId: id as string,
+        name: `${first_name} ${last_name}`,
+        // @ts-ignore
+        email: email_addresses[0].email_address,
+        image: image_url as string,
+      },
+      update: {
+        name: `${first_name} ${last_name}`,
+        // @ts-ignore
+        email: email_addresses[0].email_address,
+        image: image_url as string,
+      },
+    })
   }
 }
 
@@ -63,3 +59,7 @@ type Event = {
   object: "event"
   type: EventType
 }
+
+export const GET = handler
+export const POST = handler
+export const PUT = handler
