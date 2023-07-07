@@ -1,21 +1,17 @@
 import Link from "next/link"
-import { UserProfile } from "@clerk/nextjs"
 
 import { getUserByClerkId } from "@/lib/auth"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { cn } from "@/lib/utils"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AppearanceForm } from "@/components/appearance-form"
@@ -23,6 +19,11 @@ import { JournalHeader } from "@/components/header"
 import { ReminderForm } from "@/components/reminder-form"
 import { JournalShell } from "@/components/shell"
 import { UserNameForm } from "@/components/user-name-form"
+
+export const metadata = {
+  title: "Settings",
+  description: "Manage account and website settings.",
+}
 
 export default async function SettingsPage() {
   const user = await getUserByClerkId()

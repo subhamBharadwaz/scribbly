@@ -8,8 +8,6 @@ import { buttonVariants } from "@/components/ui/button"
 import { MainNav } from "@/components/main-nav"
 import SiteFooter from "@/components/site-footer"
 
-// import { SiteFooter } from "@/components/site-footer"
-
 interface MarketingLayoutProps {
   children: React.ReactNode
 }

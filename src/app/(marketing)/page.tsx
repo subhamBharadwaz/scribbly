@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -29,12 +29,15 @@ export default function Home() {
               the Vibrant Moments of Your Life with Our Feature-Rich Digital
               Journal.
             </p>
-            <Button
-              size="lg"
-              className="bg-yellow-400 text-slate-900 hover:bg-yellow-500 hover:text-slate-950 md:h-14 md:text-lg"
+            <Link
+              href="/journal"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "bg-yellow-400 text-slate-900 hover:bg-yellow-500 hover:text-slate-950 md:h-14 md:text-lg"
+              )}
             >
               Get started
-            </Button>
+            </Link>
           </div>
           <LottieAnim />
         </div>
