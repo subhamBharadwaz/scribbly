@@ -33,16 +33,9 @@ async function handler(request: Request) {
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, first_name, last_name, email_addresses, image_url } = evt.data
 
-    await db.user.upsert({
-      where: { clerkId: id as string },
-      create: {
+    await db.user.create({
+      data: {
         clerkId: id as string,
-        name: `${first_name} ${last_name}`,
-        // @ts-ignore
-        email: email_addresses[0].email_address,
-        image: image_url as string,
-      },
-      update: {
         name: `${first_name} ${last_name}`,
         // @ts-ignore
         email: email_addresses[0].email_address,
