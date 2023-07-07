@@ -1,10 +1,10 @@
-import Link from "next/link";
+import Link from "next/link"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
-  href?: string;
-  disabled?: boolean;
+  href?: string
+  disabled?: boolean
 }
 
 export function MdxCard({
@@ -24,7 +24,7 @@ export function MdxCard({
       {...props}
     >
       <div className="flex flex-col justify-between space-y-4">
-        <div className="[&>p]:text-muted-foreground space-y-2 [&>h3]:!mt-0 [&>h4]:!mt-0">
+        <div className="space-y-2 [&>h3]:!mt-0 [&>h4]:!mt-0 [&>p]:text-muted-foreground">
           {children}
         </div>
       </div>
@@ -34,5 +34,5 @@ export function MdxCard({
         </Link>
       )}
     </div>
-  );
+  )
 }
