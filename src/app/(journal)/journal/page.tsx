@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation"
-import { currentUser } from "@clerk/nextjs"
 
 import { getUserByClerkId } from "@/lib/auth"
 import { db } from "@/lib/db"
@@ -15,7 +14,6 @@ export const metadata = {
 
 export default async function JournalPage() {
   const user = await getUserByClerkId()
-  console.log({ user })
 
   if (!user) {
     redirect("/login")
