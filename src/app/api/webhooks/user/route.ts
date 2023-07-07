@@ -1,37 +1,38 @@
-import { IncomingHttpHeaders } from "http";
-import { headers } from "next/headers";
-import { NextResponse } from "next/server";
-import { Webhook, WebhookRequiredHeaders } from "svix";
+import { IncomingHttpHeaders } from "http"
+import { headers } from "next/headers"
+import { NextResponse } from "next/server"
+import { Webhook, WebhookRequiredHeaders } from "svix"
 
-import { env } from "@/env.mjs";
-import { db } from "@/lib/db";
+import { env } from "@/env.mjs"
+import { db } from "@/lib/db"
 
-const webhookSecret = env.CLERK_WEBHOOK_SECRET;
+const webhookSecret = env.CLERK_WEBHOOK_SECRET
 
 async function handler(request: Request) {
-  const payload = await request.json();
-  const headersList = headers();
+  const payload = await request.json()
+  const headersList = headers()
   const heads = {
     "svix-id": headersList.get("svix-id"),
     "svix-timestamp": headersList.get("svix-timestamp"),
     "svix-signature": headersList.get("svix-signature"),
-  };
-  const wh = new Webhook(webhookSecret);
-  let evt: Event | null = null;
+  }
+  const wh = new Webhook(webhookSecret)
+  let evt: Event | null = null
 
   try {
     evt = wh.verify(
       JSON.stringify(payload),
       heads as IncomingHttpHeaders & WebhookRequiredHeaders
-    ) as Event;
+    ) as Event
   } catch (err) {
-    console.error((err as Error).message);
-    return NextResponse.json({}, { status: 400 });
+    console.error((err as Error).message)
+    return NextResponse.json({}, { status: 400 })
   }
 
-  const eventType: EventType = evt.type;
+  const eventType: EventType = evt.type
   if (eventType === "user.created" || eventType === "user.updated") {
-    const { id, first_name, last_name, email_addresses, image_url } = evt.data;
+    const { id, first_name, last_name, email_addresses, image_url } = evt.data
+    console.log({ id })
 
     await db.user.upsert({
       where: { clerkId: id as string },
@@ -44,22 +45,20 @@ async function handler(request: Request) {
       },
       update: {
         name: `${first_name} ${last_name}`,
-        // @ts-ignore
-        email: email_addresses[0].email_address,
         image: image_url as string,
       },
-    });
+    })
   }
 }
 
-type EventType = "user.created" | "user.updated" | "*";
+type EventType = "user.created" | "user.updated" | "*"
 
 type Event = {
-  data: Record<string, string | number>;
-  object: "event";
-  type: EventType;
-};
+  data: Record<string, string | number>
+  object: "event"
+  type: EventType
+}
 
-export const GET = handler;
-export const POST = handler;
-export const PUT = handler;
+export const GET = handler
+export const POST = handler
+export const PUT = handler
