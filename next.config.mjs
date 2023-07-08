@@ -4,7 +4,7 @@ import "./src/env.mjs"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   images: {
     domains: ["res.cloudinary.com", "images.unsplash.com"],
   },
