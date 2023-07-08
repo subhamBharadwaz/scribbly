@@ -1,7 +1,7 @@
 import { IncomingHttpHeaders } from "http"
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime"
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 import { Webhook, WebhookRequiredHeaders } from "svix"
 
 import { env } from "@/env.mjs"
