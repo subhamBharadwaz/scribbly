@@ -2,10 +2,12 @@ import { IncomingHttpHeaders } from "http"
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
 import type { User } from "@clerk/nextjs/api"
+import { PrismaClient } from "@prisma/client"
 import { Webhook, WebhookRequiredHeaders } from "svix"
 
 import { env } from "@/env.mjs"
-import { db } from "@/lib/db"
+
+const prisma = new PrismaClient()
 
 const webhookSecret = env.CLERK_WEBHOOK_SECRET
 
@@ -72,16 +74,18 @@ async function handler(request: Request) {
     if (!emailObject) {
       return NextResponse.json({}, { status: 400 })
     }
-    await db.user.upsert({
+    await prisma.user.upsert({
       where: { clerkId: id },
       update: {
         name: `${first_name || ""} ${last_name || ""}`,
         email: emailObject.email_address,
+        image: image_url,
       },
       create: {
         clerkId: id,
         name: `${first_name || ""} ${last_name || ""}`,
         email: emailObject.email_address,
+        image: image_url,
       },
     })
   }
