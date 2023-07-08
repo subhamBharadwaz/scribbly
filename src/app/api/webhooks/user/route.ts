@@ -34,34 +34,19 @@ async function handler(request: Request) {
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, first_name, last_name, email_addresses, image_url } = evt.data
 
-    try {
-      await db.user.upsert({
-        where: { clerkId: id as string },
-        create: {
-          clerkId: id as string,
-          name: `${first_name} ${last_name}`,
-          email: email_addresses[0].email_address,
-          image: image_url as string,
-        },
-        update: {
-          name: `${first_name} ${last_name}`,
-          email: email_addresses[0].email_address,
-          image: image_url as string,
-        },
-      })
-    } catch (err) {
-      if (
-        err instanceof PrismaClientKnownRequestError &&
-        err.code === "P2002"
-      ) {
-        console.error(`User with clerkId ${id} already exists`)
-      } else {
-        console.error((err as Error).message)
-        return NextResponse.json({ err: `${err}` }, { status: 400 })
-      }
-    }
+    await db.user.upsert({
+      where: { clerkId: id as string },
+      create: {
+        clerkId: id as string,
+        name: `${first_name} ${last_name}`,
+        email: email_addresses[0].email_address,
+        image: image_url as string,
+      },
+      update: {
+        name: `${first_name} ${last_name}`,
+      },
+    })
   }
-  return NextResponse.json({ success: true }, { status: 200 })
 }
 
 type EventType = "user.created" | "user.updated" | "*"
