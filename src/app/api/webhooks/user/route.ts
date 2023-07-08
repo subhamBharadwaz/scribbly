@@ -26,7 +26,7 @@ async function handler(request: Request) {
     ) as Event
   } catch (err) {
     console.error((err as Error).message)
-    return NextResponse.json({}, { status: 400 })
+    return NextResponse.json({ err: `${err}` }, { status: 400 })
   }
 
   const eventType: EventType = evt.type
@@ -57,7 +57,7 @@ async function handler(request: Request) {
       })
     }
   }
-  return NextResponse.json({}, { status: 200 })
+  return NextResponse.json({ success: true }, { status: 200 })
 }
 
 type EventType = "user.created" | "user.updated" | "*"
