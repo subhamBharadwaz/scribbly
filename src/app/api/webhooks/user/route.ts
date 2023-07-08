@@ -32,17 +32,32 @@ async function handler(request: Request) {
   const eventType: EventType = evt.type
   if (eventType === "user.created" || eventType === "user.updated") {
     const { id, first_name, last_name, email_addresses, image_url } = evt.data
-
-    await db.user.create({
-      data: {
-        clerkId: id as string,
-        name: `${first_name} ${last_name}`,
-        // @ts-ignore
-        email: email_addresses[0].email_address,
-        image: image_url as string,
-      },
+    console.log({ evt: evt.data })
+    const existingUser = await db.user.findUnique({
+      where: { clerkId: id as string },
     })
+
+    if (existingUser) {
+      await db.user.update({
+        where: { clerkId: id as string },
+        data: {
+          name: `${first_name} ${last_name}`,
+          email: email_addresses[0].email_address,
+          image: image_url as string,
+        },
+      })
+    } else {
+      await db.user.create({
+        data: {
+          clerkId: id as string,
+          name: `${first_name} ${last_name}`,
+          email: email_addresses[0].email_address,
+          image: image_url as string,
+        },
+      })
+    }
   }
+  return NextResponse.json({}, { status: 200 })
 }
 
 type EventType = "user.created" | "user.updated" | "*"
