@@ -11,7 +11,7 @@ overrides:
 
 dependencies:
   "@clerk/nextjs":
-    specifier: ^4.21.7
+    specifier: ^4.21.14
     version: 4.21.14(next@13.4.8)(react-dom@18.2.0)(react@18.2.0)
   "@editorjs/checklist":
     specifier: ^1.5.0
