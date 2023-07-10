@@ -15,10 +15,6 @@ export const metadata = {
 export default async function JournalPage() {
   const user = await getUserByClerkId()
 
-  if (!user) {
-    redirect("/login")
-  }
-
   const entries = await db.journalEntry.findMany({
     where: {
       userId: user?.id,

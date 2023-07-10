@@ -27,7 +27,7 @@
     }
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.21.7",
+    "@clerk/nextjs": "^4.21.14",
     "@editorjs/checklist": "^1.5.0",
     "@editorjs/code": "^2.8.0",
     "@editorjs/editorjs": "^2.27.2",
