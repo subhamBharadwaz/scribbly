@@ -4,8 +4,8 @@ import { getUserByClerkId } from "@/lib/auth"
 import { stripe } from "@/lib/stripe"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { BillingForm } from "@/components/billing-form"
-import { JournalHeader } from "@/components/header"
-import { JournalShell } from "@/components/shell"
+import { Header } from "@/components/header"
+import { Shell } from "@/components/shell"
 
 export const metadata = {
   title: "Billing",
@@ -16,7 +16,7 @@ export default async function BillingPage() {
   const user = await getUserByClerkId()
 
   if (!user) {
-    redirect("/login")
+    redirect("/sign-in")
   }
 
   const subscriptionPlan = await getUserSubscriptionPlan(user.id)
@@ -31,10 +31,11 @@ export default async function BillingPage() {
   }
 
   return (
-    <JournalShell>
-      <JournalHeader
-        heading="Billing"
-        text="Manage your billing and subscription plan."
+    <Shell>
+      <Header
+        title="Billing"
+        description="Manage your billing and subscription plan."
+        size="sm"
       />
       <div className="grid gap-8">
         <BillingForm
@@ -44,6 +45,6 @@ export default async function BillingPage() {
           }}
         />
       </div>
-    </JournalShell>
+    </Shell>
   )
 }

@@ -21,10 +21,15 @@
   color: inherit;
 }
 
-.dark .ce-popover__item-icon,
+.dark .ce-popover-item__icon,
 .dark .ce-conversion-tool__icon {
-  background-color: theme("colors.muted.DEFAULT");
+  background-color: theme("colors.popover.DEFAULT");
+  color: theme("colors.muted.foreground");
   box-shadow: none;
+}
+
+.dark .ce-popover-item__title {
+  color: theme("colors.muted.foreground");
 }
 
 .dark .cdx-search-field {
@@ -42,9 +47,11 @@
 .dark .ce-toolbox__button--active,
 .dark .ce-toolbox__button:hover,
 .dark .cdx-button:hover,
+.dark .ce-popover-item__icon:hover,
+.dark .ce-popover-item__title:hover,
 .dark .ce-inline-toolbar__dropdown:hover,
 .dark .ce-inline-tool:hover,
-.dark .ce-popover__item:hover,
+.dark .ce-popover-item:hover,
 .dark .ce-conversion-tool:hover,
 .dark .ce-toolbar__settings-btn:hover {
   background-color: theme("colors.accent.DEFAULT");

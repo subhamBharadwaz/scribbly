@@ -4,7 +4,7 @@ import * as React from "react"
 import { useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
-import { ButtonProps, buttonVariants } from "@/components/ui/button"
+import { Button, ButtonProps, buttonVariants } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
@@ -58,10 +58,9 @@ const JournalEntryCreateButton: React.FC<JournalEntryCreateButtonProps> = ({
   }
 
   return (
-    <button
+    <Button
       onClick={onClick}
       className={cn(
-        buttonVariants({ variant }),
         {
           "cursor-not-allowed opacity-60": isLoading,
         },
@@ -76,7 +75,7 @@ const JournalEntryCreateButton: React.FC<JournalEntryCreateButtonProps> = ({
         <Icons.add className="mr-2 h-4 w-4" />
       )}
       New Entry
-    </button>
+    </Button>
   )
 }
 

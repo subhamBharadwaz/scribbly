@@ -1,4 +1,7 @@
+"use client"
+
 import { FC } from "react"
+import Tilt from "react-parallax-tilt"
 
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -45,7 +48,7 @@ const testimonialData = [
     avatar:
       "https://plus.unsplash.com/premium_photo-1688350808212-4e6908a03925?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=869&q=80",
     testimonial:
-      "Scribbly has revolutionized the way I reflect on my daily life. The app's insightful analytics and mood tracking feature provide valuable insights into my emotions and patterns over time. I'm grateful to Scribbly for helping me gain a deeper understanding of myself.",
+      "Scribbly has revolutionized the way I reflect on my daily life. The app's insightful analytics and mood tracking feature provide valuable insights into my emotions and patterns over time. I'm grateful to Scribbly for helping me gain a deeper understanding of myself. Hope to see new features soon!",
   },
   {
     id: 6,
@@ -70,30 +73,41 @@ const Testimonials: FC<TestimonialsProps> = ({ className }) => {
       )}
     >
       {testimonialData.map((testimonial) => (
-        <Card>
-          <CardContent className="py-6">
-            <p className="leading-relaxed text-muted-foreground">
-              {testimonial.testimonial}
-            </p>
-          </CardContent>
-          <CardFooter className="flex w-full items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Avatar>
-                <AvatarImage
-                  className="object-cover"
-                  src={testimonial.avatar}
-                />
-                <AvatarFallback>{testimonial.name}</AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="text-sm font-medium leading-none">
-                  {testimonial.name}
-                </p>
+        <Tilt
+          key={testimonial.id}
+          glareEnable={true}
+          glareMaxOpacity={0.3}
+          glareColor="#ffffff"
+          glarePosition="all"
+          glareBorderRadius="8px"
+          tiltMaxAngleX={10}
+          tiltMaxAngleY={10}
+        >
+          <Card className="bg-transparent">
+            <CardContent className="py-6">
+              <p className="leading-relaxed text-muted-foreground">
+                {testimonial.testimonial}
+              </p>
+            </CardContent>
+            <CardFooter className="flex w-full items-center justify-between">
+              <div className="flex items-center space-x-4">
+                <Avatar>
+                  <AvatarImage
+                    className="object-cover"
+                    src={testimonial.avatar}
+                  />
+                  <AvatarFallback>{testimonial.name}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-sm font-medium leading-none">
+                    {testimonial.name}
+                  </p>
+                </div>
               </div>
-            </div>
-            <Icons.quote className="w-5" />
-          </CardFooter>
-        </Card>
+              <Icons.quote className="w-5" />
+            </CardFooter>
+          </Card>
+        </Tilt>
       ))}
     </div>
   )

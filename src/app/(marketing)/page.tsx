@@ -1,6 +1,9 @@
+/* eslint-disable tailwindcss/no-contradicting-classname */
+import Image from "next/image"
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
+import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
@@ -10,47 +13,69 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Icons } from "@/components/icons"
-import LottieAnim from "@/components/lottie-anim"
-import TestimonialSwiper from "@/components/testimonials"
+import Testimonials from "@/components/testimonials"
 
 export default function Home() {
   return (
     <>
-      <section className="h-[90vh] py-16">
-        <div className="relative flex flex-col items-center justify-between md:flex-row">
-          <div className="space-y-5 lg:space-y-10">
-            <h1 className="font-heading text-4xl  tracking-wide text-foreground md:text-6xl lg:leading-normal xl:text-8xl">
-              The <span className="relative inline-block">Ultimate</span>{" "}
-              <br className="hidden md:block" />
-              Digital <span className="text-indigo-600">Journal</span>
+      <section className="relative min-h-[90vh] py-16">
+        <div className="after:absolute after:top-0 after:z-[-1] after:h-full after:w-full after:bg-[url('../../public/grid.svg')] after:opacity-[.4] after:invert-[1]" />
+        <div className="relative flex flex-col items-center justify-center space-y-20">
+          <div className="flex flex-col items-center justify-center">
+            <h1 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-4xl tracking-tight text-transparent md:text-6xl md:leading-snug">
+              Journaling Made Simple
+              <br className="md:block" />
+              With{" "}
+              <span className="bg-primary-gradient bg-clip-text text-transparent">
+                Scribbly
+              </span>
             </h1>
-            <p className="max-w-md  text-muted-foreground lg:max-w-xl lg:text-lg 2xl:text-xl">
-              Unleash the Power of Journaling: Seamlessly Document and Preserve
-              the Vibrant Moments of Your Life with Our Feature-Rich Digital
-              Journal.
+            <p className="my-4 max-w-md text-center text-muted-foreground lg:max-w-xl lg:text-lg 2xl:text-xl">
+              Seamlessly Document and Preserve the Vibrant Moments of Your Life
+              with Our Feature-Rich Digital Journal.
             </p>
+
             <Link
               href="/journal"
               className={cn(
-                buttonVariants({ size: "lg" }),
-                "bg-yellow-400 text-slate-900 hover:bg-yellow-500 hover:text-slate-950 md:h-14 md:text-lg"
+                buttonVariants({ variant: "cta" }),
+                "mt-8 flex h-12 items-center justify-center space-x-5 p-[.25rem_.3rem_.25rem_1.3rem] text-base"
               )}
             >
-              Get started
+              <span className="text-white">Get started </span>
+              <span className="right-0 inline-block rounded-full bg-white/50  p-[0.5rem]">
+                <Icons.chevronRight className="h-6 w-6 text-black/60" />
+              </span>
             </Link>
           </div>
-          <LottieAnim />
+          <div className="w-full max-w-5xl rounded-lg bg-primary-gradient p-1 shadow-[0px_4px_15px]  shadow-[rgb(247_176_253_/_50%)] md:w-4/5 lg:w-3/4">
+            <AspectRatio ratio={4 / 3}>
+              <Image
+                src="/images/hero-dark.png"
+                fill
+                alt="hero"
+                className="rounded-lg object-cover"
+              />
+            </AspectRatio>
+          </div>
         </div>
       </section>
-      <section id="features" className="mt-[10vh] min-h-[90vh]">
-        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-foreground md:text-4xl xl:text-6xl">
-          An app where you&apos; find <br />a peace of mind
+      <section id="features" className="mt-[10vh] min-h-[100vh]">
+        <h2 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl tracking-tight text-transparent md:text-5xl md:leading-snug">
+          An app where you&apos;ll find <br />a{" "}
+          <span className="bg-secondary-gradient bg-clip-text text-transparent">
+            peace{" "}
+          </span>
+          of{" "}
+          <span className="bg-secondary-gradient-2 bg-clip-text text-transparent">
+            mind
+          </span>
         </h2>
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
           <Card className="overflow-hidden">
             <CardContent className="space-y-10 p-0">
               <div className="space-y-5 px-6 py-8">
-                <h3 className="text-center font-heading text-2xl  leading-normal tracking-wide text-foreground lg:text-3xl">
+                <h3 className="text-center font-heading text-2xl  leading-normal tracking-tight text-foreground lg:text-3xl">
                   Intuitive and Modern
                   <br /> Journal Editor
                 </h3>
@@ -61,7 +86,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="relative">
-                <div className="absolute inset-0 -top-1 left-9 z-0 rounded-md bg-gradient-to-br from-yellow-300 via-yellow-500 to-amber-600" />
+                <div className="absolute inset-0 -top-1 left-9 z-0 rounded-md bg-primary-gradient" />
                 <video
                   autoPlay
                   loop
@@ -70,7 +95,7 @@ export default function Home() {
                   className="relative z-10 ml-10 rounded-md object-cover"
                 >
                   <source
-                    src="https://res.cloudinary.com/dogdzaavf/video/upload/v1687945519/editor_qmb1gl.mp4"
+                    src="https://res.cloudinary.com/dogdzaavf/video/upload/v1689155252/editor-dark_gfnig8.mp4"
                     type="video/mp4"
                   />
                 </video>
@@ -80,7 +105,7 @@ export default function Home() {
           <Card className="overflow-hidden">
             <CardContent className="space-y-10 p-0">
               <div className="space-y-5 px-6 py-8">
-                <h3 className="text-center font-heading text-2xl  leading-normal tracking-wide text-foreground lg:text-3xl">
+                <h3 className="text-center font-heading text-2xl  leading-normal tracking-tight text-foreground lg:text-3xl">
                   Personalized Entry
                   <br /> Reminders
                 </h3>
@@ -90,7 +115,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="relative">
-                <div className="absolute inset-0 -top-1 left-9 z-0 rounded-md bg-gradient-to-br from-yellow-300 via-yellow-500 to-amber-600" />
+                <div className="absolute inset-0 -top-1 left-9 z-0 rounded-md bg-primary-gradient" />
                 <video
                   autoPlay
                   loop
@@ -99,7 +124,7 @@ export default function Home() {
                   className="relative z-10 ml-10 rounded-md object-cover"
                 >
                   <source
-                    src="https://res.cloudinary.com/dogdzaavf/video/upload/v1687953190/reminder_s9hqww.mp4"
+                    src="https://res.cloudinary.com/dogdzaavf/video/upload/v1689155238/reminder-dark_elaitc.mp4"
                     type="video/mp4"
                   />
                 </video>
@@ -110,15 +135,19 @@ export default function Home() {
       </section>
 
       <section className="mt-[10vh] min-h-[90vh]">
-        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-foreground md:text-4xl xl:text-6xl">
-          Captivating Experiences and <br />
+        <h2 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl tracking-tight text-transparent md:text-5xl md:leading-snug">
+          Captivating{" "}
+          <span className="bg-secondary-gradient-3 bg-clip-text text-transparent">
+            Experiences
+          </span>{" "}
+          and <br />
           Rave Reviews
         </h2>
-        <TestimonialSwiper className="py-16" />
+        <Testimonials className="py-16" />
       </section>
 
       <section id="pricing" className="mt-[10vh] min-h-[90vh]">
-        <h2 className="text-center font-heading text-3xl  leading-normal tracking-wide text-foreground md:text-4xl xl:text-6xl">
+        <h2 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl tracking-tight text-transparent md:text-5xl md:leading-snug">
           Ready to get started?
         </h2>
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
@@ -211,9 +240,10 @@ export default function Home() {
           </Card>
         </div>
       </section>
-      <section className="mt-[10vh] min-h-[30vh]">
+      <section className="relative mt-[10vh] min-h-[30vh]">
+        <div className="after:absolute after:top-0 after:z-[-1] after:h-full after:w-full after:bg-[url('../../public/grid.svg')] after:opacity-[.4] after:invert-[1]" />
         <div className="flex flex-col items-center justify-center space-y-8 py-10">
-          <h2 className="font-heading text-3xl  leading-normal tracking-wide text-foreground md:text-4xl xl:text-6xl">
+          <h2 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl tracking-tight text-transparent md:text-5xl md:leading-snug">
             Proudly open source
           </h2>
           <p className="max-w-xl text-center text-lg leading-relaxed text-muted-foreground">

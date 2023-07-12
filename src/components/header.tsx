@@ -1,15 +1,40 @@
-interface JournalHeaderProps {
-  heading: string
-  text?: string
+import { cn } from "@/lib/utils"
+
+interface HeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+  title: string
+  description?: string | null
+  size?: "default" | "sm"
   children?: React.ReactNode
 }
-
-export function JournalHeader({ heading, text, children }: JournalHeaderProps) {
+export function Header({
+  title,
+  description,
+  size = "default",
+  className,
+  children,
+  ...props
+}: HeaderProps) {
   return (
-    <div className="flex items-center justify-between px-2">
+    <div className={cn("space-y-3 px-2", className)} {...props}>
       <div className="grid gap-1">
-        <h1 className="font-heading text-3xl md:text-4xl">{heading}</h1>
-        {text && <p className="text-lg text-muted-foreground">{text}</p>}
+        <h1
+          className={cn(
+            "line-clamp-1 text-3xl font-bold tracking-tight",
+            size === "default" && "md:text-4xl"
+          )}
+        >
+          {title}
+        </h1>
+        {description ? (
+          <p
+            className={cn(
+              "line-clamp-2 text-muted-foreground",
+              size === "default" && "text-lg"
+            )}
+          >
+            {description}
+          </p>
+        ) : null}
       </div>
       {children}
     </div>

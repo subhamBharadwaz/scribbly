@@ -68,6 +68,7 @@ const Editor: FC<EditorProps> = ({ entry }) => {
           code: Code,
           inlineCode: InlineCode,
           table: Table,
+          checklist: Checklist,
           embed: Embed,
           image: {
             class: ImageTool,
@@ -205,10 +206,10 @@ const Editor: FC<EditorProps> = ({ entry }) => {
             id="title"
             defaultValue={entry.title}
             placeholder="Entry title"
-            className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold text-foreground focus:outline-none"
+            className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold  focus:outline-none"
             {...register("title")}
           />
-          <div id="editor" className="min-h-[500px] text-foreground" />
+          <div id="editor" className="min-h-[500px]" />
           <p className="text-sm text-gray-500">
             Use{" "}
             <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">

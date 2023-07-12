@@ -208,6 +208,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.45.1
     version: 7.45.1(react@18.2.0)
+  react-parallax-tilt:
+    specifier: ^1.7.152
+    version: 1.7.152(react-dom@18.2.0)(react@18.2.0)
   react-textarea-autosize:
     specifier: ^8.5.2
     version: 8.5.2(@types/react@18.2.13)(react@18.2.0)
@@ -9637,6 +9640,19 @@ packages:
       {
         integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==,
       }
+
+  /react-parallax-tilt@1.7.152(react-dom@18.2.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-lmqZtp/AVG/vsEu1YV4oMlPCUf74JTMljg1/TFL65EmFXrcYp61f1ISPyfZknxAvQKxvQPoo7I+XL0idEOk6Tg==,
+      }
+    peerDependencies:
+      react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-remove-scroll-bar@2.3.4(@types/react@18.2.13)(react@18.2.0):
     resolution:
