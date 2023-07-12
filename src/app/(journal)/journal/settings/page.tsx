@@ -15,9 +15,9 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { AppearanceForm } from "@/components/appearance-form"
-import { JournalHeader } from "@/components/header"
+import { Header } from "@/components/header"
 import { ReminderForm } from "@/components/reminder-form"
-import { JournalShell } from "@/components/shell"
+import { Shell } from "@/components/shell"
 import { UserNameForm } from "@/components/user-name-form"
 
 export const metadata = {
@@ -31,10 +31,11 @@ export default async function SettingsPage() {
   const subscriptionPlan = await getUserSubscriptionPlan(user.id)
 
   return (
-    <JournalShell>
-      <JournalHeader
-        heading="Settings"
-        text="Manage account and website settings."
+    <Shell>
+      <Header
+        title="Settings"
+        description="Manage account and website settings."
+        size="sm"
       />
       <Separator />
       <Tabs defaultValue="account" className="w-full">
@@ -119,6 +120,6 @@ export default async function SettingsPage() {
           </Card>
         </TabsContent>
       </Tabs>
-    </JournalShell>
+    </Shell>
   )
 }

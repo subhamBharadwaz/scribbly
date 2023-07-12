@@ -22,7 +22,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
   const user = await getUserByClerkId()
 
   if (!user) {
-    redirect("/login")
+    redirect("/sign-in")
   }
 
   const entry = await getPostForUser(params.entryId, user.id)

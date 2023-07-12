@@ -51,7 +51,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
           </a>
           <Icons.linkedIn className="h-6 w-6" />
         </div>
-        <p>&copy; 2023 Scribbly.vercel.com</p>
+        <p>&copy; 2023 scribbly-lime.vercel.app</p>
       </div>
     </footer>
   )

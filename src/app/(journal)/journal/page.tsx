@@ -3,10 +3,11 @@ import { redirect } from "next/navigation"
 import { getUserByClerkId } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
-import { JournalHeader } from "@/components/header"
+import { Header } from "@/components/header"
+import { Icons } from "@/components/icons"
 import { JournalEntryItem } from "@/components/journal/journal-entry"
 import JournalEntryCreateButton from "@/components/journal/journal-entry-create-button"
-import { JournalShell } from "@/components/shell"
+import { Shell } from "@/components/shell"
 
 export const metadata = {
   title: "Journal",
@@ -30,13 +31,16 @@ export default async function JournalPage() {
   })
 
   return (
-    <JournalShell>
-      <JournalHeader
-        heading="Entries"
-        text="Create and manage journal entries."
+    <Shell>
+      <Header
+        title="Entries"
+        description="Create and manage journal entries."
+        size="sm"
+        className="items-center justify-between md:flex"
       >
         <JournalEntryCreateButton />
-      </JournalHeader>
+      </Header>
+
       <div>
         {entries?.length ? (
           <div className="divide-y divide-border rounded-md border">
@@ -55,6 +59,6 @@ export default async function JournalPage() {
           </EmptyPlaceholder>
         )}
       </div>
-    </JournalShell>
+    </Shell>
   )
 }

@@ -1,17 +1,18 @@
-import { JournalHeader } from "@/components/header"
+import { Header } from "@/components/header"
 import { JournalEntryItem } from "@/components/journal/journal-entry"
 import JournalEntryCreateButton from "@/components/journal/journal-entry-create-button"
-import { JournalShell } from "@/components/shell"
+import { Shell } from "@/components/shell"
 
 export default function JournalLoading() {
   return (
-    <JournalShell>
-      <JournalHeader
-        heading="Entries"
-        text="Create and manage journal entries."
+    <Shell>
+      <Header
+        title="Entries"
+        description="Create and manage journal entries."
+        size="sm"
       >
         <JournalEntryCreateButton />
-      </JournalHeader>
+      </Header>
       <div className="divide-border-200 divide-y rounded-md border">
         <JournalEntryItem.Skeleton />
         <JournalEntryItem.Skeleton />
@@ -19,6 +20,6 @@ export default function JournalLoading() {
         <JournalEntryItem.Skeleton />
         <JournalEntryItem.Skeleton />
       </div>
-    </JournalShell>
+    </Shell>
   )
 }

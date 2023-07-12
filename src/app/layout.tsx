@@ -9,6 +9,7 @@ import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Providers } from "@/components/providers"
+import { TailwindIndicator } from "@/components/tailwind-indicator"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -16,7 +17,7 @@ const fontSans = FontSans({
 })
 
 const fontHeading = localFont({
-  src: "../../assets/fonts/CalSans-SemiBold.woff2",
+  src: "../../assets/fonts/Inter-Bold.ttf",
   variable: "--font-heading",
 })
 
@@ -86,6 +87,7 @@ export default function RootLayout({
           <Providers>
             {children}
             <Toaster />
+            <TailwindIndicator />
           </Providers>
         </body>
       </html>

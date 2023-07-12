@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { UserAvatar } from "@/components/user-avatar"
 
+import { Icons } from "./icons"
 import { buttonVariants } from "./ui/button"
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -45,18 +46,31 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         </div>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/journal">Journal</Link>
+          <Link
+            href="/journal/settings/user-profile"
+            className="cursor-pointer"
+          >
+            <Icons.user className="mr-2 h-4 w-4" aria-hidden="true" />
+            Account
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/journal/billing">Billing</Link>
+          <Link href="/journal" className="cursor-pointer">
+            <Icons.post className="mr-2 h-4 w-4" aria-hidden="true" />
+            Journal
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/journal/settings">Settings</Link>
+          <Link href="/journal/settings" className="cursor-pointer">
+            <Icons.settings className="mr-2 h-4 w-4" aria-hidden="true" />
+            Settings
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
+          <Icons.logout className="mr-2 h-4 w-4" aria-hidden="true" />
           <SignOutButton>
-            <button className="">Sign Out</button>
+            <button>Sign Out</button>
           </SignOutButton>
         </DropdownMenuItem>
       </DropdownMenuContent>

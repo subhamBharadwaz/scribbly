@@ -1,17 +1,18 @@
 import { CardSkeleton } from "@/components/card-skeleton"
-import { JournalHeader } from "@/components/header"
-import { JournalShell } from "@/components/shell"
+import { Header } from "@/components/header"
+import { Shell } from "@/components/shell"
 
 export default function JournalBillingLoading() {
   return (
-    <JournalShell>
-      <JournalHeader
-        heading="Settings"
-        text="Manage account and website settings."
+    <Shell>
+      <Header
+        title="Settings"
+        description="Manage account and website settings."
+        size="sm"
       />
       <div className="grid gap-10">
         <CardSkeleton />
       </div>
-    </JournalShell>
+    </Shell>
   )
 }
