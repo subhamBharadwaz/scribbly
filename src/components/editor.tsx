@@ -180,7 +180,7 @@ const Editor: FC<EditorProps> = ({ entry }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid w-full gap-10">
+      <div className="container grid w-full gap-10">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-10">
             <Link
@@ -200,13 +200,13 @@ const Editor: FC<EditorProps> = ({ entry }) => {
             <span>Save</span>
           </button>
         </div>
-        <div className="prose prose-stone mx-auto w-[800px] dark:prose-invert">
+        <div className="prose prose-stone mx-auto max-w-[800px] dark:prose-invert">
           <TextareaAutosize
             autoFocus
             id="title"
             defaultValue={entry.title}
             placeholder="Entry title"
-            className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold  focus:outline-none"
+            className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold focus:outline-none  lg:text-5xl"
             {...register("title")}
           />
           <div id="editor" className="min-h-[500px]" />
