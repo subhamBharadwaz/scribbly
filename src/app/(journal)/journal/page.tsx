@@ -36,12 +36,12 @@ export default async function JournalPage() {
         title="Entries"
         description="Create and manage journal entries."
         size="sm"
-        className="items-center justify-between md:flex"
+        className="items-center justify-between lg:flex"
       >
         <JournalEntryCreateButton />
       </Header>
 
-      <div>
+      <div className="w-full">
         {entries?.length ? (
           <div className="divide-y divide-border rounded-md border">
             {entries.map((entry) => (

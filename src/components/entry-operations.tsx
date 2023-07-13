@@ -25,7 +25,7 @@ import {
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
-async function deletePost(entryId: string) {
+async function deleteEntry(entryId: string) {
   const response = await fetch(`/api/journal/entries/${entryId}`, {
     method: "DELETE",
   })
@@ -33,7 +33,7 @@ async function deletePost(entryId: string) {
   if (!response?.ok) {
     toast({
       title: "Something went wrong.",
-      description: "Your post was not deleted. Please try again.",
+      description: "Your Entry was not deleted. Please try again.",
       variant: "destructive",
     })
   }
@@ -76,7 +76,7 @@ export function EntryOperations({ entry }: EntryOperationsProps) {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Are you sure you want to delete this post?
+              Are you sure you want to delete this entry?
             </AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone.
@@ -89,7 +89,7 @@ export function EntryOperations({ entry }: EntryOperationsProps) {
                 event.preventDefault()
                 setIsDeleteLoading(true)
 
-                const deleted = await deletePost(entry.id)
+                const deleted = await deleteEntry(entry.id)
 
                 if (deleted) {
                   setIsDeleteLoading(false)
