@@ -12,6 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import Background from "@/components/background"
 import { Icons } from "@/components/icons"
 import Testimonials from "@/components/testimonials"
 
