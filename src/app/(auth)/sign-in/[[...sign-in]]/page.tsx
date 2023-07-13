@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function LoginPage() {
   return (
-    <Shell className="max-w-lg flex flex-col justify-center items-center">
+    <Shell className="flex max-w-lg flex-col items-center justify-center">
       <SignIn
         appearance={{
           layout: {
