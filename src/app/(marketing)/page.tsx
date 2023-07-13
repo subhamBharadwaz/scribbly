@@ -48,7 +48,7 @@ export default function Home() {
               </span>
             </Link>
           </div>
-          <div className="w-full max-w-5xl rounded-lg bg-primary-gradient p-1 shadow-[0px_4px_15px]  shadow-[rgb(247_176_253_/_50%)] md:w-4/5 lg:w-3/4">
+          <div className="w-full max-w-5xl rounded-lg bg-primary-gradient p-1 shadow-[0px_4px_15px] shadow-[rgb(247_176_253_/_50%)] transition-shadow  duration-300 md:w-4/5 lg:w-3/4">
             <AspectRatio ratio={4 / 3}>
               <Image
                 src="/images/hero-dark.png"
@@ -64,11 +64,7 @@ export default function Home() {
         <h2 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl tracking-tight text-transparent md:text-5xl md:leading-snug">
           An app where you&apos;ll find <br />a{" "}
           <span className="bg-secondary-gradient bg-clip-text text-transparent">
-            peace{" "}
-          </span>
-          of{" "}
-          <span className="bg-secondary-gradient-2 bg-clip-text text-transparent">
-            mind
+            peace of mind
           </span>
         </h2>
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
@@ -135,20 +131,21 @@ export default function Home() {
       </section>
 
       <section className="mt-[10vh] min-h-[90vh]">
-        <h2 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl tracking-tight text-transparent md:text-5xl md:leading-snug">
-          Captivating{" "}
-          <span className="bg-secondary-gradient-3 bg-clip-text text-transparent">
-            Experiences
-          </span>{" "}
-          and <br />
-          Rave Reviews
+        <h2 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl leading-tight tracking-tight text-transparent md:text-5xl md:leading-snug">
+          Stories from the{" "}
+          <span className="bg-secondary-gradient-2 bg-clip-text text-transparent">
+            heart
+          </span>
         </h2>
         <Testimonials className="py-16" />
       </section>
 
       <section id="pricing" className="mt-[10vh] min-h-[90vh]">
         <h2 className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl tracking-tight text-transparent md:text-5xl md:leading-snug">
-          Ready to get started?
+          Ready to get{" "}
+          <span className="bg-secondary-gradient-3 bg-clip-text text-transparent">
+            started?
+          </span>
         </h2>
         <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
           <Card>
@@ -254,12 +251,13 @@ export default function Home() {
             href="https://github.com/subhamBharadwaz/scribbly"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "cursor-pointer gap-x-3"
+              "text- cursor-pointer gap-x-3 bg-secondary-gradient-4 text-white transition-shadow duration-300  hover:shadow-[0px_4px_30px] hover:shadow-[rgb(55_65_81_/_50%)]"
             )}
             target="_blank"
             rel="noreferrer"
           >
-            <Icons.gitHub className="h-5 w-5 text-background" /> Github
+            <Icons.gitHub className="h-5 w-5 text-background text-white" />{" "}
+            Github
           </a>
         </div>
       </section>

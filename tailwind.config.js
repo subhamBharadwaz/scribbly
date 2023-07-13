@@ -68,11 +68,13 @@ module.exports = {
         "primary-gradient-2":
           "linear-gradient(120deg, #6836c9, #e6a9fa 100%, #eed4f4 100%, #ff99d7)",
         "secondary-gradient":
-          "linear-gradient(to left top, rgb(187, 247, 208), rgb(34, 197, 94))",
-        "secondary-gradient-2":
           "linear-gradient(to right, rgb(251, 146, 60), rgb(251, 113, 133))",
-        "secondary-gradient-3":
+        "secondary-gradient-2":
           "linear-gradient(to right, rgb(251, 113, 133), rgb(217, 70, 239), rgb(99, 102, 241))",
+        "secondary-gradient-3":
+          "linear-gradient(to right, rgb(249, 168, 212), rgb(216, 180, 254), rgb(129, 140, 248))",
+        "secondary-gradient-4":
+          "linear-gradient(to bottom, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0))",
         "heading-gradient":
           "linear-gradient(to right bottom, rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.38))",
         "landing-gradient":
