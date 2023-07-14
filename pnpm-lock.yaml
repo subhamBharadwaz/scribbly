@@ -142,6 +142,9 @@ dependencies:
   "@uploadthing/react":
     specifier: ^5.1.0
     version: 5.1.0(react-dropzone@14.2.3)(react@18.2.0)(uploadthing@5.1.0)(zod@3.21.4)
+  "@vercel/analytics":
+    specifier: ^1.0.1
+    version: 1.0.1
   autoprefixer:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.24)
@@ -4380,6 +4383,13 @@ packages:
     dependencies:
       "@uploadthing/mime-types": 0.2.0
       zod: 3.21.4
+    dev: false
+
+  /@vercel/analytics@1.0.1:
+    resolution:
+      {
+        integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==,
+      }
     dev: false
 
   /JSONStream@1.3.5:
