@@ -3,8 +3,8 @@ import { redirect } from "next/navigation"
 import { getUserByClerkId } from "@/lib/auth"
 import { stripe } from "@/lib/stripe"
 import { getUserSubscriptionPlan } from "@/lib/subscription"
-import { BillingForm } from "@/components/billing-form"
 import { Header } from "@/components/header"
+import { BillingForm } from "@/components/journal/billing/billing-form"
 import { Shell } from "@/components/shell"
 
 export const metadata = {

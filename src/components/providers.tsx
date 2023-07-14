@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 import { ThemeProvider } from "@/components/theme-provider"
 
+import { TooltipProvider } from "./ui/tooltip"
+
 interface ProviderProps {
   children: ReactNode
 }
@@ -20,7 +22,9 @@ export function Providers({ children }: ProviderProps) {
       defaultTheme="dark"
       enableSystem
     >
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>{children}</TooltipProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   )
 }

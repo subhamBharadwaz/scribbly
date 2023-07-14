@@ -2,13 +2,14 @@ import {
   AlertTriangle,
   AlignJustify,
   ArrowRight,
-  Check,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
   CreditCard,
   File,
   FileText,
   HelpCircle,
+  HelpCircleIcon,
   Image,
   Laptop,
   Linkedin,
@@ -26,6 +27,7 @@ import {
   Twitter,
   User,
   X,
+  XCircle,
   type Icon as LucideIcon,
 } from "lucide-react"
 
@@ -105,6 +107,7 @@ export const Icons = {
     </svg>
   ),
   close: X,
+  helpCircle: HelpCircleIcon,
   spinner: Loader2,
   menu: AlignJustify,
   chevronLeft: ChevronLeft,
@@ -146,5 +149,6 @@ export const Icons = {
     </svg>
   ),
   twitter: Twitter,
-  check: Check,
+  checkCircle: CheckCircle2,
+  xCircle: XCircle,
 }

@@ -22,7 +22,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form"
+} from "../../ui/form"
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
   user: Pick<User, "id" | "name">
@@ -85,7 +85,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             <FormItem>
               <FormLabel className="font-semibold">Name</FormLabel>
               <FormControl>
-                <Input id="name" className="w-[400px]" size={32} {...field} />
+                <Input id="name" className="max-w-xl" size={32} {...field} />
               </FormControl>
               <FormDescription>
                 This is the name that will be displayed on your profile
@@ -93,7 +93,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
               <FormMessage />
             </FormItem>
           )}
-        ></FormField>
+        />
 
         <Button type="submit" className={cn(className)} disabled={isSaving}>
           {isSaving && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}

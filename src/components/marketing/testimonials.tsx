@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 
-import { Icons } from "./icons"
+import { Icons } from "../icons"
 
 const testimonialData = [
   {

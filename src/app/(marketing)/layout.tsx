@@ -4,8 +4,8 @@ import { marketingConfig } from "@/config/marketing"
 import { getUserByClerkId } from "@/lib/auth"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
-import Background from "@/components/background"
 import { MainNav } from "@/components/main-nav"
+import Background from "@/components/marketing/background"
 import SiteFooter from "@/components/site-footer"
 
 interface MarketingLayoutProps {
