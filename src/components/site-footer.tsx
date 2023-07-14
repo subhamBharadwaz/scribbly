@@ -14,11 +14,11 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
   return (
     <footer
       className={cn(
-        "min-h-[30vh]   space-y-20 border-t bg-background p-10 text-foreground",
+        "min-h-[30vh] w-full border-t bg-background py-10 text-foreground",
         className
       )}
     >
-      <div className="container">
+      <div className="container space-y-20 ">
         <div className="space-y-8 xl:col-span-2">
           <div className="space-y-10">
             <div className="flex items-center gap-x-2">
