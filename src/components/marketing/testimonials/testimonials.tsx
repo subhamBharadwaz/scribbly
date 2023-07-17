@@ -1,13 +1,13 @@
 "use client"
 
-import { FC } from "react"
+import { FC, useEffect } from "react"
+import { stagger, useAnimate, useInView } from "framer-motion"
 import Tilt from "react-parallax-tilt"
 
 import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-
-import { Icons } from "../icons"
+import { Icons } from "@/components/icons"
 
 const testimonialData = [
   {
@@ -65,49 +65,63 @@ interface TestimonialsProps {
 }
 
 const Testimonials: FC<TestimonialsProps> = ({ className }) => {
+  const [scope, animate] = useAnimate()
+  const isInView = useInView(scope, { once: true })
+
+  useEffect(() => {
+    if (isInView) {
+      animate(
+        "#reveal-anim",
+        { opacity: [0, 1], y: [15, 0] },
+        { duration: 0.5, ease: "easeIn", delay: stagger(0.2) }
+      )
+    }
+  }, [isInView])
   return (
     <div
+      ref={scope}
       className={cn(
         "grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3",
         className
       )}
     >
       {testimonialData.map((testimonial) => (
-        <Tilt
-          key={testimonial.id}
-          glareEnable={true}
-          glareMaxOpacity={0.3}
-          glareColor="#ffffff"
-          glarePosition="all"
-          glareBorderRadius="8px"
-          tiltMaxAngleX={10}
-          tiltMaxAngleY={10}
-        >
-          <Card className="bg-transparent">
-            <CardContent className="py-6">
-              <p className="leading-relaxed text-muted-foreground">
-                {testimonial.testimonial}
-              </p>
-            </CardContent>
-            <CardFooter className="flex w-full items-center justify-between">
-              <div className="flex items-center space-x-4">
-                <Avatar>
-                  <AvatarImage
-                    className="object-cover"
-                    src={testimonial.avatar}
-                  />
-                  <AvatarFallback>{testimonial.name}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm font-medium leading-none">
-                    {testimonial.name}
-                  </p>
+        <div key={testimonial.id} id="reveal-anim">
+          <Tilt
+            glareEnable={true}
+            glareMaxOpacity={0.3}
+            glareColor="#ffffff"
+            glarePosition="all"
+            glareBorderRadius="8px"
+            tiltMaxAngleX={10}
+            tiltMaxAngleY={10}
+          >
+            <Card className="bg-transparent">
+              <CardContent className="py-6">
+                <p className="leading-relaxed text-muted-foreground">
+                  {testimonial.testimonial}
+                </p>
+              </CardContent>
+              <CardFooter className="flex w-full items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <Avatar>
+                    <AvatarImage
+                      className="object-cover"
+                      src={testimonial.avatar}
+                    />
+                    <AvatarFallback>{testimonial.name}</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="text-sm font-medium leading-none">
+                      {testimonial.name}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <Icons.quote className="w-5" />
-            </CardFooter>
-          </Card>
-        </Tilt>
+                <Icons.quote className="w-5" />
+              </CardFooter>
+            </Card>
+          </Tilt>
+        </div>
       ))}
     </div>
   )

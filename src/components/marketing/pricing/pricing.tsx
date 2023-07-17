@@ -1,7 +1,11 @@
-import { FC } from "react"
+"use client"
+
+import { FC, useEffect } from "react"
 import Link from "next/link"
+import { stagger, useAnimate, useInView } from "framer-motion"
 
 import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -14,9 +18,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-
-import { Icons } from "../icons"
-import { buttonVariants } from "../ui/button"
+import { Icons } from "@/components/icons"
 
 interface PricingProps {}
 
@@ -89,11 +91,23 @@ const pricingItems = [
   },
 ]
 
-const Pricing: FC<PricingProps> = ({}) => {
+const Pricing: FC<PricingProps> = () => {
+  const [scope, animate] = useAnimate()
+  const isInView = useInView(scope, { once: true })
+
+  useEffect(() => {
+    if (isInView) {
+      animate(
+        "#reveal-anim",
+        { opacity: [0, 1], y: [15, 0] },
+        { duration: 0.5, ease: "easeIn", delay: stagger(0.3) }
+      )
+    }
+  }, [isInView])
   return (
-    <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
+    <div ref={scope} className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
       {pricingItems.map((item) => (
-        <Card key={item.id}>
+        <Card key={item.id} id="reveal-anim">
           <CardHeader>
             <CardTitle className="text-2xl font-bold md:text-3xl lg:text-4xl">
               {item.plan}
