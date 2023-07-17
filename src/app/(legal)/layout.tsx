@@ -1,3 +1,4 @@
+import { Suspense } from "react"
 import Link from "next/link"
 
 import { marketingConfig } from "@/config/marketing"
@@ -20,15 +21,28 @@ export default async function LegalLayout({ children }: LegalLayoutProps) {
         <div className="container flex h-20 items-center justify-between py-6">
           <MainNav items={marketingConfig.mainNav} />
           <nav>
-            <Link
-              href={user?.clerkId ? "/journal" : "/sign-in"}
-              className={cn(
-                buttonVariants({ size: "lg", variant: "cta" }),
-                "rounded-full px-4"
-              )}
+            <Suspense
+              fallback={
+                <button
+                  className={cn(
+                    buttonVariants({ size: "lg", variant: "cta" }),
+                    "rounded-full px-4 motion-safe:animate-pulse"
+                  )}
+                >
+                  Please wait...
+                </button>
+              }
             >
-              {user && user?.clerkId ? "Go to your journal" : "Sign in"}
-            </Link>
+              <Link
+                href={user?.clerkId ? "/journal" : "/sign-in"}
+                className={cn(
+                  buttonVariants({ size: "lg", variant: "cta" }),
+                  "rounded-full px-4"
+                )}
+              >
+                {user && user?.clerkId ? "Go to your journal" : "Sign in"}
+              </Link>
+            </Suspense>
           </nav>
         </div>
       </header>

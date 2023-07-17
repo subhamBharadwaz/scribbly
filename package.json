@@ -95,6 +95,7 @@
     "react-dom": "18.2.0",
     "react-editor-js": "^2.1.0",
     "react-hook-form": "^7.45.1",
+    "react-intersection-observer": "^9.5.2",
     "react-parallax-tilt": "^1.7.152",
     "react-textarea-autosize": "^8.5.2",
     "sharp": "^0.32.1",
