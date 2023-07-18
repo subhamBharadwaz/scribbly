@@ -20,7 +20,7 @@ const TestimonialsSection: FC = () => {
   }, [isInView])
 
   return (
-    <section ref={scope} className="mt-[10vh] min-h-[90vh]">
+    <section ref={scope} className="mt-[10vh]">
       <h2
         id="reveal-anim"
         className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl leading-tight tracking-tight text-transparent md:text-5xl md:leading-snug"

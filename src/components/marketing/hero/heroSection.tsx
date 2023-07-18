@@ -23,11 +23,10 @@ const HeroSection: FC = () => {
   })
 
   return (
-    <section className="relative min-h-[90vh] py-16">
-      <div className="after:absolute after:top-0 after:z-[-1] after:h-full after:w-full after:bg-[url('../../public/grid.svg')] after:opacity-[.4] after:invert-[1]" />
+    <section className="mt-[10vh]">
       <div
         ref={scope}
-        className="relative flex flex-col items-center justify-center space-y-20"
+        className="relative flex flex-col items-center justify-center gap-y-24"
       >
         <div className="flex flex-col items-center justify-center">
           <h1

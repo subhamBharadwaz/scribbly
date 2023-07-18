@@ -20,7 +20,7 @@ const FeaturesSection: FC = () => {
   }, [isInView])
 
   return (
-    <section ref={scope} id="features" className="mt-[10vh] min-h-[100vh]">
+    <section ref={scope} id="features" className="mt-[10vh]">
       <h2
         id="reveal-anim"
         className="bg-heading-gradient bg-clip-text  text-center font-heading  text-3xl tracking-tight text-transparent md:text-5xl md:leading-snug"

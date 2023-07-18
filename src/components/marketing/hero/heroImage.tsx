@@ -11,7 +11,7 @@ export const HeroImage = () => {
   const { ref, inView } = useInView({ threshold: 0.4, triggerOnce: true })
 
   return (
-    <div ref={ref} className="mt-[12.8rem] [perspective:2000px]">
+    <div ref={ref} className="py-10 [perspective:2000px]">
       <div
         className={cn(
           "border-transparent-white relative rounded-lg border bg-white bg-opacity-[0.01] bg-hero-gradient",
