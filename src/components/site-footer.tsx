@@ -51,7 +51,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
               <div className="h-8 border-l border-muted-foreground/50" />
 
               <a
-                href={siteConfig.links.twitter}
+                href={siteConfig.links.linkedin}
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-md p-2 transition-colors hover:bg-foreground/20 active:bg-foreground/30"

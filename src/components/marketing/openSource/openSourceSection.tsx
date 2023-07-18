@@ -23,7 +23,6 @@ const OpenSourceSection: FC = () => {
   }, [isInView])
   return (
     <section ref={scope} className="relative mt-[10vh] min-h-[30vh]">
-      <div className="after:absolute after:top-0 after:z-[-1] after:h-full after:w-full after:bg-[url('../../public/grid.svg')] after:opacity-[.4] after:invert-[1]" />
       <div className="flex flex-col items-center justify-center space-y-8 py-10">
         <h2
           id="reveal-anim"
