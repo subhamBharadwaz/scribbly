@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://scribbly-lime.vercel.app"
+  const baseUrl = "https://scribbly.subhambharadwaz.in"
   return [
     {
       url: baseUrl,

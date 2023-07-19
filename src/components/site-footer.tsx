@@ -140,7 +140,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
         </div>
         <div className="mt-16 border-t  pt-8 sm:mt-20 lg:mt-24">
           <p className="text-sm leading-5 text-muted-foreground">
-            &copy; {new Date().getFullYear()} scribbly-lime.vercel.app
+            &copy; {new Date().getFullYear()} scribbly.subhambharadwaz.in
           </p>
         </div>
       </div>
