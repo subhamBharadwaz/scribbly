@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/.react-email/node_modules
 /.pnp
 .pnp.js
 
@@ -38,6 +39,9 @@ next-env.d.ts
 
 .vscode
 
+# vercel
+.vercel
 
 # Contentlayer
+*.tsbuildinfo
 .contentlayer

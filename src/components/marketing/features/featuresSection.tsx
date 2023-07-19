@@ -17,7 +17,7 @@ const FeaturesSection: FC = () => {
         { duration: 0.5, ease: "easeIn", delay: stagger(0.3) }
       )
     }
-  }, [isInView])
+  }, [animate, isInView])
 
   return (
     <section ref={scope} id="features" className="mt-[10vh]">

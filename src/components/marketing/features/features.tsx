@@ -37,7 +37,7 @@ const Features: FC<FeaturesProps> = () => {
         { duration: 0.5, ease: "easeIn", delay: stagger(0.3) }
       )
     }
-  }, [isInView])
+  }, [animate, isInView])
   return (
     <div ref={scope} className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
       {features.map((feature) => (

@@ -20,7 +20,7 @@ const OpenSourceSection: FC = () => {
         { duration: 0.5, ease: "easeIn", delay: stagger(0.3) }
       )
     }
-  }, [isInView])
+  }, [animate, isInView])
   return (
     <section ref={scope} className="relative mt-[10vh] min-h-[30vh]">
       <div className="flex flex-col items-center justify-center space-y-8 py-10">

@@ -17,7 +17,7 @@ const TestimonialsSection: FC = () => {
         { duration: 0.5, ease: "easeIn", delay: stagger(0.3) }
       )
     }
-  }, [isInView])
+  }, [animate, isInView])
 
   return (
     <section ref={scope} className="mt-[10vh]">
