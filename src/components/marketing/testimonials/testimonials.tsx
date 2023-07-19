@@ -76,7 +76,7 @@ const Testimonials: FC<TestimonialsProps> = ({ className }) => {
         { duration: 0.5, ease: "easeIn", delay: stagger(0.2) }
       )
     }
-  }, [isInView])
+  }, [animate, isInView])
   return (
     <div
       ref={scope}
