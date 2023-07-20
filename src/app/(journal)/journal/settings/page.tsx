@@ -9,6 +9,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -117,6 +118,10 @@ export default async function SettingsPage() {
               )}
               <ReminderForm subscriptionPlan={subscriptionPlan} />
             </CardContent>
+            <CardFooter>
+              We&apos;ll send you a reminder email every day/weekly at 9:00 Pm
+              UTC
+            </CardFooter>
           </Card>
         </TabsContent>
       </Tabs>
@@ -187,6 +192,9 @@ export default async function SettingsPage() {
             )}
             <ReminderForm subscriptionPlan={subscriptionPlan} />
           </CardContent>
+          <CardFooter>
+            We&apos;ll send you a reminder email every day/weekly at 9:00 Pm UTC
+          </CardFooter>
         </Card>
       </div>
     </Shell>
