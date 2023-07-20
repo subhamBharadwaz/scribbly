@@ -6,7 +6,7 @@ import { db } from "@/lib/db"
 import { resend } from "@/lib/resend"
 import ReminderEmail from "@/components/emails/reminder-email"
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
     const users = await db.user.findMany({
       where: {
