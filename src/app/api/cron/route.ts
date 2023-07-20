@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import { type ErrorResponse } from "resend"
 
 import { env } from "@/env.mjs"
@@ -6,7 +6,7 @@ import { db } from "@/lib/db"
 import { resend } from "@/lib/resend"
 import ReminderEmail from "@/components/emails/reminder-email"
 
-export async function GET(req: Request) {
+export async function GET(req: NextRequest) {
   try {
     const users = await db.user.findMany({
       where: {
@@ -32,6 +32,7 @@ export async function GET(req: Request) {
         }),
       })
     }
+    return NextResponse.json("Successfully sent", { status: 200 })
   } catch (error) {
     console.error(error)
 
