@@ -19,7 +19,8 @@ interface ReminderEmailProps {
   fromEmail: string
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? ""
+const baseUrl =
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://scribbly.subhambharadwaz.in"
 
 export default function ReminderEmail({
   firstName = "there",
