@@ -19,26 +19,24 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 const appearanceFormSchema = z.object({
-  theme: z.enum(["light", "dark"], {
+  colorTheme: z.enum(["light", "dark"], {
     required_error: "Please select a theme.",
   }),
 })
 
 type AppearanceFormValues = z.infer<typeof appearanceFormSchema>
 
-// This can come from your database or API.
-const defaultValues: Partial<AppearanceFormValues> = {
-  theme: "light",
-}
-
 export function AppearanceForm() {
+  const { setTheme } = useTheme()
+
   const form = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceFormSchema),
-    defaultValues,
+    defaultValues: {
+      colorTheme: "dark",
+    },
   })
-  const { setTheme } = useTheme()
   function onSubmit(data: AppearanceFormValues) {
-    setTheme(data.theme)
+    setTheme(data.colorTheme)
   }
 
   return (
@@ -46,7 +44,7 @@ export function AppearanceForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="theme"
+          name="colorTheme"
           render={({ field }) => (
             <FormItem className="space-y-1">
               <FormLabel className="font-semibold">Theme</FormLabel>
