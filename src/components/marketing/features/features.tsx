@@ -13,7 +13,7 @@ const features = [
     title: `Intuitive and Modern Journal Editor`,
     description: `Create journal entries with our sleek and intuitive editor, offering rich formatting options and a visually captivating experience.`,
     thumbnail: "/images/features/editor.webp",
-    demo: "https://res.cloudinary.com/dogdzaavf/video/upload/v1689155252/editor-dark_gfnig8.mp4",
+    demo: "https://scribbly.s3.ap-south-1.amazonaws.com/editor-dark_gfnig8.mp4",
   },
   {
     id: "reminder",
@@ -21,7 +21,7 @@ const features = [
     description: ` Set personalized reminders to ensure consistent journaling and
         never miss an opportunity to reflect and record your thoughts.`,
     thumbnail: "/images/features/reminder.webp",
-    demo: "https://res.cloudinary.com/dogdzaavf/video/upload/v1689155238/reminder-dark_elaitc.mp4",
+    demo: "https://scribbly.s3.ap-south-1.amazonaws.com/reminder-dark_elaitc.mp4",
   },
 ]
 

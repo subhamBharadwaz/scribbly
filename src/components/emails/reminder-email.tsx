@@ -38,7 +38,7 @@ export default function ReminderEmail({
         <Body className="mx-auto bg-zinc-50 font-sans">
           <Container className="mx-auto my-[40px] max-w-2xl rounded p-4">
             <Img
-              src="https://res.cloudinary.com/dogdzaavf/image/upload/v1689747594/logo_bqjpan.webp"
+              src="https://scribbly.s3.ap-south-1.amazonaws.com/logo_bqjpan.webp"
               width="70"
               height="50"
               alt="Scribbly"
@@ -81,7 +81,7 @@ export default function ReminderEmail({
                 your thoughts flow freely. 🌌
               </Text>
               <Img
-                src="https://res.cloudinary.com/dogdzaavf/image/upload/v1689746096/journal_z0t8j8.webp"
+                src="https://scribbly.s3.ap-south-1.amazonaws.com/journal_z0t8j8.webp"
                 alt="Illustration of a girl writing in a journal"
                 height={424}
                 className="mt-10 aspect-video w-full object-cover"
@@ -95,7 +95,7 @@ export default function ReminderEmail({
                 You&apos;re making progress every step of the way! ⏳
               </Text>
               <Img
-                src="https://res.cloudinary.com/dogdzaavf/image/upload/v1689746099/support_hrnaao.webp"
+                src="https://scribbly.s3.ap-south-1.amazonaws.com/support_hrnaao.webp"
                 alt="Illustration of a big tree and two people sitting on a bench"
                 height={424}
                 className="mt-10 aspect-video w-full object-cover"
