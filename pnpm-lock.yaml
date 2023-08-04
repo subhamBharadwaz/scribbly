@@ -227,7 +227,7 @@ dependencies:
     specifier: ^9.5.2
     version: 9.5.2(react@18.2.0)
   react-parallax-tilt:
-    specifier: ^1.7.152
+    specifier: ^1.7.70
     version: 1.7.152(react-dom@18.2.0)(react@18.2.0)
   react-textarea-autosize:
     specifier: ^8.5.2
