@@ -4,9 +4,6 @@
 
 ![Scribbly Landing Page](https://res.cloudinary.com/dogdzaavf/image/upload/v1689845679/Screenshot_2023-07-20_150023_noco29.png)
 
-> **Warning**
-> This app is a work in progress.
-
 ## About this project
 
 Scribbly is a web application that provides a platform for users to create and manage their digital journal. With Scribbly, users can easily jot down their thoughts, experiences, and ideas, and organize them in a personal and customizable journal.
