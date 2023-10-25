@@ -94,7 +94,7 @@
     "framer-motion": "^10.12.18",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.246.0",
-    "next": "13.4.8",
+    "next": "13.5.0",
     "next-contentlayer": "^0.3.3",
     "next-themes": "^0.2.1",
     "postcss": "8.4.24",
