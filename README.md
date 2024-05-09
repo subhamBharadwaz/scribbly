@@ -2,7 +2,7 @@
 
 ## An open source Journal Web App
 
-![Scribbly Landing Page](https://res.cloudinary.com/dogdzaavf/image/upload/v1689845679/Screenshot_2023-07-20_150023_noco29.png)
+![Scribbly Landing Page](https://github.com/subhamBharadwaz/scribbly/assets/72348711/23644c37-78c3-40ac-beef-a94c1cd5cfd3)
 
 ## About this project
 
@@ -31,6 +31,8 @@ Scribbly is a web application that provides a platform for users to create and m
 - UI Components built using **Radix UI** and **shadcn/ui**
 - Subscriptions using **Stripe**
 - Styled using **Tailwind CSS**
+- Analytics with **PostHog**
+- Error Handling in **Sentry**
 - Validations using **Zod**
 - Written in **TypeScript**
 
