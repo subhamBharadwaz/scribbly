@@ -1,7 +1,7 @@
 import { IncomingHttpHeaders } from "http"
 import { headers } from "next/headers"
 import { NextResponse } from "next/server"
-import type { User } from "@clerk/nextjs/api"
+import type { User } from "@clerk/nextjs/server"
 import { Webhook, WebhookRequiredHeaders } from "svix"
 
 import { env } from "@/env.mjs"
