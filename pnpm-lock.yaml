@@ -209,6 +209,9 @@ dependencies:
   postcss:
     specifier: 8.4.24
     version: 8.4.24
+  posthog-js:
+    specifier: ^1.131.3
+    version: 1.131.3
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -7515,6 +7518,13 @@ packages:
       web-streams-polyfill: 3.3.3
     dev: false
 
+  /fflate@0.4.8:
+    resolution:
+      {
+        integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==,
+      }
+    dev: false
+
   /file-entry-cache@6.0.1:
     resolution:
       {
@@ -10954,6 +10964,23 @@ packages:
       nanoid: 3.3.7
       picocolors: 1.0.0
       source-map-js: 1.2.0
+
+  /posthog-js@1.131.3:
+    resolution:
+      {
+        integrity: sha512-ds/TADDS+rT/WgUyeW4cJ+X+fX+O1KdkOyssNI/tP90PrFf0IJsck5B42YOLhfz87U2vgTyBaKHkdlMgWuOFog==,
+      }
+    dependencies:
+      fflate: 0.4.8
+      preact: 10.21.0
+    dev: false
+
+  /preact@10.21.0:
+    resolution:
+      {
+        integrity: sha512-aQAIxtzWEwH8ou+OovWVSVNlFImL7xUCwJX3YMqA3U8iKCNC34999fFOnWjYNsylgfPgMexpbk7WYOLtKr/mxg==,
+      }
+    dev: false
 
   /prebuild-install@7.1.2:
     resolution:

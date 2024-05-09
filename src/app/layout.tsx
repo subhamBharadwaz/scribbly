@@ -8,6 +8,7 @@ import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/toaster"
 import { Analytics } from "@/components/analytics"
+import { CSPostHogProvider } from "@/components/analytics-provider"
 import { Providers } from "@/components/providers"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 
@@ -80,20 +81,22 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body
-          className={cn(
-            "min-h-screen bg-background font-sans antialiased",
-            fontSans.variable,
-            fontHeading.variable
-          )}
-        >
-          <Providers>
-            {children}
-            <Analytics />
-            <Toaster />
-            <TailwindIndicator />
-          </Providers>
-        </body>
+        <CSPostHogProvider>
+          <body
+            className={cn(
+              "min-h-screen bg-background font-sans antialiased",
+              fontSans.variable,
+              fontHeading.variable
+            )}
+          >
+            <Providers>
+              {children}
+              <Analytics />
+              <Toaster />
+              <TailwindIndicator />
+            </Providers>
+          </body>
+        </CSPostHogProvider>
       </html>
     </ClerkProvider>
   )
