@@ -1,7 +1,13 @@
-import { authMiddleware } from "@clerk/nextjs"
+import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server"
 
-export default authMiddleware({
-  publicRoutes: ["/", "/terms", "/privacy", "/api(.*)", "/api/cron"],
+const isProtectedRoute = createRouteMatcher(["/editor(.*)", "/journal(.*)", ""])
+
+export default clerkMiddleware((auth, req) => {
+  if (!auth().userId && isProtectedRoute(req)) {
+    // Add custom logic to run before redirecting
+
+    return auth().redirectToSignIn()
+  }
 })
 
 export const config = {

@@ -33,7 +33,7 @@
     }
   },
   "dependencies": {
-    "@clerk/nextjs": "^4.30.1",
+    "@clerk/nextjs": "^5.0.7",
     "@editorjs/checklist": "^1.6.0",
     "@editorjs/code": "^2.9.0",
     "@editorjs/editorjs": "^2.29.1",
