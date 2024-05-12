@@ -16,10 +16,10 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Header } from "@/components/header"
-import { AppearanceForm } from "@/components/journal/settings/appearance-form"
-import { ReminderForm } from "@/components/journal/settings/reminder-form"
-import { UserNameForm } from "@/components/journal/settings/user-name-form"
 import { Shell } from "@/components/shell"
+import { AppearanceForm } from "@/app/(journal)/_components/settings/appearance-form"
+import { ReminderForm } from "@/app/(journal)/_components/settings/reminder-form"
+import { UserNameForm } from "@/app/(journal)/_components/settings/user-name-form"
 
 export const metadata = {
   title: "Settings",

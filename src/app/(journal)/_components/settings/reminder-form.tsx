@@ -27,15 +27,15 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../ui/form"
+} from "../../../../components/ui/form"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../ui/select"
-import { Switch } from "../../ui/switch"
+} from "../../../../components/ui/select"
+import { Switch } from "../../../../components/ui/switch"
 
 interface ReminderFormProps extends React.HTMLAttributes<HTMLFormElement> {
   subscriptionPlan: UserSubscriptionPlan

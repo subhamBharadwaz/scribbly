@@ -27,8 +27,9 @@ import {
 import { CopyButton } from "@/components/copy-button"
 import { Header } from "@/components/header"
 import { Icons } from "@/components/icons"
-import { BillingForm } from "@/components/journal/billing/billing-form"
 import { Shell } from "@/components/shell"
+
+import { BillingForm } from "../../_components/billing/billing-form"
 
 export const metadata = {
   title: "Billing",
