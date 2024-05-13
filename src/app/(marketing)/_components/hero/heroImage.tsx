@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer"
 
 import { cn } from "@/lib/utils"
 
-import heroDarkImage from "../../../../public/images/hero-dark.webp"
+import heroDarkImage from "../../../../../public/images/hero-dark.webp"
 
 export const HeroImage = () => {
   const { ref, inView } = useInView({ threshold: 0.4, triggerOnce: true })

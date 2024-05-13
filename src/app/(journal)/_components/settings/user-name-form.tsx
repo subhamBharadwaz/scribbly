@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { updateUserName } from "@/server/actions/user"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { User } from "@prisma/client"
 import { useForm } from "react-hook-form"
@@ -22,7 +23,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../ui/form"
+} from "../../../../components/ui/form"
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
   user: Pick<User, "id" | "name">
@@ -44,19 +45,14 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
   async function onSubmit(data: FormData) {
     setIsSaving(true)
 
-    const response = await fetch(`/api/users/${user.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: data.name,
-      }),
-    })
+    const response = await updateUserName(
+      { params: { userId: user?.id } },
+      { name: data?.name }
+    )
 
     setIsSaving(false)
 
-    if (!response?.ok) {
+    if (response?.error) {
       return toast({
         title: "Something went wrong.",
         description: "Your name was not updated. Please try again.",
@@ -67,8 +63,6 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     toast({
       description: "Your name has been updated.",
     })
-
-    router.refresh()
   }
 
   return (

@@ -1,7 +1,8 @@
 import { Header } from "@/components/header"
-import { JournalEntryItem } from "@/components/journal/journal-entry"
-import JournalEntryCreateButton from "@/components/journal/journal-entry-create-button"
 import { Shell } from "@/components/shell"
+
+import { JournalEntryItem } from "../_components/journal-entry"
+import JournalEntryCreateButton from "../_components/journal-entry-create-button"
 
 export default function JournalLoading() {
   return (

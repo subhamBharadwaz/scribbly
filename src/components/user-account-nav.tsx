@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { SignOutButton } from "@clerk/nextjs"
 
-import { cn } from "@/lib/utils"
 import {
   DropdownMenu,
   DropdownMenuContent,

@@ -1,7 +1,9 @@
 import Link from "next/link"
+import { getUserSubscriptionPlan } from "@/server/actions/stripe"
+import { getMyReminderSettings } from "@/server/queries/reminder"
+import { Reminder } from "@prisma/client"
 
 import { getUserByClerkId } from "@/lib/auth"
-import { getUserSubscriptionPlan } from "@/lib/subscription"
 import { cn } from "@/lib/utils"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { buttonVariants } from "@/components/ui/button"
@@ -16,10 +18,10 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Header } from "@/components/header"
-import { AppearanceForm } from "@/components/journal/settings/appearance-form"
-import { ReminderForm } from "@/components/journal/settings/reminder-form"
-import { UserNameForm } from "@/components/journal/settings/user-name-form"
 import { Shell } from "@/components/shell"
+import { AppearanceForm } from "@/app/(journal)/_components/settings/appearance-form"
+import { ReminderForm } from "@/app/(journal)/_components/settings/reminder-form"
+import { UserNameForm } from "@/app/(journal)/_components/settings/user-name-form"
 
 export const metadata = {
   title: "Settings",
@@ -28,8 +30,10 @@ export const metadata = {
 
 export default async function SettingsPage() {
   const user = await getUserByClerkId()
-  // @ts-ignore
   const subscriptionPlan = await getUserSubscriptionPlan(user.id)
+
+  const currentReminderSettings = await getMyReminderSettings()
+  const currentReminder: Reminder = currentReminderSettings as Reminder
 
   return (
     <Shell className="gap-4">
@@ -116,7 +120,10 @@ export default async function SettingsPage() {
                   </AlertDescription>
                 </Alert>
               )}
-              <ReminderForm subscriptionPlan={subscriptionPlan} />
+              <ReminderForm
+                subscriptionPlan={subscriptionPlan}
+                reminderSettings={currentReminder}
+              />
             </CardContent>
             <CardFooter>
               We&apos;ll send you a reminder email every day/weekly at 9:00 Pm
@@ -190,7 +197,10 @@ export default async function SettingsPage() {
                 </AlertDescription>
               </Alert>
             )}
-            <ReminderForm subscriptionPlan={subscriptionPlan} />
+            <ReminderForm
+              subscriptionPlan={subscriptionPlan}
+              reminderSettings={currentReminder}
+            />
           </CardContent>
           <CardFooter>
             We&apos;ll send you a reminder email every day/weekly at 9:00 Pm UTC

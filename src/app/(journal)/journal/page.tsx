@@ -1,35 +1,18 @@
-import { redirect } from "next/navigation"
+import { getMyJournalEntries } from "@/server/queries/journal"
 
-import { getUserByClerkId } from "@/lib/auth"
-import { db } from "@/lib/db"
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { Header } from "@/components/header"
-import { Icons } from "@/components/icons"
-import { JournalEntryItem } from "@/components/journal/journal-entry"
-import JournalEntryCreateButton from "@/components/journal/journal-entry-create-button"
 import { Shell } from "@/components/shell"
+
+import { JournalEntryItem } from "../_components/journal-entry"
+import JournalEntryCreateButton from "../_components/journal-entry-create-button"
 
 export const metadata = {
   title: "Journal",
 }
 
 export default async function JournalPage() {
-  const user = await getUserByClerkId()
-
-  const entries = await db.journalEntry.findMany({
-    where: {
-      userId: user?.id,
-    },
-    select: {
-      id: true,
-      title: true,
-      createdAt: true,
-    },
-    orderBy: {
-      updatedAt: "desc",
-    },
-  })
-
+  const entries = await getMyJournalEntries()
   return (
     <Shell>
       <Header

@@ -1,8 +1,8 @@
-import FeaturesSection from "@/components/marketing/features/featuresSection"
-import HeroSection from "@/components/marketing/hero/heroSection"
-import OpenSourceSection from "@/components/marketing/openSource/openSourceSection"
-import PricingSection from "@/components/marketing/pricing/pricingSection"
-import TestimonialsSection from "@/components/marketing/testimonials/testimonialsSection"
+import FeaturesSection from "./_components/features/featuresSection"
+import HeroSection from "./_components/hero/heroSection"
+import OpenSourceSection from "./_components/openSource/openSourceSection"
+import PricingSection from "./_components/pricing/pricingSection"
+import TestimonialsSection from "./_components/testimonials/testimonialsSection"
 
 export default function Home() {
   return (
