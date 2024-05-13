@@ -4,7 +4,8 @@ import { JournalEntry } from "@prisma/client"
 
 import { formatDate } from "@/lib/utils"
 import { Skeleton } from "@/components/ui/skeleton"
-import { EntryOperations } from "@/components/entry-operations"
+
+import { EntryOperations } from "../_components/entry-operations"
 
 interface JournalEntryProps {
   entry: Pick<JournalEntry, "id" | "title" | "createdAt">

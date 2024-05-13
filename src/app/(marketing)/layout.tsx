@@ -5,8 +5,9 @@ import { getUserByClerkId } from "@/lib/auth"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { MainNav } from "@/components/main-nav"
-import Background from "@/components/marketing/background"
 import SiteFooter from "@/components/site-footer"
+
+import Background from "./_components/background"
 
 interface MarketingLayoutProps {
   children: React.ReactNode

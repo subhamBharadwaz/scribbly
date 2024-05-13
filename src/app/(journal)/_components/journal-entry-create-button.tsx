@@ -2,9 +2,10 @@
 
 import * as React from "react"
 import { useRouter } from "next/navigation"
+import { createJournalEntry } from "@/server/actions/journal"
 
 import { cn } from "@/lib/utils"
-import { Button, ButtonProps, buttonVariants } from "@/components/ui/button"
+import { Button, ButtonProps } from "@/components/ui/button"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
 
@@ -21,20 +22,12 @@ const JournalEntryCreateButton: React.FC<JournalEntryCreateButtonProps> = ({
   async function onClick() {
     setIsLoading(true)
 
-    const response = await fetch("/api/journal/entries", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: "Untitled Entry",
-      }),
-    })
+    const entry = await createJournalEntry({ title: "Untitled Entry" })
 
     setIsLoading(false)
 
-    if (!response?.ok) {
-      if (response.status === 402) {
+    if ("error" in entry) {
+      if (entry.code === 402) {
         return toast({
           title: "Limit of 3 entries reached.",
           description: "Please upgrade to the PRO plan.",
@@ -49,12 +42,9 @@ const JournalEntryCreateButton: React.FC<JournalEntryCreateButtonProps> = ({
       })
     }
 
-    const entry = await response.json()
-
-    // This forces a cache invalidation.
-    router.refresh()
-
-    router.push(`/editor/${entry.id}`)
+    if (entry) {
+      router.push(`/editor/${entry.id}`)
+    }
   }
 
   return (
@@ -70,9 +60,9 @@ const JournalEntryCreateButton: React.FC<JournalEntryCreateButtonProps> = ({
       {...props}
     >
       {isLoading ? (
-        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+        <Icons.spinner className="mr-2 size-4 animate-spin" />
       ) : (
-        <Icons.add className="mr-2 h-4 w-4" />
+        <Icons.add className="mr-2 size-4" />
       )}
       New Entry
     </Button>

@@ -14,6 +14,8 @@ import { uploadFiles } from "@/lib/uploadthing"
 
 import "@/styles/editor.css"
 
+import { editJournalEntry } from "@/server/actions/journal"
+
 import { cn } from "@/lib/utils"
 import { entryPatchSchema } from "@/lib/validations/entry"
 import { buttonVariants } from "@/components/ui/button"
@@ -146,28 +148,20 @@ const Editor: FC<EditorProps> = ({ entry }) => {
 
     const blocks = await ref.current?.save()
 
-    const response = await fetch(`/api/journal/entries/${entry.id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: data.title,
-        content: blocks,
-      }),
-    })
+    const response = await editJournalEntry(
+      { params: { entryId: entry.id } },
+      { title: data.title, content: blocks }
+    )
 
     setIsSaving(false)
 
-    if (!response?.ok) {
+    if (response?.error) {
       return toast({
         title: "Something went wrong.",
         description: "Your entry was not saved. Please try again.",
         variant: "destructive",
       })
     }
-
-    router.refresh()
 
     return toast({
       description: "Your entry has been saved.",

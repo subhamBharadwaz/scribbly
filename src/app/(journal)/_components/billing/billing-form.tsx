@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { stripeSubscription } from "@/server/actions/stripe"
 import { UserSubscriptionPlan } from "@/types"
 
 import { cn, formatDate } from "@/lib/utils"
@@ -34,9 +35,10 @@ export function BillingForm({
     setIsLoading(!isLoading)
 
     // Get a Stripe session URL.
-    const response = await fetch("/api/users/stripe")
+    const response = await stripeSubscription()
+    console.log(response)
 
-    if (!response?.ok) {
+    if (response?.error) {
       return toast({
         title: "Something went wrong.",
         description: "Please refresh the page and try again.",
@@ -47,9 +49,8 @@ export function BillingForm({
     // Redirect to the Stripe session.
     // This could be a checkout page for initial upgrade.
     // Or portal to manage existing subscription.
-    const session = await response.json()
-    if (session) {
-      window.location.href = session.url
+    if (response) {
+      window.location.href = response?.url
     }
   }
 
@@ -71,7 +72,7 @@ export function BillingForm({
             disabled={isLoading}
           >
             {isLoading && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+              <Icons.spinner className="mr-2 size-4 animate-spin" />
             )}
             {subscriptionPlan.isPro ? "Manage Subscription" : "Upgrade to PRO"}
           </button>
