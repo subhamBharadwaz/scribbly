@@ -94,6 +94,15 @@ module.exports = {
           from: { height: 0 },
           to: { height: "var(--radix-accordion-content-height)" },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
+        },
+
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
@@ -103,6 +112,11 @@ module.exports = {
           "25%": { transform: "rotateX(25deg) scale(0.9)" },
           "60%": { transform: "none" },
           "100%": { transform: "none" },
+        },
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
         },
         "image-glow": {
           "0%": {
@@ -117,12 +131,29 @@ module.exports = {
             opacity: 0.2,
           },
         },
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(calc(-100% - var(--gap)))" },
+        },
+        "marquee-vertical": {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(calc(-100% - var(--gap)))" },
+        },
+        gradient: {
+          to: {
+            backgroundPosition: "var(--bg-size) 0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "image-rotate": "image-rotate 1400ms ease forwards",
         "image-glow": "image-glow 4100ms 600ms ease-out forwards",
+        marquee: "marquee var(--duration) linear infinite",
+        "marquee-vertical": "marquee-vertical var(--duration) linear infinite",
+        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
+        gradient: "gradient 8s linear infinite",
       },
     },
   },

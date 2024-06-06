@@ -4,6 +4,7 @@ import { FC, useEffect } from "react"
 import { stagger, useAnimate, useInView } from "framer-motion"
 
 import { Card, CardContent } from "@/components/ui/card"
+import { WobbleCard } from "@/components/wobble-card"
 
 interface FeaturesProps {}
 
@@ -38,36 +39,38 @@ const Features: FC<FeaturesProps> = () => {
       )
     }
   }, [animate, isInView])
+
   return (
     <div ref={scope} className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
       {features.map((feature) => (
-        <Card className="overflow-hidden" key={feature.id} id="reveal-anim">
-          <CardContent className="space-y-10 p-0">
-            <div className="space-y-5 px-6 py-8">
-              <h3 className="text-center font-heading text-2xl  leading-normal tracking-tight text-foreground lg:text-3xl">
-                {feature.title}
-              </h3>
-              <p className="text-center text-muted-foreground lg:text-lg">
-                {feature.description}
-              </p>
-            </div>
-            <div className="relative ">
-              <div className="absolute inset-0 -top-1 left-9 z-0 rounded-md bg-primary-gradient" />
-              <video
-                autoPlay
-                loop
-                muted
-                width={800}
-                height={600}
-                poster={feature.thumbnail}
-                className="relative z-10 ml-10 rounded-md object-cover"
-              >
-                <source src={feature.demo} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-          </CardContent>
-        </Card>
+        <WobbleCard
+          key={feature.id}
+          containerClassName="relative min-h-[570px]"
+          className="relative"
+          id="reveal-anim"
+        >
+          <div className="space-y-5 px-6 pt-2">
+            <h3 className="text-center font-heading text-2xl  leading-normal tracking-tight text-foreground lg:text-3xl">
+              {feature.title}
+            </h3>
+            <p className="lg:text-md text-center text-foreground">
+              {feature.description}
+            </p>
+          </div>
+
+          <video
+            autoPlay
+            loop
+            muted
+            width={500}
+            height={400}
+            poster={feature.thumbnail}
+            className="absolute bottom-0 right-0 z-10 rounded-md object-cover"
+          >
+            <source src={feature.demo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </WobbleCard>
       ))}
     </div>
   )
