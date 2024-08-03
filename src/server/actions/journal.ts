@@ -144,3 +144,88 @@ export async function editJournalEntry(
     }
   }
 }
+
+const UpdateBookmarkStatusSchema = z.object({
+  entryId: z.string(),
+  isBookmarked: z.boolean(),
+})
+
+export async function updateBookmarkStatus(
+  rawInput: z.infer<typeof UpdateBookmarkStatusSchema>
+) {
+  try {
+    const { entryId, isBookmarked } = UpdateBookmarkStatusSchema.parse(rawInput)
+
+    if (!(await verifyCurrentUserHasAccessToEntry(entryId))) {
+      throw new Error("You don't have any access to this entry")
+    }
+
+    const bookmarkedEntry = await db.journalEntry.update({
+      where: {
+        id: entryId,
+      },
+      data: {
+        isBookmarked,
+      },
+    })
+    revalidatePath(`/journal`)
+    return bookmarkedEntry
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return {
+        error: error.issues,
+        code: 422,
+      }
+    }
+    return {
+      error,
+      code: 500,
+    }
+  }
+}
+
+export async function getMyBookmarkedJournalEntries() {
+  const user = await getUserByClerkId()
+
+  if (!user) {
+    throw new Error("Unauthorized")
+  }
+
+  const entries = await db.journalEntry.findMany({
+    where: {
+      userId: user?.id,
+      isBookmarked: true,
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      isBookmarked: true,
+    },
+    orderBy: { updatedAt: "desc" },
+  })
+  revalidatePath("/journal")
+  return entries
+}
+
+export async function getMyJournalEntries() {
+  const user = await getUserByClerkId()
+
+  if (!user) {
+    throw new Error("Unauthorized")
+  }
+
+  const entries = await db.journalEntry.findMany({
+    where: {
+      userId: user?.id,
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      isBookmarked: true,
+    },
+    orderBy: { updatedAt: "desc" },
+  })
+  return entries
+}

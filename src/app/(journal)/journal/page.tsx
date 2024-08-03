@@ -1,10 +1,17 @@
-import { getMyJournalEntries } from "@/server/queries/journal"
+import {
+  getMyBookmarkedJournalEntries,
+  getMyJournalEntries,
+} from "@/server/actions/journal"
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query"
 
-import { EmptyPlaceholder } from "@/components/empty-placeholder"
 import { Header } from "@/components/header"
 import { Shell } from "@/components/shell"
 
-import { JournalEntryItem } from "../_components/journal-entry"
+import EntryList from "../_components/entry-list"
 import JournalEntryCreateButton from "../_components/journal-entry-create-button"
 
 export const metadata = {
@@ -12,7 +19,18 @@ export const metadata = {
 }
 
 export default async function JournalPage() {
-  const entries = await getMyJournalEntries()
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: ["entries"],
+    queryFn: getMyJournalEntries,
+  })
+
+  await queryClient.prefetchQuery({
+    queryKey: ["bookmarkedEntries"],
+    queryFn: getMyBookmarkedJournalEntries,
+  })
+
   return (
     <Shell>
       <Header
@@ -24,24 +42,9 @@ export default async function JournalPage() {
         <JournalEntryCreateButton />
       </Header>
 
-      <div className="w-full">
-        {entries?.length ? (
-          <div className="divide-y divide-border rounded-md border">
-            {entries.map((entry) => (
-              <JournalEntryItem key={entry.id} entry={entry} />
-            ))}
-          </div>
-        ) : (
-          <EmptyPlaceholder>
-            <EmptyPlaceholder.Icon name="post" />
-            <EmptyPlaceholder.Title>No entires created</EmptyPlaceholder.Title>
-            <EmptyPlaceholder.Description>
-              You don&apos;t have any entry yet. Start creating content.
-            </EmptyPlaceholder.Description>
-            <JournalEntryCreateButton variant="outline" />
-          </EmptyPlaceholder>
-        )}
-      </div>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <EntryList />
+      </HydrationBoundary>
     </Shell>
   )
 }
