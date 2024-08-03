@@ -1,11 +1,12 @@
 "use client"
 
-import React from "react"
+import React, { useEffect } from "react"
 import {
   getMyBookmarkedJournalEntries,
   getMyJournalEntries,
 } from "@/server/actions/journal"
 import { useMutationState, useQuery } from "@tanstack/react-query"
+import { AnimatePresence, motion } from "framer-motion"
 
 import { EmptyPlaceholder } from "@/components/empty-placeholder"
 
@@ -70,17 +71,21 @@ const EntryList = () => {
               {`Entr${updatedBookmarkedEntries?.length === 1 ? "y" : "ies"}`}
             </span>
           </div>
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-2  xl:grid-cols-3">
-            {updatedBookmarkedEntries?.map((entry) => (
-              <JournalEntryItem
-                key={entry?.id}
-                entry={entry}
-                userBookmarks={
-                  updatedBookmarkedEntries &&
-                  updatedBookmarkedEntries?.map((entry) => entry?.id)
-                }
-              />
-            ))}
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2  xl:grid-cols-3">
+            <AnimatePresence>
+              {updatedBookmarkedEntries?.map((entry) => (
+                <motion.div key={entry?.id}>
+                  <JournalEntryItem
+                    key={entry?.id}
+                    entry={entry}
+                    userBookmarks={
+                      updatedBookmarkedEntries &&
+                      updatedBookmarkedEntries?.map((entry) => entry?.id)
+                    }
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       ) : null}
@@ -94,17 +99,21 @@ const EntryList = () => {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 gap-16 md:grid-cols-2  xl:grid-cols-3">
-            {entries?.map((entry) => (
-              <JournalEntryItem
-                key={entry?.id}
-                entry={entry}
-                userBookmarks={
-                  updatedBookmarkedEntries &&
-                  updatedBookmarkedEntries?.map((entry) => entry?.id)
-                }
-              />
-            ))}
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-2  xl:grid-cols-3">
+            <AnimatePresence>
+              {entries?.map((entry) => (
+                <motion.div key={entry?.id}>
+                  <JournalEntryItem
+                    key={entry?.id}
+                    entry={entry}
+                    userBookmarks={
+                      updatedBookmarkedEntries &&
+                      updatedBookmarkedEntries?.map((entry) => entry?.id)
+                    }
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </div>
         </div>
       ) : (
