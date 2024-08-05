@@ -3,10 +3,48 @@
 import { FC, useEffect } from "react"
 import { stagger, useAnimate, useInView } from "framer-motion"
 
-import { Card, CardContent } from "@/components/ui/card"
-import { WobbleCard } from "@/components/wobble-card"
+import { StickyScroll } from "@/components/sticky-scroll-reveal"
+
+import { WobbleCard } from "../wobble-card"
 
 interface FeaturesProps {}
+
+const content = [
+  {
+    title: "Intuitive and Modern Journal Editor",
+    description: `Create journal entries with our sleek and intuitive editor, offering rich formatting options and a visually captivating experience.`,
+    thumbnail: "/images/features/editor.webp",
+    href: "https://scribbly.s3.ap-south-1.amazonaws.com/editor-dark_gfnig8.mp4",
+  },
+  {
+    title: `Personalized Entry Reminders`,
+    description: ` Set personalized reminders to ensure consistent journaling and
+        never miss an opportunity to reflect and record your thoughts.`,
+    thumbnail: "/images/features/reminder.webp",
+    href: "https://scribbly.s3.ap-south-1.amazonaws.com/reminder-dark_elaitc.mp4",
+  },
+  {
+    title: `Personalized Entry Reminders`,
+    description: ` Set personalized reminders to ensure consistent journaling and
+        never miss an opportunity to reflect and record your thoughts.`,
+    thumbnail: "/images/features/editor.webp",
+    href: "https://scribbly.s3.ap-south-1.amazonaws.com/editor-dark_gfnig8.mp4",
+  },
+  {
+    title: `Personalized Entry Reminders`,
+    description: ` Set personalized reminders to ensure consistent journaling and
+        never miss an opportunity to reflect and record your thoughts.`,
+    thumbnail: "/images/features/editor.webp",
+    href: "https://scribbly.s3.ap-south-1.amazonaws.com/editor-dark_gfnig8.mp4",
+  },
+  {
+    title: `Personalized Entry Reminders`,
+    description: ` Set personalized reminders to ensure consistent journaling and
+        never miss an opportunity to reflect and record your thoughts.`,
+    thumbnail: "/images/features/editor.webp",
+    href: "https://scribbly.s3.ap-south-1.amazonaws.com/editor-dark_gfnig8.mp4",
+  },
+]
 
 const features = [
   {
@@ -41,7 +79,7 @@ const Features: FC<FeaturesProps> = () => {
   }, [animate, isInView])
 
   return (
-    <div ref={scope} className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2">
       {features.map((feature) => (
         <WobbleCard
           key={feature.id}
@@ -65,7 +103,7 @@ const Features: FC<FeaturesProps> = () => {
             width={500}
             height={400}
             poster={feature.thumbnail}
-            className="absolute bottom-0 right-0 z-10 rounded-md object-cover"
+            className="absolute -bottom-3 right-0 z-10 rounded-md object-cover"
           >
             <source src={feature.demo} type="video/mp4" />
             Your browser does not support the video tag.
