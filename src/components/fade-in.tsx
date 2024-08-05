@@ -47,7 +47,7 @@ export default function FadeIn({
         type: "spring",
       }}
     >
-      {children}
+      {children ? children : null}
     </motion.div>
   )
 }
