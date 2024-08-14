@@ -31,16 +31,12 @@ const Testimonials: FC<TestimonialsProps> = ({ className }) => {
     <div className={cn("relative flex flex-col", className)}>
       <Marquee className="max-w-screen [--duration:120s]" pauseOnHover>
         {firstRow.map((id, idx) => (
-          <FadeIn delay={0.06 + idx * 0.04} key={idx}>
-            <TweetCard id={id} className="max-h-48 w-72 min-w-72" />
-          </FadeIn>
+          <TweetCard id={id} className="max-h-48 w-72 min-w-72" />
         ))}
       </Marquee>
       <Marquee className="max-w-screen [--duration:120s]" reverse pauseOnHover>
         {secondRow.map((id, idx) => (
-          <FadeIn delay={0.06 + 0.04 * (secondRow.length - idx)} key={idx}>
-            <TweetCard id={id} className="max-h-48 w-72 min-w-72" />
-          </FadeIn>
+          <TweetCard id={id} className="max-h-48 w-72 min-w-72" />
         ))}
       </Marquee>
       <div className="pointer-events-none absolute inset-y-0 left-0 h-full w-1/3 bg-gradient-to-r from-background"></div>

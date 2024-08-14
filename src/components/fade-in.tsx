@@ -4,13 +4,13 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 
 export default function FadeIn({
-  children,
+  children = null,
   className,
   noVertical,
   delay,
   viewTriggerOffset,
 }: {
-  children: React.ReactNode
+  children?: React.ReactNode
   className?: string
   noVertical?: boolean
   delay?: number
@@ -33,6 +33,10 @@ export default function FadeIn({
     },
   }
 
+  if (!children) {
+    return null
+  }
+
   return (
     <motion.div
       ref={ref}
@@ -47,7 +51,7 @@ export default function FadeIn({
         type: "spring",
       }}
     >
-      {children ? children : null}
+      {children}
     </motion.div>
   )
 }
