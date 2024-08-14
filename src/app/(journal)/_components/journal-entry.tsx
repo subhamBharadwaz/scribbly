@@ -5,7 +5,10 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { JournalEntryCard } from "./journal-entry-card"
 
 interface JournalEntryProps {
-  entry: Pick<JournalEntry, "id" | "title" | "createdAt" | "isBookmarked">
+  entry: Pick<
+    JournalEntry,
+    "id" | "title" | "createdAt" | "isBookmarked" | "content"
+  >
   userBookmarks: string[]
   className?: string
 }

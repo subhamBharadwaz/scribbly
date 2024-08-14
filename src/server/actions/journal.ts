@@ -200,6 +200,7 @@ export async function getMyBookmarkedJournalEntries() {
       id: true,
       title: true,
       createdAt: true,
+      content: true,
       isBookmarked: true,
     },
     orderBy: { updatedAt: "desc" },
@@ -221,6 +222,7 @@ export async function getMyJournalEntries() {
     },
     select: {
       id: true,
+      content: true,
       title: true,
       createdAt: true,
       isBookmarked: true,

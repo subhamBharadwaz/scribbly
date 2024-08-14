@@ -11,7 +11,10 @@ import { cn, formatDate } from "@/lib/utils"
 import { EntryOperations } from "./entry-operations"
 
 interface JournalEntryProps {
-  entry: Pick<JournalEntry, "id" | "title" | "createdAt" | "isBookmarked">
+  entry: Pick<
+    JournalEntry,
+    "id" | "title" | "createdAt" | "isBookmarked" | "content"
+  >
   isBookmarked: boolean
   className?: string
 }
@@ -54,7 +57,7 @@ export function JournalEntryCard({
       ref={scope}
       layout
       className={cn(
-        "group relative min-h-28  space-y-5 rounded-lg border border-blue-50 bg-muted/30 p-4",
+        "group relative flex  h-44 flex-col space-y-5 rounded-lg border border-blue-50 bg-muted/30 p-4",
         className
       )}
     >
@@ -71,11 +74,10 @@ export function JournalEntryCard({
         </div>
       )}
       <p className="text-sm text-muted-foreground lg:text-base">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa deleniti
-        et expedita temporibus ad quae corrupti voluptatum, numquam repellendus
-        ullam!
+        {entry.content?.blocks[0]?.data.text}
       </p>
-      <div className="flex items-center justify-between transition-all duration-300  group-hover:block">
+
+      <div className="absolute bottom-5 right-4 flex items-center  justify-between transition-all duration-300 group-hover:block">
         <p className="block text-sm text-muted-foreground transition-all duration-300 group-hover:hidden">
           {formatDate(entry.createdAt?.toDateString())}
         </p>

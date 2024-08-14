@@ -182,15 +182,13 @@ const Editor: FC<EditorProps> = ({ entry }) => {
               className={cn(buttonVariants({ variant: "ghost" }))}
             >
               <>
-                <Icons.chevronLeft className="mr-2 h-4 w-4" />
+                <Icons.chevronLeft className="mr-2 size-4" />
                 Back
               </>
             </Link>
           </div>
           <button type="submit" className={cn(buttonVariants())}>
-            {isSaving && (
-              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-            )}
+            {isSaving && <Icons.spinner className="mr-2 size-4 animate-spin" />}
             <span>Save</span>
           </button>
         </div>

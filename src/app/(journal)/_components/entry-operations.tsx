@@ -138,7 +138,11 @@ export function EntryOperations({
         <Link
           href={`/editor/${entry.id}`}
           className={cn(
-            buttonVariants({ size: "icon", className: "rounded-full" })
+            buttonVariants({
+              size: "icon",
+              className:
+                "rounded-full duration-300 transition-all hover:-translate-y-0.5",
+            })
           )}
         >
           <Pencil className="size-4" />
@@ -146,7 +150,7 @@ export function EntryOperations({
         <Button
           size="icon"
           onClick={() => setShowDeleteAlert(true)}
-          className="rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100"
+          className="rounded-full opacity-0 transition-all duration-300 hover:-translate-y-0.5 group-hover:opacity-100"
         >
           <Trash className="size-4" />
         </Button>
@@ -154,7 +158,7 @@ export function EntryOperations({
           size="icon"
           onClick={handleBookmarkToggle}
           disabled={isTransitionPending}
-          className="rounded-full opacity-0 transition-all duration-300 group-hover:opacity-100"
+          className="rounded-full opacity-0 transition-all duration-300 hover:-translate-y-0.5 group-hover:opacity-100"
         >
           <BookmarkIcon
             className={cn(
