@@ -77,7 +77,7 @@ export function ReminderForm({
   const updateReminderMutation = useMutation({
     mutationFn: updateReminderHandler,
     onSuccess: () => {
-      queryClient.invalidateQueries(["reminder"]),
+      queryClient.invalidateQueries({ queryKey: ["reminder"] }),
         toast({
           description: "Reminder settings updated successfully.",
         }),

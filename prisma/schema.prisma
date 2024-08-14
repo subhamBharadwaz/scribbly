@@ -32,11 +32,12 @@ model User {
 }
 
 model JournalEntry {
-  id        String   @id @default(cuid())
-  title     String
-  content   Json?
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  id           String   @id @default(cuid())
+  title        String
+  content      Json?
+  isBookmarked Boolean  @default(false)
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @updatedAt @map(name: "updated_at")
 
   userId String
   user   User   @relation(fields: [userId], references: [id])

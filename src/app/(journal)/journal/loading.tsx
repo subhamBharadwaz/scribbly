@@ -14,7 +14,8 @@ export default function JournalLoading() {
       >
         <JournalEntryCreateButton />
       </Header>
-      <div className="divide-border-200 divide-y rounded-md border">
+      <div className="grid grid-cols-1 gap-16 md:grid-cols-2  xl:grid-cols-3">
+        <JournalEntryItem.Skeleton />
         <JournalEntryItem.Skeleton />
         <JournalEntryItem.Skeleton />
         <JournalEntryItem.Skeleton />

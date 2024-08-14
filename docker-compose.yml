@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  scribbly:
+    image: postgres:16.2
+    restart: always
+    container_name: scribbly
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: example
+      PGDATA: /data/postgres
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+
+volumes:
+  postgres:

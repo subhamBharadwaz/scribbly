@@ -33,7 +33,7 @@
     }
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.0.7",
+    "@clerk/nextjs": "^5.2.12",
     "@editorjs/checklist": "^1.6.0",
     "@editorjs/code": "^2.9.0",
     "@editorjs/editorjs": "^2.29.1",
@@ -46,7 +46,7 @@
     "@editorjs/paragraph": "^2.11.4",
     "@editorjs/table": "^2.3.0",
     "@hookform/resolvers": "^3.3.4",
-    "@prisma/client": "^5.13.0",
+    "@prisma/client": "^5.17.0",
     "@radix-ui/react-accessible-icon": "^1.0.3",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -74,7 +74,7 @@
     "@react-email/tailwind": "^0.0.8",
     "@sentry/nextjs": "^7.105.0",
     "@t3-oss/env-nextjs": "^0.4.1",
-    "@tanstack/react-query": "^4.36.1",
+    "@tanstack/react-query": "^5.40.1",
     "@types/node": "20.3.1",
     "@types/react": "18.2.13",
     "@types/react-dom": "18.2.6",
@@ -93,7 +93,7 @@
     "eslint-config-next": "13.4.7",
     "framer-motion": "^10.18.0",
     "lottie-react": "^2.4.0",
-    "lucide-react": "^0.246.0",
+    "lucide-react": "^0.378.0",
     "next": "14.2.3",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
@@ -108,15 +108,18 @@
     "react-intersection-observer": "^9.10.2",
     "react-parallax-tilt": "^1.7.225",
     "react-textarea-autosize": "^8.5.3",
+    "react-tweet": "^3.2.1",
     "resend": "^0.17.2",
     "server-only": "^0.0.1",
     "sharp": "^0.32.6",
     "stripe": "^12.18.0",
     "svix": "^1.24.0",
     "tailwind-merge": "^1.14.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^5.7.4",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",
@@ -131,7 +134,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
     "pretty-quick": "^3.3.1",
-    "prisma": "^5.13.0",
+    "prisma": "^5.17.0",
     "tailwindcss": "^3.4.1",
     "typescript": "5.1.3"
   }

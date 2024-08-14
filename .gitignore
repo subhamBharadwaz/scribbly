@@ -48,3 +48,5 @@ next-env.d.ts
 
 # Sentry Config File
 .sentryclirc
+
+db-data

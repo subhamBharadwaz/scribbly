@@ -1,43 +1,42 @@
-import { FC } from "react"
-import Link from "next/link"
 import { JournalEntry } from "@prisma/client"
 
-import { formatDate } from "@/lib/utils"
 import { Skeleton } from "@/components/ui/skeleton"
 
-import { EntryOperations } from "../_components/entry-operations"
+import { JournalEntryCard } from "./journal-entry-card"
 
 interface JournalEntryProps {
-  entry: Pick<JournalEntry, "id" | "title" | "createdAt">
+  entry: Pick<
+    JournalEntry,
+    "id" | "title" | "createdAt" | "isBookmarked" | "content"
+  >
+  userBookmarks: string[]
+  className?: string
 }
 
-export function JournalEntryItem({ entry }: JournalEntryProps) {
+export function JournalEntryItem({
+  entry,
+  userBookmarks,
+  className,
+}: JournalEntryProps) {
+  const isBookmarked = userBookmarks?.includes(entry?.id)
+
   return (
-    <div className="flex items-center justify-between p-5">
-      <div className="grid gap-1">
-        <Link
-          href={`/editor/${entry.id}`}
-          className="font-semibold hover:underline"
-        >
-          {entry.title}
-        </Link>
-        <div>
-          <p className="text-sm text-muted-foreground">
-            {formatDate(entry.createdAt?.toDateString())}
-          </p>
-        </div>
-      </div>
-      <EntryOperations entry={{ id: entry.id, title: entry.title }} />
-    </div>
+    <JournalEntryCard
+      entry={entry}
+      isBookmarked={isBookmarked}
+      className={className}
+    />
   )
 }
 
 JournalEntryItem.Skeleton = function JournalEntrySkeleton() {
   return (
-    <div className="p-4">
-      <div className="space-y-3">
-        <Skeleton className="h-5 w-2/5" />
-        <Skeleton className="h-4 w-4/5" />
+    <div className="relative min-h-28  space-y-5 rounded-lg border border-blue-50 bg-muted/30 p-4">
+      <Skeleton className="h-4 w-20" />
+      <Skeleton className="h-10 w-40" />
+      <div className="flex items-center justify-between">
+        <Skeleton className="h-2 w-10" />
+        <Skeleton className="size-8 rounded-full" />
       </div>
     </div>
   )

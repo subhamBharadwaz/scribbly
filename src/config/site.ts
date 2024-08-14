@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
   url: "https://scribbly.subhambharadwaz.in",
   ogImage: "https://scribbly.subhambharadwaz.in/og.jpg",
   links: {
-    twitter: "https://twitter.com/subh4mBharadwaz",
+    twitter: "https://twitter.com/webhashira",
     github: "https://github.com/subhamBharadwaz",
     linkedin: "https://www.linkedin.com/in/subham-bharadwaz-5a9792197/",
   },

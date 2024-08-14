@@ -1,5 +1,3 @@
-import { notFound } from "next/navigation"
-
 import { journalConfig } from "@/config/journal"
 import { getUserByClerkId } from "@/lib/auth"
 import { MainNav } from "@/components/main-nav"
