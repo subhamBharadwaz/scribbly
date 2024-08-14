@@ -74,6 +74,7 @@ export function JournalEntryCard({
         </div>
       )}
       <p className="text-sm text-muted-foreground lg:text-base">
+        {/* @ts-ignore */}
         {entry.content?.blocks[0]?.data.text}
       </p>
 
