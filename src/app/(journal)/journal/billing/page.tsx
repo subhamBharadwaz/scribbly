@@ -38,20 +38,20 @@ export const metadata = {
 
 const testCardsInfo = [
   {
-    brand: "Visa",
-    number: "4242 4242 4242 4242",
+    brand: "Visa (IN)",
+    number: "4000003560000008",
     cvc: "Any 3 digits",
     date: "Any future date",
   },
   {
-    brand: "Visa(debit)",
-    number: "4000 0566 5566 5566",
+    brand: "Visa (US)",
+    number: "4242424242424242",
     cvc: "Any 3 digits",
     date: "Any future date",
   },
   {
-    brand: "Mastercard",
-    number: "5555 5555 5555 4444",
+    brand: "Visa (CA)",
+    number: "4000001240000000",
     cvc: "Any 3 digits",
     date: "Any future date",
   },
