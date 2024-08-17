@@ -150,7 +150,7 @@ export function EntryOperations({
         <Button
           size="icon"
           onClick={() => setShowDeleteAlert(true)}
-          className="rounded-full opacity-0 transition-all duration-300 hover:-translate-y-0.5 group-hover:opacity-100"
+          className="rounded-full opacity-100 transition-all duration-300 hover:-translate-y-0.5 group-hover:opacity-100 md:opacity-0"
         >
           <Trash className="size-4" />
         </Button>
@@ -158,7 +158,7 @@ export function EntryOperations({
           size="icon"
           onClick={handleBookmarkToggle}
           disabled={isTransitionPending}
-          className="rounded-full opacity-0 transition-all duration-300 hover:-translate-y-0.5 group-hover:opacity-100"
+          className="rounded-full opacity-100 transition-all duration-300 hover:-translate-y-0.5 group-hover:opacity-100 md:opacity-0"
         >
           <BookmarkIcon
             className={cn(

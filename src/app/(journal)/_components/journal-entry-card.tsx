@@ -61,25 +61,27 @@ export function JournalEntryCard({
         className
       )}
     >
-      <Link
-        href={`/editor/${entry.id}`}
-        className="text-lg font-semibold hover:underline lg:text-xl"
-      >
-        {" "}
-        {entry.title}
-      </Link>
+      <div className="grow">
+        <Link
+          href={`/editor/${entry.id}`}
+          className="text-lg font-semibold hover:underline lg:text-xl"
+        >
+          {" "}
+          {entry.title}
+        </Link>
+        <p className="text-sm text-muted-foreground lg:text-base">
+          {/* @ts-ignore */}
+          {entry.content?.blocks[0]?.data.text}
+        </p>
+      </div>
       {isBookmarked && (
         <div className="absolute right-4 top-0 rounded-full bg-muted p-2">
           <BookmarkIcon className="size-4 fill-foreground text-foreground" />
         </div>
       )}
-      <p className="text-sm text-muted-foreground lg:text-base">
-        {/* @ts-ignore */}
-        {entry.content?.blocks[0]?.data.text}
-      </p>
 
-      <div className="absolute bottom-5 right-4 flex items-center  justify-between transition-all duration-300 group-hover:block">
-        <p className="block text-sm text-muted-foreground transition-all duration-300 group-hover:hidden">
+      <div className="mt-auto flex w-full items-center justify-between self-end transition-all duration-300 group-hover:block">
+        <p className="text-sm text-muted-foreground transition-all duration-300 group-hover:hidden">
           {formatDate(entry.createdAt?.toDateString())}
         </p>
         <EntryOperations
