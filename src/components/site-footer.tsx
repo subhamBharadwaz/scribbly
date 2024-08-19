@@ -22,7 +22,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
         <div className="space-y-8 xl:col-span-2">
           <div className="space-y-10">
             <div className="flex items-center gap-x-2">
-              <Icons.mobileLogo className="h-8 w-8" />
+              <Icons.mobileLogo className="size-8" />
               <h3 className="text-md text-muted-foreground lg:text-lg">
                 Scribbly - Digital Journal
               </h3>
@@ -35,7 +35,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
                 className="rounded-md p-2 transition-colors hover:bg-foreground/20 active:bg-foreground/30"
               >
                 <span className="sr-only">Github</span>
-                <Icons.gitHub className="h-5 w-5" />
+                <Icons.gitHub className="size-5" />
               </a>
               <div className="h-8 border-l border-muted-foreground/50" />
 
@@ -46,7 +46,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
                 className="rounded-md p-2 transition-colors hover:bg-foreground/20 active:bg-foreground/30"
               >
                 <span className="sr-only">Twitter</span>
-                <Icons.twitter className="h-5 w-5" />
+                <Icons.twitter className="size-5" />
               </a>
               <div className="h-8 border-l border-muted-foreground/50" />
 
@@ -57,7 +57,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
                 className="rounded-md p-2 transition-colors hover:bg-foreground/20 active:bg-foreground/30"
               >
                 <span className="sr-only">Linkedin</span>
-                <Icons.linkedIn className="h-5 w-5" />
+                <Icons.linkedIn className="size-5" />
               </a>
             </div>
           </div>
@@ -140,7 +140,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
         </div>
         <div className="mt-16 border-t  pt-8 sm:mt-20 lg:mt-24">
           <p className="text-sm leading-5 text-muted-foreground">
-            &copy; {new Date().getFullYear()} scribbly.subhambharadwaz.in
+            &copy; {new Date().getFullYear()} scribbly.subhambharadwaz.com
           </p>
         </div>
       </div>
