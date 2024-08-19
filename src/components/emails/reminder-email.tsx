@@ -20,7 +20,7 @@ interface ReminderEmailProps {
 }
 
 const baseUrl =
-  process.env.NEXT_PUBLIC_APP_URL ?? "https://scribbly.subhambharadwaz.in"
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://scribbly.subhambharadwaz.com"
 
 export default function ReminderEmail({
   firstName = "there",
