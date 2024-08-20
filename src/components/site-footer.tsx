@@ -69,7 +69,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
                   <li>
                     <Link
                       className="text-sm text-muted-foreground transition-colors duration-200 ease-in-out hover:text-accent-foreground"
-                      href="#features"
+                      href="/#features"
                     >
                       Features
                     </Link>
@@ -77,7 +77,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
                   <li>
                     <Link
                       className="text-sm text-muted-foreground transition-colors duration-200 ease-in-out hover:text-accent-foreground"
-                      href="#pricing"
+                      href="/#pricing"
                     >
                       Pricing
                     </Link>
@@ -90,7 +90,7 @@ const SiteFooter: FC<SiteFooterProps> = ({ className }) => {
                   <li>
                     <Link
                       className="text-sm text-muted-foreground transition-colors duration-200 ease-in-out hover:text-accent-foreground"
-                      href="#pricing"
+                      href="/"
                     >
                       About us
                     </Link>
