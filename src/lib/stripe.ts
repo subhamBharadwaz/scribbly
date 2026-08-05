@@ -1,8 +1,16 @@
-import Stripe from "stripe"
+import Stripe from "stripe";
 
-import { env } from "@/env.mjs"
+import { env } from "@/env";
 
-export const stripe = new Stripe(env.STRIPE_API_KEY, {
-  apiVersion: "2022-11-15",
-  typescript: true,
-})
+let stripeClient: Stripe | null = null;
+
+export function getStripe() {
+  if (!stripeClient) {
+    stripeClient = new Stripe(env.STRIPE_API_KEY, {
+      apiVersion: "2026-05-27.dahlia",
+      typescript: true,
+    });
+  }
+
+  return stripeClient;
+}

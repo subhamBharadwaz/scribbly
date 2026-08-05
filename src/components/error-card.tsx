@@ -1,8 +1,8 @@
-import * as React from "react"
-import Link from "next/link"
+import * as React from "react";
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,15 +10,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Icons } from "@/components/icons"
+} from "@/components/ui/card";
+import { Icons } from "@/components/icons";
 
 interface ErrorCardProps extends React.ComponentPropsWithoutRef<typeof Card> {
-  icon?: keyof typeof Icons
-  title: string
-  description: string
-  retryLink?: string
-  retryLinkText?: string
+  icon?: keyof typeof Icons;
+  title: string;
+  description: string;
+  retryLink?: "/" | "/journal" | "/sign-in" | "/sign-up";
+  retryLinkText?: string;
 }
 
 export function ErrorCard({
@@ -30,7 +30,7 @@ export function ErrorCard({
   className,
   ...props
 }: ErrorCardProps) {
-  const Icon = Icons[icon ?? "warning"]
+  const Icon = Icons[icon ?? "warning"];
 
   return (
     <Card className={cn("grid place-items-center", className)} {...props}>
@@ -50,7 +50,7 @@ export function ErrorCard({
               className={cn(
                 buttonVariants({
                   variant: "ghost",
-                })
+                }),
               )}
             >
               {retryLinkText}
@@ -60,5 +60,5 @@ export function ErrorCard({
         </CardFooter>
       ) : null}
     </Card>
-  )
+  );
 }

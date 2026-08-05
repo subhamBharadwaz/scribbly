@@ -1,21 +1,20 @@
-import "@/styles/globals.css"
+import "@/styles/globals.css";
 
-import { Inter as FontSans } from "next/font/google"
-import localFont from "next/font/local"
-import { ClerkProvider } from "@clerk/nextjs"
+import { Inter as FontSans } from "next/font/google";
+import localFont from "next/font/local";
 
-import { siteConfig } from "@/config/site"
-import { cn } from "@/lib/utils"
-import { Toaster } from "@/components/ui/toaster"
-import { Analytics } from "@/components/analytics"
-import { CSPostHogProvider } from "@/components/analytics-provider"
-import { Providers } from "@/components/providers"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster";
+import { Analytics } from "@/components/analytics";
+import { CSPostHogProvider } from "@/components/analytics-provider";
+import { Providers } from "@/components/providers";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
 const fontHeading = localFont({
   src: "../../assets/fonts/Satoshi-Variable.woff2",
@@ -23,9 +22,10 @@ const fontHeading = localFont({
   weight: "700",
   display: "swap",
   style: "normal",
-})
+});
 
 export const metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
@@ -46,10 +46,6 @@ export const metadata = {
     },
   ],
   creator: "Subham Bharadwaz",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -71,33 +67,36 @@ export const metadata = {
     apple: "/apple-touch-icon.png",
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
-}
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <CSPostHogProvider>
-          <body
-            className={cn(
-              "min-h-screen bg-background font-sans antialiased",
-              fontSans.variable,
-              fontHeading.variable
-            )}
-          >
-            <Providers>
-              {children}
-              <Analytics />
-              <Toaster />
-              <TailwindIndicator />
-            </Providers>
-          </body>
-        </CSPostHogProvider>
-      </html>
-    </ClerkProvider>
-  )
+    <html
+      lang="en"
+      className={cn(fontSans.variable, fontHeading.variable)}
+      suppressHydrationWarning
+    >
+      <CSPostHogProvider>
+        <body className="min-h-screen bg-background font-sans antialiased">
+          <Providers>
+            {children}
+            <Analytics />
+            <Toaster />
+            <TailwindIndicator />
+          </Providers>
+        </body>
+      </CSPostHogProvider>
+    </html>
+  );
 }

@@ -1,0 +1,18 @@
+allowBuilds:
+  "@sentry/cli": true
+  contentlayer2: true
+  core-js: true
+  esbuild: true
+  msgpackr-extract: true
+  protobufjs: true
+  sharp: true
+onlyBuiltDependencies:
+  - "@sentry/cli"
+  - contentlayer2
+  - core-js
+  - esbuild
+  - msgpackr-extract
+  - protobufjs
+  - sharp
+
+ignoredBuiltDependencies: []

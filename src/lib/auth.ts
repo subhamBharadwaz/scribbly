@@ -1,31 +1,41 @@
-import { auth } from "@clerk/nextjs/server"
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { nextCookies } from "better-auth/next-js";
+import { headers } from "next/headers";
 
-import { db } from "./db"
+import { env } from "@/env";
+import { db } from "@/server/db";
 
-export const getUserByClerkId = async () => {
-  const { userId } = auth()
+export const auth = betterAuth({
+  appName: "Scribbly",
+  database: drizzleAdapter(db, {
+    provider: "pg",
+  }),
+  socialProviders: {
+    google: {
+      clientId: env.GOOGLE_CLIENT_ID || "",
+      clientSecret: env.GOOGLE_CLIENT_SECRET || "",
+    },
+    github: {
+      clientId: env.GITHUB_CLIENT_ID || "",
+      clientSecret: env.GITHUB_CLIENT_SECRET || "",
+    },
+  },
+  trustedOrigins: [env.NEXT_PUBLIC_APP_URL, env.BETTER_AUTH_URL],
+  plugins: [nextCookies()],
+});
 
-  if (userId) {
-    try {
-      const user = await db.user.findUniqueOrThrow({
-        where: {
-          clerkId: userId as string,
-        },
-      })
+export type AuthSession = typeof auth.$Infer.Session;
+export type AuthUser = AuthSession["user"];
 
-      return user
-    } catch (error) {
-      console.error(error)
-      if (error.code === "P2025") {
-        // Network error, retry the function call
-        return await getUserByClerkId()
-      } else if (error.code === "P2016") {
-        // Record not found, wait and retry the function call
-        await new Promise((resolve) => setTimeout(resolve, 1000))
-        return await getUserByClerkId()
-      } else {
-        throw new Error("User not found")
-      }
-    }
-  }
+export async function getCurrentSession() {
+  return auth.api.getSession({
+    headers: await headers(),
+  });
+}
+
+export async function getCurrentUser() {
+  const session = await getCurrentSession();
+
+  return session?.user ?? null;
 }
