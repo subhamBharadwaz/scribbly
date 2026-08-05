@@ -1,25 +1,23 @@
 "use client";
 
-import { FC, useCallback, useEffect, useRef, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { type FC, useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
-import * as z from "zod";
+import type * as z from "zod";
 
 import { uploadFiles } from "@/lib/uploadthing";
 
 import "@/styles/editor.css";
 
-import { editJournalEntry } from "@/server/actions/journal";
-
-import { cn } from "@/lib/utils";
-import { entryPatchSchema } from "@/lib/validations/entry";
-import type { JournalEntry } from "@/server/db/types";
+import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
-import { Icons } from "@/components/icons";
+import { cn } from "@/lib/utils";
+import { entryPatchSchema } from "@/lib/validations/entry";
+import { editJournalEntry } from "@/server/actions/journal";
+import type { JournalEntry } from "@/server/db/types";
 
 interface EditorProps {
   entry: Pick<JournalEntry, "id" | "title" | "content" | "mood" | "tags">;
@@ -36,8 +34,6 @@ const Editor: FC<EditorProps> = ({ entry }) => {
   const [tags, setTags] = useState(entry.tags.join(", "));
 
   const ref = useRef<import("@editorjs/editorjs").default | null>(null);
-  const router = useRouter();
-
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [hasChanges, setHasChanges] = useState(false);

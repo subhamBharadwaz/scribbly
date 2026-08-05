@@ -1,14 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
-import Link from "next/link";
-import {
-  AnimatePresence,
-  motion,
-  useAnimate,
-  usePresence,
-} from "framer-motion";
+import { motion, useAnimate, usePresence } from "framer-motion";
 import { BookmarkIcon, TagIcon } from "lucide-react";
+import Link from "next/link";
+import { useEffect } from "react";
 
 import { cn, formatDate } from "@/lib/utils";
 import type { JournalEntry } from "@/server/db/types";
