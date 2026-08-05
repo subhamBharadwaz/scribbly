@@ -52,6 +52,20 @@ pnpm install
 cp .env.example .env.local
 ```
 
+Required local services and credentials include:
+
+- PostgreSQL connection string in `DATABASE_URL`
+- Better Auth secret in `BETTER_AUTH_SECRET`
+- UploadThing token for editor images
+- Stripe credentials for subscriptions
+- Resend credentials for reminder emails
+
+Apply database migrations before starting the app:
+
+```sh
+pnpm db:migrate
+```
+
 3. Start the development server:
 
 ```sh
