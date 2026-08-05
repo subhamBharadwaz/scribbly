@@ -1,3 +1,6 @@
+packages:
+  - "."
+
 allowBuilds:
   "@sentry/cli": true
   contentlayer2: true
