@@ -13,6 +13,8 @@ Scribbly is a web application that provides a platform for users to create and m
 - **Secure and Private**: Scribbly prioritizes user data security and privacy, ensuring that journal entries are kept confidential and protected.
 - **Subscription Plan**: Scribbly offers a monthly subscription plan that provides users with additional features and benefits.
 - **Reminder Feature**: The reminder feature is a valuable addition to Scribbly. By sending reminder emails to users who have activated this option every day at 9 pm, you help users stay consistent with their journaling habit and make it a part of their daily routine.
+- **Mood and Tags**: Add a mood and comma-separated tags to each entry so journal cards can be scanned and organized by context.
+- **Autosave**: Entry title, content, mood, and tags are saved automatically after a short pause while editing. Manual saving remains available.
 
 ## Features
 
@@ -23,10 +25,10 @@ Scribbly is a web application that provides a platform for users to create and m
 - Metadata files
 - Server and Client Components
 - API Routes and Middleware
-- Authentication using **Clerk**
+- Authentication using **Better Auth**
 - Block-Style editor with **Editor.js**
-- ORM using **Prisma**
-- Database on **PlanetScale**
+- ORM using **Drizzle ORM**
+- PostgreSQL database
 - Creating and sending emails with **React Email** and **Resend**
 - UI Components built using **Radix UI** and **shadcn/ui**
 - Subscriptions using **Stripe**

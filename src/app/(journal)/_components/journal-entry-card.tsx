@@ -1,22 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import Link from "next/link"
-import { JournalEntry } from "@prisma/client"
-import { AnimatePresence, motion, useAnimate, usePresence } from "framer-motion"
-import { BookmarkIcon } from "lucide-react"
+import { useEffect } from "react";
+import Link from "next/link";
+import {
+  AnimatePresence,
+  motion,
+  useAnimate,
+  usePresence,
+} from "framer-motion";
+import { BookmarkIcon, TagIcon } from "lucide-react";
 
-import { cn, formatDate } from "@/lib/utils"
+import { cn, formatDate } from "@/lib/utils";
+import type { JournalEntry } from "@/server/db/types";
 
-import { EntryOperations } from "./entry-operations"
+import { EntryOperations } from "./entry-operations";
 
 interface JournalEntryProps {
   entry: Pick<
     JournalEntry,
-    "id" | "title" | "createdAt" | "isBookmarked" | "content"
-  >
-  isBookmarked: boolean
-  className?: string
+    "id" | "title" | "createdAt" | "isBookmarked" | "content" | "mood" | "tags"
+  >;
+  isBookmarked: boolean;
+  className?: string;
 }
 
 export function JournalEntryCard({
@@ -24,8 +29,8 @@ export function JournalEntryCard({
   isBookmarked,
   className,
 }: JournalEntryProps) {
-  const [isPresent, safeToRemove] = usePresence()
-  const [scope, animate] = useAnimate()
+  const [isPresent, safeToRemove] = usePresence();
+  const [scope, animate] = useAnimate();
 
   useEffect(() => {
     if (!isPresent) {
@@ -39,13 +44,13 @@ export function JournalEntryCard({
           {
             duration: 0.125,
             ease: "easeIn",
-          }
-        )
-        safeToRemove()
-      }
-      exitAnimation()
+          },
+        );
+        safeToRemove();
+      };
+      exitAnimation();
     }
-  }, [isPresent])
+  }, [isPresent]);
   return (
     <motion.div
       initial={{ opacity: 0, x: 24 }}
@@ -58,7 +63,7 @@ export function JournalEntryCard({
       layout
       className={cn(
         "group relative flex  h-44 flex-col space-y-5 rounded-lg border border-blue-50 bg-muted/30 p-4",
-        className
+        className,
       )}
     >
       <div className="grow">
@@ -71,8 +76,26 @@ export function JournalEntryCard({
         </Link>
         <p className="text-sm text-muted-foreground lg:text-base">
           {/* @ts-ignore */}
-          {entry.content?.blocks[0]?.data.text}
+          {entry.content?.blocks?.[0]?.data?.text}
         </p>
+        {(entry.mood || entry.tags.length > 0) && (
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+            {entry.mood && (
+              <span className="rounded-full bg-primary/10 px-2.5 py-1 font-medium text-primary">
+                Mood: {entry.mood}
+              </span>
+            )}
+            {entry.tags.map((tag) => (
+              <span
+                key={tag}
+                className="inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-muted-foreground"
+              >
+                <TagIcon className="size-3" />
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
       {isBookmarked && (
         <div className="absolute right-4 top-0 rounded-full bg-muted p-2">
@@ -94,5 +117,5 @@ export function JournalEntryCard({
         />
       </div>
     </motion.div>
-  )
+  );
 }
