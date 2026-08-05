@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useRouter } from "next/navigation"
-import { updateReminder } from "@/server/actions/reminder"
-import { UserSubscriptionPlan } from "@/types"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Reminder } from "@prisma/client"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { useForm } from "react-hook-form"
-import { ZodIssue } from "zod"
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { updateReminder } from "@/server/actions/reminder";
+import { UserSubscriptionPlan } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useForm } from "react-hook-form";
+import { ZodIssue } from "zod";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import {
   reminderFormSchema,
   ReminderFormValues,
-} from "@/lib/validations/reminder"
-import { Button } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+} from "@/lib/validations/reminder";
+import type { Reminder } from "@/server/db/types";
+import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
+import { Icons } from "@/components/icons";
 
 import {
   Form,
@@ -27,23 +27,23 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../../components/ui/form"
+} from "../../../../components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../../../../components/ui/select"
-import { Switch } from "../../../../components/ui/switch"
+} from "../../../../components/ui/select";
+import { Switch } from "../../../../components/ui/switch";
 
 type ReminderError = {
-  error: ZodIssue[]
-  code: number
-}
+  error: ZodIssue[];
+  code: number;
+};
 interface ReminderFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  subscriptionPlan: UserSubscriptionPlan
-  reminderSettings: Reminder
+  subscriptionPlan: UserSubscriptionPlan;
+  reminderSettings: Reminder;
 }
 
 export function ReminderForm({
@@ -52,11 +52,11 @@ export function ReminderForm({
   reminderSettings,
   ...props
 }: ReminderFormProps) {
-  const router = useRouter()
-  const queryClient = useQueryClient()
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
-  const [isSaving, setIsSaving] = React.useState<boolean>(false)
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [isSaving, setIsSaving] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
   const form = useForm<ReminderFormValues>({
     resolver: zodResolver(reminderFormSchema),
@@ -64,24 +64,24 @@ export function ReminderForm({
       active: reminderSettings?.active,
       frequency: reminderSettings?.frequency,
     },
-  })
+  });
 
   const updateReminderHandler = async (data: ReminderFormValues) => {
     const reminder = await updateReminder({
       active: data.active,
       frequency: data.frequency,
-    })
-    return reminder
-  }
+    });
+    return reminder;
+  };
 
   const updateReminderMutation = useMutation({
     mutationFn: updateReminderHandler,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["reminder"] }),
+      (queryClient.invalidateQueries({ queryKey: ["reminder"] }),
         toast({
           description: "Reminder settings updated successfully.",
         }),
-        setIsSaving(false)
+        setIsSaving(false));
     },
     onError: () => {
       toast({
@@ -89,16 +89,16 @@ export function ReminderForm({
         description:
           "Your reminder settings were not updated. Please try again.",
         variant: "destructive",
-      })
+      });
     },
-  })
+  });
 
   async function onSubmit(data: ReminderFormValues) {
     if (subscriptionPlan?.isPro) {
-      setIsSaving(true)
-      updateReminderMutation.mutate(data)
+      setIsSaving(true);
+      updateReminderMutation.mutate(data);
     }
-    router.refresh()
+    router.refresh();
   }
 
   return (
@@ -167,5 +167,5 @@ export function ReminderForm({
         </Button>
       </form>
     </Form>
-  )
+  );
 }
