@@ -1,35 +1,36 @@
 import {
   getMyBookmarkedJournalEntries,
   getMyJournalEntries,
-} from "@/server/actions/journal"
+} from "@/server/actions/journal";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
-} from "@tanstack/react-query"
+} from "@tanstack/react-query";
 
-import { Header } from "@/components/header"
-import { Shell } from "@/components/shell"
+import { Header } from "@/components/header";
+import { Shell } from "@/components/shell";
 
-import EntryList from "../_components/entry-list"
-import JournalEntryCreateButton from "../_components/journal-entry-create-button"
+import EntryList from "../_components/entry-list";
+import JournalEntryCreateButton from "../_components/journal-entry-create-button";
 
 export const metadata = {
   title: "Journal",
-}
+};
 
 export default async function JournalPage() {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery({
-    queryKey: ["entries"],
-    queryFn: getMyJournalEntries,
-  })
-
-  await queryClient.prefetchQuery({
-    queryKey: ["bookmarkedEntries"],
-    queryFn: getMyBookmarkedJournalEntries,
-  })
+  await Promise.all([
+    queryClient.prefetchQuery({
+      queryKey: ["entries"],
+      queryFn: getMyJournalEntries,
+    }),
+    queryClient.prefetchQuery({
+      queryKey: ["bookmarkedEntries"],
+      queryFn: getMyBookmarkedJournalEntries,
+    }),
+  ]);
 
   return (
     <Shell>
@@ -46,5 +47,5 @@ export default async function JournalPage() {
         <EntryList />
       </HydrationBoundary>
     </Shell>
-  )
+  );
 }

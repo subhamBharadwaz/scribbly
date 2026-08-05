@@ -50,3 +50,5 @@ next-env.d.ts
 .sentryclirc
 
 db-data
+# next-agents-md
+.next-docs/

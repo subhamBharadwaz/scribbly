@@ -1,62 +1,61 @@
-"use client"
+"use client";
 
-import React from "react"
+import { useMutationState, useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
+import { EmptyPlaceholder } from "@/components/empty-placeholder";
 import {
   getMyBookmarkedJournalEntries,
   getMyJournalEntries,
-} from "@/server/actions/journal"
-import { useMutationState, useQuery } from "@tanstack/react-query"
-import { AnimatePresence, motion } from "framer-motion"
+} from "@/server/actions/journal";
 
-import { EmptyPlaceholder } from "@/components/empty-placeholder"
-
-import { JournalEntryItem } from "../_components/journal-entry"
-import JournalEntryCreateButton from "./journal-entry-create-button"
+import { JournalEntryItem } from "../_components/journal-entry";
+import JournalEntryCreateButton from "./journal-entry-create-button";
 
 const EntryList = () => {
   const { data: entries } = useQuery({
     queryKey: ["entries"],
     queryFn: getMyJournalEntries,
-  })
+  });
 
   const { data: bookmarkedEntries } = useQuery({
     queryKey: ["bookmarkedEntries"],
     queryFn: getMyBookmarkedJournalEntries,
-  })
+  });
 
   type Variables = {
-    entryId: string
-    isBookmarked: boolean
-  }
+    entryId: string;
+    isBookmarked: boolean;
+  };
 
   const variables = useMutationState<Variables>({
     filters: { mutationKey: ["updateBookmark"], status: "pending" },
     select: (mutation) => mutation.state.variables as Variables,
-  })
+  });
 
   const updatedBookmarkedEntries = React.useMemo(() => {
     if (variables.length > 0) {
-      const pendingBookmark = variables[0]
-      const entryData = entries?.find((e) => e.id === pendingBookmark.entryId)
+      const pendingBookmark = variables[0];
+      const entryData = entries?.find((e) => e.id === pendingBookmark.entryId);
 
       if (pendingBookmark.isBookmarked) {
         return [
           ...(bookmarkedEntries || []).filter(
-            (entry) => entry.id !== pendingBookmark.entryId
+            (entry) => entry.id !== pendingBookmark.entryId,
           ),
           {
             ...entryData,
             isBookmarked: pendingBookmark.isBookmarked,
           },
-        ]
+        ];
       } else {
         return (bookmarkedEntries || []).filter(
-          (entry) => entry.id !== pendingBookmark.entryId
-        )
+          (entry) => entry.id !== pendingBookmark.entryId,
+        );
       }
     }
-    return bookmarkedEntries
-  }, [bookmarkedEntries, variables, entries])
+    return bookmarkedEntries;
+  }, [bookmarkedEntries, variables, entries]);
 
   return (
     <div className="w-full space-y-16">
@@ -127,7 +126,7 @@ const EntryList = () => {
         </EmptyPlaceholder>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default EntryList
+export default EntryList;

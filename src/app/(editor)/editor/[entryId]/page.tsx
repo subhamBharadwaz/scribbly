@@ -1,24 +1,25 @@
-import { notFound, redirect } from "next/navigation"
-import { getMyEntry } from "@/server/queries/editor"
+import { notFound, redirect } from "next/navigation";
+import { getMyEntry } from "@/server/queries/editor";
 
-import { getUserByClerkId } from "@/lib/auth"
-import Editor from "@/app/(journal)/_components/editor"
+import { getCurrentUser } from "@/lib/auth";
+import Editor from "@/app/(journal)/_components/editor";
 
 interface EditorPageProps {
-  params: { entryId: string }
+  params: Promise<{ entryId: string }>;
 }
 
 export default async function EditorPage({ params }: EditorPageProps) {
-  const user = await getUserByClerkId()
+  const { entryId } = await params;
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/sign-in")
+    redirect("/sign-in");
   }
 
-  const entry = await getMyEntry(params.entryId, user.id)
+  const entry = await getMyEntry(entryId, user.id);
 
   if (!entry) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -27,7 +28,9 @@ export default async function EditorPage({ params }: EditorPageProps) {
         id: entry.id,
         title: entry.title,
         content: entry.content,
+        mood: entry.mood,
+        tags: entry.tags,
       }}
     />
-  )
+  );
 }

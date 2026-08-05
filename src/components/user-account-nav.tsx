@@ -1,7 +1,9 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { SignOutButton } from "@clerk/nextjs"
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { signOut } from "@/app/features/auth/auth-client";
 
 import {
   DropdownMenu,
@@ -9,21 +11,29 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { UserAvatar } from "@/components/user-avatar"
+} from "@/components/ui/dropdown-menu";
+import { UserAvatar } from "@/components/user-avatar";
 
-import { Icons } from "./icons"
-import { buttonVariants } from "./ui/button"
+import { Icons } from "./icons";
+import { buttonVariants } from "./ui/button";
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: {
-    name: string
-    email: string
-    image: string
-  }
+    name: string;
+    email: string;
+    image: string;
+  };
 }
 
 export function UserAccountNav({ user }: UserAccountNavProps) {
+  const router = useRouter();
+
+  async function handleSignOut() {
+    await signOut();
+    router.push("/");
+    router.refresh();
+  }
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -68,11 +78,11 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <Icons.logout className="mr-2 h-4 w-4" aria-hidden="true" />
-          <SignOutButton>
-            <button>Sign Out</button>
-          </SignOutButton>
+          <button type="button" onClick={handleSignOut}>
+            Sign Out
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

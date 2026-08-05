@@ -1,19 +1,19 @@
-import { Suspense } from "react"
-import Link from "next/link"
+import { Suspense } from "react";
+import Link from "next/link";
 
-import { marketingConfig } from "@/config/marketing"
-import { getUserByClerkId } from "@/lib/auth"
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { MainNav } from "@/components/main-nav"
-import SiteFooter from "@/components/site-footer"
+import { marketingConfig } from "@/config/marketing";
+import { getCurrentUser } from "@/lib/auth";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { MainNav } from "@/components/main-nav";
+import SiteFooter from "@/components/site-footer";
 
 interface LegalLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default async function LegalLayout({ children }: LegalLayoutProps) {
-  const user = await getUserByClerkId()
+  const user = await getCurrentUser();
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -26,7 +26,7 @@ export default async function LegalLayout({ children }: LegalLayoutProps) {
                 <button
                   className={cn(
                     buttonVariants({ size: "lg", variant: "cta" }),
-                    "rounded-full px-4 motion-safe:animate-pulse"
+                    "rounded-full px-4 motion-safe:animate-pulse",
                   )}
                 >
                   Please wait...
@@ -34,13 +34,13 @@ export default async function LegalLayout({ children }: LegalLayoutProps) {
               }
             >
               <Link
-                href={user?.clerkId ? "/journal" : "/sign-in"}
+                href={user ? "/journal" : "/sign-in"}
                 className={cn(
                   buttonVariants({ size: "lg", variant: "cta" }),
-                  "rounded-full px-4"
+                  "rounded-full px-4",
                 )}
               >
-                {user && user?.clerkId ? "Go to your journal" : "Sign in"}
+                {user ? "Go to your journal" : "Sign in"}
               </Link>
             </Suspense>
           </nav>
@@ -49,5 +49,5 @@ export default async function LegalLayout({ children }: LegalLayoutProps) {
       <main className="container flex-1">{children}</main>
       <SiteFooter className="mt-[20vh]" />
     </div>
-  )
+  );
 }

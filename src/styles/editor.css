@@ -42,6 +42,75 @@
   background: theme("colors.accent.DEFAULT");
 }
 
+.dark .ce-inline-toolbar,
+.dark .ce-conversion-toolbar,
+.dark .ce-settings,
+.dark .ce-popover {
+  background-color: hsl(var(--popover)) !important;
+  color: hsl(var(--popover-foreground)) !important;
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 4px 16px rgb(0 0 0 / 35%);
+}
+
+.dark .ce-inline-toolbar__actions,
+.dark .ce-inline-toolbar__dropdown,
+.dark .ce-inline-tool,
+.dark .ce-conversion-tool,
+.dark .ce-popover-item,
+.dark .ce-popover-item__title {
+  background-color: transparent !important;
+  color: hsl(var(--popover-foreground)) !important;
+}
+
+.dark .ce-inline-tool:hover,
+.dark .ce-inline-tool--active,
+.dark .ce-inline-toolbar__dropdown:hover,
+.dark .ce-conversion-tool:hover,
+.dark .ce-popover-item:hover,
+.dark .ce-popover-item--focused {
+  background-color: hsl(var(--accent)) !important;
+  color: hsl(var(--accent-foreground)) !important;
+}
+
+.dark .ce-inline-tool button,
+.dark .ce-inline-tool button:hover,
+.dark .ce-inline-tool button:focus,
+.dark .ce-inline-toolbar__dropdown button,
+.dark .ce-inline-toolbar__dropdown button:hover {
+  background: transparent !important;
+  color: inherit !important;
+}
+
+.dark .ce-inline-toolbar__dropdown,
+.dark .ce-inline-toolbar__dropdown-content,
+.dark .ce-popover__container,
+.dark .ce-popover__items {
+  background-color: hsl(var(--popover)) !important;
+}
+
+.dark .ce-inline-toolbar__dropdown-tooltip,
+.dark .ce-inline-toolbar__tooltip,
+.dark .ce-popover-item__title {
+  background-color: hsl(var(--popover)) !important;
+  color: hsl(var(--popover-foreground)) !important;
+}
+
+.dark .ce-inline-tool svg,
+.dark .ce-inline-toolbar__dropdown svg,
+.dark .ce-conversion-tool svg,
+.dark .ce-popover-item__icon svg {
+  fill: currentColor;
+  color: hsl(var(--popover-foreground));
+}
+
+.dark .ce-inline-toolbar__dropdown:hover,
+.dark .ce-inline-tool:hover,
+.dark .ce-conversion-tool:hover,
+.dark .ce-popover-item:hover {
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
 .dark .cdx-settings-button:hover,
 .dark .ce-settings__button:hover,
 .dark .ce-toolbox__button--active,

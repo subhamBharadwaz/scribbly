@@ -1,12 +1,12 @@
-import Link from "next/link"
-import { getUserSubscriptionPlan } from "@/server/actions/stripe"
-import { getMyReminderSettings } from "@/server/queries/reminder"
-import { Reminder } from "@prisma/client"
+import Link from "next/link";
+import { getUserSubscriptionPlan } from "@/server/actions/stripe";
+import { getMyReminderSettings } from "@/server/queries/reminder";
 
-import { getUserByClerkId } from "@/lib/auth"
-import { cn } from "@/lib/utils"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { buttonVariants } from "@/components/ui/button"
+import { getCurrentUser } from "@/lib/auth";
+import { cn } from "@/lib/utils";
+import type { Reminder } from "@/server/db/types";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -14,26 +14,26 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Header } from "@/components/header"
-import { Shell } from "@/components/shell"
-import { AppearanceForm } from "@/app/(journal)/_components/settings/appearance-form"
-import { ReminderForm } from "@/app/(journal)/_components/settings/reminder-form"
-import { UserNameForm } from "@/app/(journal)/_components/settings/user-name-form"
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Header } from "@/components/header";
+import { Shell } from "@/components/shell";
+import { AppearanceForm } from "@/app/(journal)/_components/settings/appearance-form";
+import { ReminderForm } from "@/app/(journal)/_components/settings/reminder-form";
+import { UserNameForm } from "@/app/(journal)/_components/settings/user-name-form";
 
 export const metadata = {
   title: "Settings",
   description: "Manage account and website settings.",
-}
+};
 
 export default async function SettingsPage() {
-  const user = await getUserByClerkId()
-  const subscriptionPlan = await getUserSubscriptionPlan(user.id)
+  const user = await getCurrentUser();
+  const subscriptionPlan = await getUserSubscriptionPlan(user.id);
 
-  const currentReminderSettings = await getMyReminderSettings()
-  const currentReminder: Reminder = currentReminderSettings as Reminder
+  const currentReminderSettings = await getMyReminderSettings();
+  const currentReminder: Reminder = currentReminderSettings as Reminder;
 
   return (
     <Shell className="gap-4">
@@ -64,7 +64,7 @@ export default async function SettingsPage() {
                 <p className="font-semibold">Profile</p>
                 <div className="space-y-8">
                   <p className="text-muted-foreground">
-                    Manage your profile information with clerk
+                    Manage your profile information.
                   </p>
                   <Link
                     href="/journal/settings/user-profile"
@@ -147,7 +147,7 @@ export default async function SettingsPage() {
               <p className="font-semibold">Profile</p>
               <div className="space-y-8">
                 <p className="text-muted-foreground">
-                  Manage your profile information with clerk
+                  Manage your profile information.
                 </p>
                 <Link
                   href="/journal/settings/user-profile"
@@ -208,5 +208,5 @@ export default async function SettingsPage() {
         </Card>
       </div>
     </Shell>
-  )
+  );
 }

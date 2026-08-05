@@ -1,16 +1,15 @@
-import { JournalEntry } from "@prisma/client"
+import { Skeleton } from "@/components/ui/skeleton";
+import type { JournalEntry } from "@/server/db/types";
 
-import { Skeleton } from "@/components/ui/skeleton"
-
-import { JournalEntryCard } from "./journal-entry-card"
+import { JournalEntryCard } from "./journal-entry-card";
 
 interface JournalEntryProps {
   entry: Pick<
     JournalEntry,
-    "id" | "title" | "createdAt" | "isBookmarked" | "content"
-  >
-  userBookmarks: string[]
-  className?: string
+    "id" | "title" | "createdAt" | "isBookmarked" | "content" | "mood" | "tags"
+  >;
+  userBookmarks: string[];
+  className?: string;
 }
 
 export function JournalEntryItem({
@@ -18,7 +17,7 @@ export function JournalEntryItem({
   userBookmarks,
   className,
 }: JournalEntryProps) {
-  const isBookmarked = userBookmarks?.includes(entry?.id)
+  const isBookmarked = userBookmarks?.includes(entry?.id);
 
   return (
     <JournalEntryCard
@@ -26,7 +25,7 @@ export function JournalEntryItem({
       isBookmarked={isBookmarked}
       className={className}
     />
-  )
+  );
 }
 
 JournalEntryItem.Skeleton = function JournalEntrySkeleton() {
@@ -39,5 +38,5 @@ JournalEntryItem.Skeleton = function JournalEntrySkeleton() {
         <Skeleton className="size-8 rounded-full" />
       </div>
     </div>
-  )
-}
+  );
+};

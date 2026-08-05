@@ -1,67 +1,71 @@
-"use client"
+"use client";
 
-import { FC, useCallback, useEffect, useRef, useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import EditorJS from "@editorjs/editorjs"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { JournalEntry } from "@prisma/client"
-import { useForm } from "react-hook-form"
-import TextareaAutosize from "react-textarea-autosize"
-import * as z from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
+import { type FC, useCallback, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import TextareaAutosize from "react-textarea-autosize";
+import type * as z from "zod";
 
-import { uploadFiles } from "@/lib/uploadthing"
+import { uploadFiles } from "@/lib/uploadthing";
 
-import "@/styles/editor.css"
+import "@/styles/editor.css";
 
-import { editJournalEntry } from "@/server/actions/journal"
-
-import { cn } from "@/lib/utils"
-import { entryPatchSchema } from "@/lib/validations/entry"
-import { buttonVariants } from "@/components/ui/button"
-import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { Icons } from "@/components/icons";
+import { buttonVariants } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
+import { cn } from "@/lib/utils";
+import { entryPatchSchema } from "@/lib/validations/entry";
+import { editJournalEntry } from "@/server/actions/journal";
+import type { JournalEntry } from "@/server/db/types";
 
 interface EditorProps {
-  entry: Pick<JournalEntry, "id" | "title" | "content">
+  entry: Pick<JournalEntry, "id" | "title" | "content" | "mood" | "tags">;
 }
 
-type FormData = z.infer<typeof entryPatchSchema>
+type FormData = z.infer<typeof entryPatchSchema>;
 
 const Editor: FC<EditorProps> = ({ entry }) => {
   const { register, handleSubmit } = useForm<FormData>({
     resolver: zodResolver(entryPatchSchema),
-  })
+  });
 
-  const ref = useRef<EditorJS>()
-  const router = useRouter()
+  const [mood, setMood] = useState(entry.mood ?? "");
+  const [tags, setTags] = useState(entry.tags.join(", "));
 
-  const [isSaving, setIsSaving] = useState<boolean>(false)
-  const [isMounted, setIsMounted] = useState<boolean>(false)
+  const ref = useRef<import("@editorjs/editorjs").default | null>(null);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [hasChanges, setHasChanges] = useState(false);
+  const [lastSaved, setLastSaved] = useState(false);
+  const autosaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const initializeEditor = useCallback(async () => {
-    const EditorJS = (await import("@editorjs/editorjs")).default
-    const Header = (await import("@editorjs/header")).default
-    const Checklist = (await import("@editorjs/checklist")).default
-    const Embed = (await import("@editorjs/embed")).default
-    const Table = (await import("@editorjs/table")).default
-    const List = (await import("@editorjs/list")).default
-    const Code = (await import("@editorjs/code")).default
-    const LinkTool = (await import("@editorjs/link")).default
-    const InlineCode = (await import("@editorjs/inline-code")).default
-    const ImageTool = (await import("@editorjs/image")).default
-    const ColorPlugin = (await import("editorjs-text-color-plugin")).default
+    const EditorJS = (await import("@editorjs/editorjs")).default;
+    const Header = (await import("@editorjs/header")).default;
+    const Checklist = (await import("@editorjs/checklist")).default;
+    const Embed = (await import("@editorjs/embed")).default;
+    const Table = (await import("@editorjs/table")).default;
+    const List = (await import("@editorjs/list")).default;
+    const Code = (await import("@editorjs/code")).default;
+    const LinkTool = (await import("@editorjs/link")).default;
+    const InlineCode = (await import("@editorjs/inline-code")).default;
+    const ImageTool = (await import("@editorjs/image")).default;
 
-    const body = entryPatchSchema.parse(entry)
+    const body = entryPatchSchema.parse(entry);
 
-    if (!ref.current) {
+    if (!ref.current && document.getElementById("editor")) {
       const editor = new EditorJS({
         holder: "editor",
         onReady() {
-          ref.current = editor
+          ref.current = editor;
         },
         placeholder: "Type here to write your journal entry...",
         inlineToolbar: true,
+        onChange() {
+          setHasChanges(true);
+          setLastSaved(false);
+        },
         data: body.content,
         tools: {
           header: Header,
@@ -77,103 +81,143 @@ const Editor: FC<EditorProps> = ({ entry }) => {
             config: {
               uploader: {
                 async uploadByFile(file: File) {
-                  const [res] = await uploadFiles({
+                  const [res] = await uploadFiles("imageUploader", {
                     files: [file],
-                    endpoint: "imageUploader",
-                  })
+                  });
 
                   return {
                     success: 1,
                     file: {
-                      url: res.fileUrl,
+                      url: res.ufsUrl,
                     },
-                  }
+                  };
                 },
               },
             },
           },
-          Color: {
+          /* Color plugin removed: it crashes when Editor.js opens the inline toolbar. */
+          /* Color: {
             class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
             config: {
-              colorCollections: [
-                "#EC7878",
-                "#9C27B0",
-                "#673AB7",
-                "#3F51B5",
-                "#0070FF",
-                "#03A9F4",
-                "#00BCD4",
-                "#4CAF50",
-                "#8BC34A",
-                "#CDDC39",
-                "#FFF",
-              ],
+              colorCollections,
               defaultColor: "#FF1300",
               type: "text",
               customPicker: true, // add a button to allow selecting any colour
             },
-          },
-          Marker: {
+          }, */
+          /* Marker is disabled because editorjs-text-color-plugin crashes in
+             its inline toolbar when this second tool is registered. */
+          /* Marker: {
             class: ColorPlugin, // if load from CDN, please try: window.ColorPlugin
             config: {
+              colorCollections,
               defaultColor: "#FFBF00",
               type: "marker",
               icon: `<svg fill="#000000" height="200px" width="200px" version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M17.6,6L6.9,16.7c-0.2,0.2-0.3,0.4-0.3,0.6L6,23.9c0,0.3,0.1,0.6,0.3,0.8C6.5,24.9,6.7,25,7,25c0,0,0.1,0,0.1,0l6.6-0.6 c0.2,0,0.5-0.1,0.6-0.3L25,13.4L17.6,6z"></path> <path d="M26.4,12l1.4-1.4c1.2-1.2,1.1-3.1-0.1-4.3l-3-3c-0.6-0.6-1.3-0.9-2.2-0.9c-0.8,0-1.6,0.3-2.2,0.9L19,4.6L26.4,12z"></path> </g> <g> <path d="M28,29H4c-0.6,0-1-0.4-1-1s0.4-1,1-1h24c0.6,0,1,0.4,1,1S28.6,29,28,29z"></path> </g> </g></svg>`,
             },
-          },
+          }, */
         },
-      })
+      });
     }
-  }, [entry])
+  }, [entry]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsMounted(true)
+      setIsMounted(true);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (isMounted) {
-      initializeEditor()
+      initializeEditor();
 
       return () => {
-        ref.current?.destroy()
-        ref.current = undefined
-      }
+        if (autosaveTimer.current) clearTimeout(autosaveTimer.current);
+        ref.current?.destroy();
+        ref.current = undefined;
+      };
     }
-  }, [isMounted, initializeEditor])
+  }, [isMounted, initializeEditor]);
 
-  async function onSubmit(data: FormData) {
-    setIsSaving(true)
+  async function saveEntry(data: FormData, showToast = false) {
+    setIsSaving(true);
 
-    const blocks = await ref.current?.save()
+    const blocks = await ref.current?.save();
 
     const response = await editJournalEntry(
       { params: { entryId: entry.id } },
-      { title: data.title, content: blocks }
-    )
+      {
+        title: data.title,
+        content: blocks,
+        mood: mood || undefined,
+        tags: tags
+          .split(",")
+          .map((tag) => tag.trim().toLowerCase())
+          .filter(Boolean),
+      },
+    );
 
-    setIsSaving(false)
+    setIsSaving(false);
 
     if (response?.error) {
-      return toast({
-        title: "Something went wrong.",
-        description: "Your entry was not saved. Please try again.",
-        variant: "destructive",
-      })
+      if (showToast) {
+        return toast({
+          title: "Something went wrong.",
+          description: "Your entry was not saved. Please try again.",
+          variant: "destructive",
+        });
+      }
+      return;
     }
 
-    return toast({
-      description: "Your entry has been saved.",
-    })
+    setHasChanges(false);
+    setLastSaved(true);
+
+    if (showToast) {
+      toast({ description: "Your entry has been saved." });
+    }
+  }
+
+  const onSubmit = handleSubmit((data) => saveEntry(data, true));
+
+  useEffect(() => {
+    if (!hasChanges || !isMounted) return;
+
+    if (autosaveTimer.current) clearTimeout(autosaveTimer.current);
+    autosaveTimer.current = setTimeout(() => {
+      void handleSubmit((data) => saveEntry(data))();
+    }, 1200);
+
+    return () => {
+      if (autosaveTimer.current) clearTimeout(autosaveTimer.current);
+    };
+  }, [hasChanges, isMounted, mood, tags, handleSubmit]);
+
+  useEffect(() => {
+    if (!isMounted) return;
+
+    const handleBeforeUnload = () => {
+      if (hasChanges) {
+        void handleSubmit((data) => saveEntry(data))();
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [hasChanges, isMounted, handleSubmit]);
+
+  function updateMetadata(update: () => void) {
+    update();
+    setHasChanges(true);
+    setLastSaved(false);
   }
 
   if (!isMounted) {
-    return null
+    return null;
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={onSubmit}>
       <div className="container grid w-full gap-10">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center space-x-10">
@@ -189,7 +233,7 @@ const Editor: FC<EditorProps> = ({ entry }) => {
           </div>
           <button type="submit" className={cn(buttonVariants())}>
             {isSaving && <Icons.spinner className="mr-2 size-4 animate-spin" />}
-            <span>Save</span>
+            <span>{isSaving ? "Saving" : "Save"}</span>
           </button>
         </div>
         <div className="prose prose-stone mx-auto max-w-[800px] dark:prose-invert">
@@ -201,7 +245,46 @@ const Editor: FC<EditorProps> = ({ entry }) => {
             className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold focus:outline-none  lg:text-5xl"
             {...register("title")}
           />
-          <div id="editor" className="min-h-[500px]" />
+          <div id="editor" className="min-h-[320px]" />
+          <div className="not-prose mt-8 grid gap-4 border-t pt-6 sm:grid-cols-2">
+            <label className="grid gap-2 text-sm font-medium">
+              Mood
+              <select
+                value={mood}
+                onChange={(event) =>
+                  updateMetadata(() => setMood(event.target.value))
+                }
+                className="h-10 rounded-md border bg-background px-3 text-sm"
+              >
+                <option value="">Not set</option>
+                <option value="great">Great</option>
+                <option value="good">Good</option>
+                <option value="okay">Okay</option>
+                <option value="low">Low</option>
+                <option value="rough">Rough</option>
+              </select>
+            </label>
+            <label className="grid gap-2 text-sm font-medium">
+              Tags
+              <input
+                value={tags}
+                onChange={(event) =>
+                  updateMetadata(() => setTags(event.target.value))
+                }
+                placeholder="work, family, ideas"
+                className="h-10 rounded-md border bg-background px-3 text-sm"
+              />
+            </label>
+          </div>
+          <p className="mt-3 text-sm text-muted-foreground" aria-live="polite">
+            {isSaving
+              ? "Saving..."
+              : lastSaved
+                ? "Saved"
+                : hasChanges
+                  ? "Changes will save automatically"
+                  : ""}
+          </p>
           <p className="text-sm text-gray-500">
             Use{" "}
             <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
@@ -212,7 +295,7 @@ const Editor: FC<EditorProps> = ({ entry }) => {
         </div>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default Editor
+export default Editor;

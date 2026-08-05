@@ -1,17 +1,17 @@
-import { journalConfig } from "@/config/journal"
-import { getUserByClerkId } from "@/lib/auth"
-import { MainNav } from "@/components/main-nav"
-import { JournalNav } from "@/components/nav"
-import SiteFooter from "@/components/site-footer"
+import { journalConfig } from "@/config/journal";
+import { getCurrentUser } from "@/lib/auth";
+import { MainNav } from "@/components/main-nav";
+import { JournalNav } from "@/components/nav";
+import SiteFooter from "@/components/site-footer";
 // import { SiteFooter } from "@/components/site-footer"
-import { UserAccountNav } from "@/components/user-account-nav"
+import { UserAccountNav } from "@/components/user-account-nav";
 
 interface JournalLayoutProps {
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 
 export default async function JournalLayout({ children }: JournalLayoutProps) {
-  const user = await getUserByClerkId()
+  const user = await getCurrentUser();
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -39,5 +39,5 @@ export default async function JournalLayout({ children }: JournalLayoutProps) {
       </div>
       <SiteFooter className="border-t" />
     </div>
-  )
+  );
 }

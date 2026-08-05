@@ -1,39 +1,47 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { useAuth, useUser } from "@clerk/nextjs"
-import posthog from "posthog-js"
-import { PostHogProvider } from "posthog-js/react"
+import { useEffect } from "react";
+import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
 
-import { env } from "@/env.mjs"
+import { useSession } from "@/app/features/auth/auth-client";
+import { env } from "@/env";
 
-if (typeof window !== "undefined") {
-  posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
-    api_host: "/ingest",
-    ui_host: "https://us.i.posthog.com",
-  })
+function getPostHogClient() {
+  if (typeof window === "undefined") return posthog;
+
+  if (!posthog.__loaded) {
+    posthog.init(env.NEXT_PUBLIC_POSTHOG_KEY, {
+      api_host: "/ingest",
+      ui_host: "https://us.i.posthog.com",
+    });
+  }
+
+  return posthog;
 }
+
 export function CSPostHogProvider({ children }) {
+  const client = getPostHogClient();
+
   return (
-    <PostHogProvider client={posthog}>
+    <PostHogProvider client={client}>
       <PostHogAuthWrapper>{children}</PostHogAuthWrapper>
     </PostHogProvider>
-  )
+  );
 }
 
 function PostHogAuthWrapper({ children }: { children: React.ReactNode }) {
-  const auth = useAuth()
-  const userInfo = useUser()
+  const { data: session, isPending } = useSession() as any;
 
   useEffect(() => {
-    if (userInfo.user) {
-      posthog.identify(userInfo.user.id, {
-        email: userInfo.user.emailAddresses[0].emailAddress,
-        name: userInfo.user.fullName,
-      })
-    } else if (!auth.isSignedIn) {
-      posthog.reset()
+    if (session?.user) {
+      posthog.identify(session.user.id, {
+        email: session.user.email,
+        name: session.user.name,
+      });
+    } else if (!isPending) {
+      posthog.reset();
     }
-  }, [auth, userInfo])
-  return children
+  }, [isPending, session]);
+  return children;
 }

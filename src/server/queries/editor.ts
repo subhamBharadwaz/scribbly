@@ -1,17 +1,16 @@
-import "server-only"
+import "server-only";
 
-import { JournalEntry, User } from "@prisma/client"
+import { and, eq } from "drizzle-orm";
 
-import { db } from "@/lib/db"
+import { db } from "@/server/db";
+import { journalEntry } from "@/server/db/schema";
+import type { JournalEntry, User } from "@/server/db/types";
 
 export async function getMyEntry(
   entryId: JournalEntry["id"],
-  userId: User["id"]
+  userId: User["id"],
 ) {
-  return await db.journalEntry.findFirst({
-    where: {
-      id: entryId,
-      userId: userId,
-    },
-  })
+  return db.query.journalEntry.findFirst({
+    where: and(eq(journalEntry.id, entryId), eq(journalEntry.userId, userId)),
+  });
 }
