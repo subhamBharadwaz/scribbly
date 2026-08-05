@@ -66,6 +66,11 @@ Apply database migrations before starting the app:
 pnpm db:migrate
 ```
 
+For Vercel deployments, set the project Root Directory to `.` (the repository
+root), not `src`. The Next.js app uses `src/` as its source directory, and
+setting Vercel's root to `src` causes middleware/proxy paths to be resolved as
+`src/src/...`.
+
 3. Start the development server:
 
 ```sh
