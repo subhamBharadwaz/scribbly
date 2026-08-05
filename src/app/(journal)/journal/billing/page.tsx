@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation"
-import { getUserSubscriptionPlan } from "@/server/actions/stripe"
+import { redirect } from "next/navigation";
+import { getUserSubscriptionPlan } from "@/server/actions/stripe";
 
-import { getUserByClerkId } from "@/lib/auth"
-import { stripe } from "@/lib/stripe"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { getCurrentUser } from "@/lib/auth";
+import { getStripe } from "@/lib/stripe";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,7 +14,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 import {
   Table,
   TableBody,
@@ -23,18 +23,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { CopyButton } from "@/components/copy-button"
-import { Header } from "@/components/header"
-import { Icons } from "@/components/icons"
-import { Shell } from "@/components/shell"
+} from "@/components/ui/table";
+import { CopyButton } from "@/components/copy-button";
+import { Header } from "@/components/header";
+import { Icons } from "@/components/icons";
+import { Shell } from "@/components/shell";
 
-import { BillingForm } from "../../_components/billing/billing-form"
+import { BillingForm } from "../../_components/billing/billing-form";
 
 export const metadata = {
   title: "Billing",
   description: "Manage billing and your subscription plan.",
-}
+};
 
 const testCardsInfo = [
   {
@@ -55,24 +55,24 @@ const testCardsInfo = [
     cvc: "Any 3 digits",
     date: "Any future date",
   },
-]
+];
 
 export default async function BillingPage() {
-  const user = await getUserByClerkId()
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/sign-in")
+    redirect("/sign-in");
   }
 
-  const subscriptionPlan = await getUserSubscriptionPlan(user.id)
+  const subscriptionPlan = await getUserSubscriptionPlan(user.id);
 
   // If user has a pro plan, check cancel status on Stripe.
-  let isCanceled = false
+  let isCanceled = false;
   if (subscriptionPlan.isPro && subscriptionPlan.stripeSubscriptionId) {
-    const stripePlan = await stripe.subscriptions.retrieve(
-      subscriptionPlan.stripeSubscriptionId
-    )
-    isCanceled = stripePlan.cancel_at_period_end
+    const stripePlan = await getStripe().subscriptions.retrieve(
+      subscriptionPlan.stripeSubscriptionId,
+    );
+    isCanceled = stripePlan.cancel_at_period_end;
   }
 
   return (
@@ -159,5 +159,5 @@ export default async function BillingPage() {
         />
       </div>
     </Shell>
-  )
+  );
 }

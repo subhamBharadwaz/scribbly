@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useRouter } from "next/navigation"
-import { updateUserName } from "@/server/actions/user"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { User } from "@prisma/client"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import { updateUserName } from "@/server/actions/user";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
-import { cn } from "@/lib/utils"
-import { userNameSchema } from "@/lib/validations/user"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { toast } from "@/components/ui/use-toast"
-import { Icons } from "@/components/icons"
+import { cn } from "@/lib/utils";
+import { userNameSchema } from "@/lib/validations/user";
+import type { User } from "@/server/db/types";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
+import { Icons } from "@/components/icons";
 
 import {
   Form,
@@ -23,46 +23,46 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "../../../../components/ui/form"
+} from "../../../../components/ui/form";
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, "id" | "name">
+  user: Pick<User, "id" | "name">;
 }
 
-type FormData = z.infer<typeof userNameSchema>
+type FormData = z.infer<typeof userNameSchema>;
 
 export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
-  const router = useRouter()
+  const router = useRouter();
   const form = useForm<FormData>({
     resolver: zodResolver(userNameSchema),
     defaultValues: {
       name: user?.name || "",
     },
-  })
+  });
 
-  const [isSaving, setIsSaving] = React.useState<boolean>(false)
+  const [isSaving, setIsSaving] = React.useState<boolean>(false);
 
   async function onSubmit(data: FormData) {
-    setIsSaving(true)
+    setIsSaving(true);
 
     const response = await updateUserName(
       { params: { userId: user?.id } },
-      { name: data?.name }
-    )
+      { name: data?.name },
+    );
 
-    setIsSaving(false)
+    setIsSaving(false);
 
     if (response?.error) {
       return toast({
         title: "Something went wrong.",
         description: "Your name was not updated. Please try again.",
         variant: "destructive",
-      })
+      });
     }
 
     toast({
       description: "Your name has been updated.",
-    })
+    });
   }
 
   return (
@@ -95,5 +95,5 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
         </Button>
       </form>
     </Form>
-  )
+  );
 }
